@@ -375,6 +375,8 @@ void init( void )
     // Capture error
     while (true);
   }
+	/* Configure the SysTick Handler Priority: Preemption priority and subpriority */
+	NVIC_SetPriority(SysTick_IRQn, 15);	
 
   // Disable watchdog
   //WDT_Disable(WDT);
@@ -482,6 +484,10 @@ void init( void )
 
   // Initialize analogOutput module
   analogOutputInit();
+
+	/* Configure the NVIC Preemption Priority Bits */
+	/* 4 bits for pre-emption priority(0-15 PreemptionPriority) and 0 bits for subpriority(0 SubPriority) */
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
 }
 
 #ifdef __cplusplus

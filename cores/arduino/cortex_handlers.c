@@ -61,11 +61,6 @@ void TAMPER_IRQHandler               (void) __attribute__ ((weak, alias("__halt"
 void RTC_IRQHandler                  (void) __attribute__ ((weak, alias("__halt")));
 void FLASH_IRQHandler                (void) __attribute__ ((weak, alias("__halt")));
 void RCC_IRQHandler                  (void) __attribute__ ((weak, alias("__halt")));
-void EXTI0_IRQHandler                (void) __attribute__ ((weak, alias("__halt")));
-void EXTI1_IRQHandler                (void) __attribute__ ((weak, alias("__halt")));
-void EXTI2_IRQHandler                (void) __attribute__ ((weak, alias("__halt")));
-void EXTI3_IRQHandler                (void) __attribute__ ((weak, alias("__halt")));
-void EXTI4_IRQHandler                (void) __attribute__ ((weak, alias("__halt")));
 void DMA1_Channel1_IRQHandler        (void) __attribute__ ((weak, alias("__halt")));
 void DMA1_Channel2_IRQHandler        (void) __attribute__ ((weak, alias("__halt")));
 void DMA1_Channel3_IRQHandler        (void) __attribute__ ((weak, alias("__halt")));
@@ -78,7 +73,6 @@ void USB_HP_CAN1_TX_IRQHandler       (void) __attribute__ ((weak, alias("__halt"
 void USB_LP_CAN1_RX0_IRQHandler      (void) __attribute__ ((weak, alias("__halt")));
 void CAN1_RX1_IRQHandler             (void) __attribute__ ((weak, alias("__halt")));
 void CAN1_SCE_IRQHandler             (void) __attribute__ ((weak, alias("__halt")));
-void EXTI9_5_IRQHandler              (void) __attribute__ ((weak, alias("__halt")));
 void TIM1_BRK_TIM15_IRQHandler       (void) __attribute__ ((weak, alias("__halt")));
 void TIM1_UP_TIM16_IRQHandler        (void) __attribute__ ((weak, alias("__halt")));
 void TIM1_TRG_COM_TIM17_IRQHandler   (void) __attribute__ ((weak, alias("__halt")));
@@ -92,7 +86,6 @@ void I2C2_EV_IRQHandler              (void) __attribute__ ((weak, alias("__halt"
 void I2C2_ER_IRQHandler              (void) __attribute__ ((weak, alias("__halt")));
 void SPI1_IRQHandler                 (void) __attribute__ ((weak, alias("__halt")));
 void SPI2_IRQHandler                 (void) __attribute__ ((weak, alias("__halt")));
-void EXTI15_10_IRQHandler            (void) __attribute__ ((weak, alias("__halt")));
 void RTCAlarm_IRQHandler             (void) __attribute__ ((weak, alias("__halt")));
 void USBWakeUp_IRQHandler            (void) __attribute__ ((weak, alias("__halt")));
 void TIM8_BRK_IRQHandler             (void) __attribute__ ((weak, alias("__halt")));

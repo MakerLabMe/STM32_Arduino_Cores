@@ -18,24 +18,38 @@
 
 #include "WInterrupts.h"
 
+//Interrupts
+ const uint8_t GPIO_IRQn[] = {
+  EXTI0_IRQn,     //0
+  EXTI1_IRQn,     //1
+  EXTI2_IRQn,     //2
+  EXTI3_IRQn,     //3
+  EXTI4_IRQn,     //4
+  EXTI9_5_IRQn,   //5
+  EXTI9_5_IRQn,   //6
+  EXTI9_5_IRQn,   //7
+  EXTI9_5_IRQn,   //8
+  EXTI9_5_IRQn,   //9
+  EXTI15_10_IRQn, //10
+  EXTI15_10_IRQn, //11
+  EXTI15_10_IRQn, //12
+  EXTI15_10_IRQn, //13
+  EXTI15_10_IRQn, //14
+  EXTI15_10_IRQn  //15
+ };
+
 typedef void (*interruptCB)(void);
 
-static interruptCB callbacksPioA[32];
-static interruptCB callbacksPioB[32];
-static interruptCB callbacksPioC[32];
-static interruptCB callbacksPioD[32];
+static interruptCB callbacksEXTI[16];//EXTI line:0~15
 
 /* Configure PIO interrupt sources */
 static void __initialize() {
-#if 0
-	int i;
-	for (i=0; i<32; i++) {
-		callbacksPioA[i] = NULL;
-		callbacksPioB[i] = NULL;
-		callbacksPioC[i] = NULL;
-		callbacksPioD[i] = NULL;
+	uint16_t i;
+	for (i=0; i<16; i++) {
+		callbacksEXTI[i] = NULL;
 	}
 
+#if 0
 	pmc_enable_periph_clk(ID_PIOA);
 	NVIC_DisableIRQ(PIOA_IRQn);
 	NVIC_ClearPendingIRQ(PIOA_IRQn);
@@ -65,131 +79,346 @@ static void __initialize() {
 
 void attachInterrupt(uint32_t pin, void (*callback)(void), uint32_t mode)
 {
-#if 0
 	static int enabled = 0;
 	if (!enabled) {
 		__initialize();
 		enabled = 1;
 	}
 
-	// Retrieve pin information
-	Pio *pio = g_APinDescription[pin].pPort;
-	uint32_t mask = g_APinDescription[pin].ulPin;
-	uint32_t pos = 0;
+	uint8_t GPIO_PortSource = 0;	//variable to hold the port number
+	uint8_t GPIO_PinSource = 0;	//variable to hold the pin number
+	uint8_t PinNumber;				//temp variable to calculate the pin number
 
-	uint32_t t;
-	for (t = mask; t>1; t>>=1, pos++)
-		;
 
-	// Set callback function
-	if (pio == PIOA)
-		callbacksPioA[pos] = callback;
-	if (pio == PIOB)
-		callbacksPioB[pos] = callback;
-	if (pio == PIOC)
-		callbacksPioC[pos] = callback;
-	if (pio == PIOD)
-		callbacksPioD[pos] = callback;
+	//EXTI structure to init EXT
+	EXTI_InitTypeDef EXTI_InitStructure;
+	//NVIC structure to set up NVIC controller
+	NVIC_InitTypeDef NVIC_InitStructure;
 
-	// Configure the interrupt mode
-	if (mode == CHANGE) {
-		// Disable additional interrupt mode (detects both rising and falling edges)
-		pio->PIO_AIMDR = mask;
-	} else {
-		// Enable additional interrupt mode
-		pio->PIO_AIMER = mask;
+	//Map the Spark pin to the appropriate port and pin on the STM32
+	GPIO_TypeDef *gpio_port = g_APinDescription[pin].pPort;
+	uint16_t gpio_pin = g_APinDescription[pin].ulPin;
 
-		// Select mode of operation
-		if (mode == LOW) {
-			pio->PIO_LSR = mask;    // "Level" Select Register
-			pio->PIO_FELLSR = mask; // "Falling Edge / Low Level" Select Register
-		}
-		if (mode == HIGH) {
-			pio->PIO_LSR = mask;    // "Level" Select Register
-			pio->PIO_REHLSR = mask; // "Rising Edge / High Level" Select Register
-		}
-		if (mode == FALLING) {
-			pio->PIO_ESR = mask;    // "Edge" Select Register
-			pio->PIO_FELLSR = mask; // "Falling Edge / Low Level" Select Register
-		}
-		if (mode == RISING) {
-			pio->PIO_ESR = mask;    // "Edge" Select Register
-			pio->PIO_REHLSR = mask; // "Rising Edge / High Level" Select Register
-		}
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO,ENABLE);
+
+	//Select the port source
+	if (gpio_port == GPIOA )
+	{
+		GPIO_PortSource = GPIO_PortSourceGPIOA;
+	}
+	else if (gpio_port == GPIOB )
+	{
+		GPIO_PortSource = GPIO_PortSourceGPIOB;
+	}
+	else if (gpio_port == GPIOC )
+	{
+		GPIO_PortSource = GPIO_PortSourceGPIOC;
+	}
+	else if (gpio_port == GPIOD )
+	{
+		GPIO_PortSource = GPIO_PortSourceGPIOD;
+	}
+	else if (gpio_port == GPIOE )
+	{
+		GPIO_PortSource = GPIO_PortSourceGPIOE;
 	}
 
-	// Enable interrupt
-	pio->PIO_IER = mask;
-#endif
+	//Find out the pin number from the mask
+	PinNumber = gpio_pin;
+	PinNumber = PinNumber >> 1;
+	while(PinNumber)
+	{
+		PinNumber = PinNumber >> 1;
+		GPIO_PinSource++;
+	}
+
+	// Register the handler for the user function name
+  callbacksEXTI[GPIO_PinSource] = callback;
+
+	//Connect EXTI Line to appropriate Pin
+	GPIO_EXTILineConfig(GPIO_PortSource, GPIO_PinSource);
+
+	//Configure GPIO EXTI line
+	EXTI_InitStructure.EXTI_Line = gpio_pin;//EXTI_Line;
+	
+	//select the interrupt mode
+	EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+	switch (mode)
+	{
+		//case LOW:
+			//There is no LOW mode in STM32, so using falling edge as default
+			//EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;
+			//break;
+		case CHANGE:
+			//generate interrupt on rising or falling edge
+			EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
+			break;
+		case RISING:
+			//generate interrupt on rising edge
+			EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+			break;
+		case FALLING:
+			//generate interrupt on falling edge
+			EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;
+			break;
+	}
+
+	//enable EXTI line
+	EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+	//send values to registers
+	EXTI_Init(&EXTI_InitStructure);
+
+  //configure NVIC
+  //select NVIC channel to configure
+  NVIC_InitStructure.NVIC_IRQChannel = GPIO_IRQn[GPIO_PinSource];
+  if(GPIO_PinSource > 4)
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 14;
+  else
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 13;
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+  //enable IRQ channel
+  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+  //update NVIC registers
+  NVIC_Init(&NVIC_InitStructure);
 }
 
 void detachInterrupt(uint32_t pin)
 {
-#if 0
-	// Retrieve pin information
-	Pio *pio = g_APinDescription[pin].pPort;
-	uint32_t mask = g_APinDescription[pin].ulPin;
+	uint8_t GPIO_PinSource = 0;	//variable to hold the pin number
+	uint8_t PinNumber;				//temp variable to calculate the pin number
 
-	// Disable interrupt
-	pio->PIO_IDR = mask;
-#endif
+	uint16_t gpio_pin = g_APinDescription[pin].ulPin;
+
+	//Clear the pending interrupt flag for that interrupt pin
+	EXTI_ClearITPendingBit(gpio_pin);
+
+	//EXTI structure to init EXT
+	EXTI_InitTypeDef EXTI_InitStructure;
+
+	//Find out the pin number from the mask
+	PinNumber = gpio_pin;
+	PinNumber = PinNumber >> 1;
+	while(PinNumber)
+	{
+		PinNumber = PinNumber >> 1;
+		GPIO_PinSource++;
+	}
+
+  //Select the appropriate EXTI line
+  EXTI_InitStructure.EXTI_Line = gpio_pin;
+  //disable that EXTI line
+  EXTI_InitStructure.EXTI_LineCmd = DISABLE;
+  //send values to registers
+  EXTI_Init(&EXTI_InitStructure);
+
+	//unregister the user's handler
+	callbacksEXTI[GPIO_PinSource] = NULL;
+  
 }
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void PIOA_Handler(void) {
-#if 0
-	uint32_t isr = PIOA->PIO_ISR;
-	uint32_t i;
-	for (i=0; i<32; i++, isr>>=1) {
-		if ((isr & 0x1) == 0)
-			continue;
-		if (callbacksPioA[i])
-			callbacksPioA[i]();
+/* interrupt handler for PA0,PB0,PC0,PD0,PE0 */
+void EXTI0_IRQHandler      (void) {
+	if (EXTI_GetITStatus(EXTI_Line0) != RESET)
+	{
+		/* Clear the EXTI line pending bit */
+		EXTI_ClearITPendingBit(EXTI_Line0);
+
+		if(NULL != callbacksEXTI[0])
+		{
+      callbacksEXTI[0]();
+		}
 	}
-#endif
 }
 
-void PIOB_Handler(void) {
-#if 0
-	uint32_t isr = PIOB->PIO_ISR;
-	uint32_t i;
-	for (i=0; i<32; i++, isr>>=1) {
-		if ((isr & 0x1) == 0)
-			continue;
-		if (callbacksPioB[i])
-			callbacksPioB[i]();
+/* interrupt handler for PA1,PB1,PC1,PD1,PE1 */
+void EXTI1_IRQHandler    (void) {
+	if (EXTI_GetITStatus(EXTI_Line1) != RESET)
+	{
+		/* Clear the EXTI line pending bit */
+		EXTI_ClearITPendingBit(EXTI_Line1);
+
+		if(NULL != callbacksEXTI[1])
+		{
+      callbacksEXTI[1]();
+		}
 	}
-#endif
 }
 
-void PIOC_Handler(void) {
-#if 0
-	uint32_t isr = PIOC->PIO_ISR;
-	uint32_t i;
-	for (i=0; i<32; i++, isr>>=1) {
-		if ((isr & 0x1) == 0)
-			continue;
-		if (callbacksPioC[i])
-			callbacksPioC[i]();
+/* interrupt handler for PA2,PB2,PC2,PD2,PE2 */
+void EXTI2_IRQHandler    (void) {
+	if (EXTI_GetITStatus(EXTI_Line2) != RESET)
+	{
+		/* Clear the EXTI line pending bit */
+		EXTI_ClearITPendingBit(EXTI_Line2);
+
+		if(NULL != callbacksEXTI[2])
+		{
+      callbacksEXTI[2]();
+		}
 	}
-#endif
 }
 
-void PIOD_Handler(void) {
-#if 0
-	uint32_t isr = PIOD->PIO_ISR;
-	uint32_t i;
-	for (i=0; i<32; i++, isr>>=1) {
-		if ((isr & 0x1) == 0)
-			continue;
-		if (callbacksPioD[i])
-			callbacksPioD[i]();
+/* interrupt handler for PA3,PB3,PC3,PD3,PE3 */
+void EXTI3_IRQHandler    (void) {
+	if (EXTI_GetITStatus(EXTI_Line3) != RESET)
+	{
+		/* Clear the EXTI line pending bit */
+		EXTI_ClearITPendingBit(EXTI_Line3);
+
+		if(NULL != callbacksEXTI[3])
+		{
+      callbacksEXTI[3]();
+		}
 	}
-#endif
 }
+
+/* interrupt handler for PA4,PB4,PC4,PD4,PE4 */
+void EXTI4_IRQHandler    (void) {
+	if (EXTI_GetITStatus(EXTI_Line4) != RESET)
+	{
+		/* Clear the EXTI line pending bit */
+		EXTI_ClearITPendingBit(EXTI_Line4);
+
+		if(NULL != callbacksEXTI[4])
+		{
+      callbacksEXTI[4]();
+		}
+	}
+}
+
+/* interrupt handler for PA5~9,PB5~9,PC5~9,PD5~9,PE5~9 */
+void EXTI9_5_IRQHandler  (void) {
+
+	if (EXTI_GetITStatus(EXTI_Line5) != RESET)
+	{
+		/* Clear the EXTI line pending bit */
+		EXTI_ClearITPendingBit(EXTI_Line5);
+
+		if(NULL != callbacksEXTI[5])
+		{
+      callbacksEXTI[5]();
+		}
+	}
+
+	if (EXTI_GetITStatus(EXTI_Line6) != RESET)
+	{
+		/* Clear the EXTI line pending bit */
+		EXTI_ClearITPendingBit(EXTI_Line6);
+
+		if(NULL != callbacksEXTI[6])
+		{
+      callbacksEXTI[6]();
+		}
+	}
+
+	if (EXTI_GetITStatus(EXTI_Line7) != RESET)
+	{
+		/* Clear the EXTI line pending bit */
+		EXTI_ClearITPendingBit(EXTI_Line7);
+
+		if(NULL != callbacksEXTI[7])
+		{
+      callbacksEXTI[7]();
+		}
+	}
+
+	if (EXTI_GetITStatus(EXTI_Line8) != RESET)
+	{
+		/* Clear the EXTI line pending bit */
+		EXTI_ClearITPendingBit(EXTI_Line8);
+
+		if(NULL != callbacksEXTI[8])
+		{
+      callbacksEXTI[8]();
+		}
+	}
+
+	if (EXTI_GetITStatus(EXTI_Line9) != RESET)
+	{
+		/* Clear the EXTI line pending bit */
+		EXTI_ClearITPendingBit(EXTI_Line9);
+
+		if(NULL != callbacksEXTI[9])
+		{
+      callbacksEXTI[9]();
+		}
+	}
+}
+
+/* interrupt handler for PA10~15,PB10~15,PC10~15,PD1015,PE10~15 */
+void EXTI15_10_IRQHandler(void) {
+
+	if (EXTI_GetITStatus(EXTI_Line10) != RESET)
+	{
+		/* Clear the EXTI line pending bit */
+		EXTI_ClearITPendingBit(EXTI_Line10);
+
+		if(NULL != callbacksEXTI[10])
+		{
+      callbacksEXTI[10]();
+		}
+	}
+
+	if (EXTI_GetITStatus(EXTI_Line11) != RESET)
+	{
+		/* Clear the EXTI line pending bit */
+		EXTI_ClearITPendingBit(EXTI_Line11);
+
+		if(NULL != callbacksEXTI[11])
+		{
+      callbacksEXTI[11]();
+		}
+	}
+
+	if (EXTI_GetITStatus(EXTI_Line12) != RESET)
+	{
+		/* Clear the EXTI line pending bit */
+		EXTI_ClearITPendingBit(EXTI_Line12);
+
+		if(NULL != callbacksEXTI[12])
+		{
+      callbacksEXTI[12]();
+		}
+	}
+
+	if (EXTI_GetITStatus(EXTI_Line13) != RESET)
+	{
+		/* Clear the EXTI line pending bit */
+		EXTI_ClearITPendingBit(EXTI_Line13);
+
+		if(NULL != callbacksEXTI[13])
+		{
+      callbacksEXTI[13]();
+		}
+	}
+
+	if (EXTI_GetITStatus(EXTI_Line14) != RESET)
+	{
+		/* Clear the EXTI line pending bit */
+		EXTI_ClearITPendingBit(EXTI_Line14);
+
+		if(NULL != callbacksEXTI[14])
+		{
+      callbacksEXTI[14]();
+		}
+	}
+
+	if (EXTI_GetITStatus(EXTI_Line15) != RESET)
+	{
+		/* Clear the EXTI line pending bit */
+		EXTI_ClearITPendingBit(EXTI_Line15);
+
+		if(NULL != callbacksEXTI[15])
+		{
+      callbacksEXTI[15]();
+		}
+	}
+}
+
 
 #ifdef __cplusplus
 }
