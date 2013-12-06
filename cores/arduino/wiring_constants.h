@@ -80,8 +80,9 @@ enum BitOrder {
 #define degrees(rad) ((rad)*RAD_TO_DEG)
 #define sq(x) ((x)*(x))
 
-#define interrupts() __enable_irq()
-#define noInterrupts() __disable_irq()
+//interrupts functions are in WInterrupts.c file
+//#define interrupts() __enable_irq()
+//#define noInterrupts() __disable_irq()
 
 #define lowByte(w) ((uint8_t) ((w) & 0xff))
 #define highByte(w) ((uint8_t) ((w) >> 8))

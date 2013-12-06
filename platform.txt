@@ -75,7 +75,18 @@ tools.bossac.cmd=bossac
 tools.bossac.cmd.windows=bossac.exe
 tools.bossac.path={runtime.ide.path}/hardware/tools
 
-tools.bossac.upload.params.verbose=-i -d
+
+tools.bossac.upload.params.verbose= -i -D
 tools.bossac.upload.params.quiet=
 tools.bossac.upload.pattern="{path}/{cmd}" {upload.verbose} --port={serial.port.file} -U {upload.native_usb} -e -w -v -b "{build.path}/{build.project_name}.bin" -R
+
+
+tools.sloadhost-stm32.cmd=sloadhost-stm32
+tools.sloadhost-stm32.cmd.windows=sloadhost-stm32.exe
+tools.sloadhost-stm32.path={runtime.ide.path}/hardware/tools
+
+
+tools.sloadhost-stm32.upload.params.verbose= 
+tools.sloadhost-stm32.upload.params.quiet=
+tools.sloadhost-stm32.upload.pattern="{path}/{cmd}" --serialdev {serial.port} --baudrate 115200 --dtrrtsconfigboot --go 0x8000000 --globalerase --loadfile "{build.path}/{build.project_name}.bin" --write 0x08000000
 

@@ -220,6 +220,28 @@ void detachInterrupt(uint32_t pin)
 extern "C" {
 #endif
 
+
+void interrupts(void){
+	//Only enable the interrupts that are exposed to the user
+	NVIC_EnableIRQ(EXTI0_IRQn);
+	NVIC_EnableIRQ(EXTI1_IRQn);
+	NVIC_EnableIRQ(EXTI2_IRQn);
+	NVIC_EnableIRQ(EXTI3_IRQn);
+	NVIC_EnableIRQ(EXTI4_IRQn);
+	NVIC_EnableIRQ(EXTI9_5_IRQn);
+	NVIC_EnableIRQ(EXTI15_10_IRQn);
+}
+
+void noInterrupts(void){
+	NVIC_DisableIRQ(EXTI0_IRQn);
+	NVIC_DisableIRQ(EXTI1_IRQn);
+	NVIC_DisableIRQ(EXTI2_IRQn);
+	NVIC_DisableIRQ(EXTI3_IRQn);
+	NVIC_DisableIRQ(EXTI4_IRQn);
+	NVIC_DisableIRQ(EXTI9_5_IRQn);
+	NVIC_DisableIRQ(EXTI15_10_IRQn);
+}
+
 /* interrupt handler for PA0,PB0,PC0,PD0,PE0 */
 void EXTI0_IRQHandler      (void) {
 	if (EXTI_GetITStatus(EXTI_Line0) != RESET)
