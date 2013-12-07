@@ -133,8 +133,8 @@ static const uint8_t SCK  = PIN_SPI_SCK;
 #define TX1               (1u)  //PA9
 // Serial2
 #define PINS_USART1          (83u)
-#define RX2                 (61u) //PA3
-#define TX2                 (60u) //PA2
+#define RX2                 (61u) //A7,PA3
+#define TX2                 (60u) //A6,PA2
 // Serial3
 #define PINS_USART3          (84u)
 #define RX3                (41u) //PB11
@@ -218,7 +218,7 @@ static const uint8_t CAN1TX = 89;
 #ifdef __cplusplus
 
 //extern UARTClass Serial;
-extern USARTClass Serial1;
+extern USARTClass Serial;
 extern USARTClass Serial2;
 extern USARTClass Serial3;
 

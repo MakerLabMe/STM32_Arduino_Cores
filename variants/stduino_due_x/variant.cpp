@@ -301,17 +301,17 @@ extern const PinDescription g_APinDescription[]=
 /*
  * UART objects
  */
-RingBuffer rx_buffer1;
+//RingBuffer rx_buffer1;
 
 //UARTClass Serial(UART, UART_IRQn, id_uart, &rx_buffer1);
-void serialEvent() __attribute__((weak));
-void serialEvent() { }
-
-// IT handlers
-void UART_Handler(void)
-{
-  //Serial.IrqHandler();
-}
+//void serialEvent() __attribute__((weak));
+//void serialEvent() { }
+//
+//// IT handlers
+//void UART_Handler(void)
+//{
+//  //Serial.IrqHandler();
+//}
 
 // ----------------------------------------------------------------------------
 /*
@@ -321,7 +321,7 @@ RingBuffer rx_buffer2;
 RingBuffer rx_buffer3;
 RingBuffer rx_buffer4;
 
-USARTClass Serial1(USART1, USART1_IRQn, id_usart1, &rx_buffer2);
+USARTClass Serial(USART1, USART1_IRQn, id_usart1, &rx_buffer2);
 void serialEvent1() __attribute__((weak));
 void serialEvent1() { }
 USARTClass Serial2(USART2, USART2_IRQn, id_usart2, &rx_buffer3);
@@ -334,7 +334,7 @@ void serialEvent3() { }
 // IT handlers
 void USART1_IRQHandler(void) 
 {
-  Serial1.IrqHandler();
+  Serial.IrqHandler();//USART1 must be Serial,for usart flash programming.
 }
 
 void USART2_IRQHandler(void) 
@@ -352,7 +352,7 @@ void USART3_IRQHandler(void)
 void serialEventRun(void)
 {
   //if (Serial.available()) serialEvent();
-  if (Serial1.available()) serialEvent1();
+  if (Serial.available()) serialEvent1();
   if (Serial2.available()) serialEvent2();
   if (Serial3.available()) serialEvent3();
 }
