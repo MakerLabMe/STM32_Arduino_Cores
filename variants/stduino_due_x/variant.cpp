@@ -136,11 +136,11 @@ extern const PinDescription g_APinDescription[]=
   { GPIOB, GPIO_Pin_3,   RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // 
   { GPIOB, GPIO_Pin_4,   RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // 
   { GPIOB, GPIO_Pin_5,   RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // 
-  { GPIOB, GPIO_Pin_6,   RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // 
+  { GPIOB, GPIO_Pin_6,   RCC_APB2Periph_GPIOB, NONE, TIM4, TIM_Channel_1 }, // 9,TIM4_CH1,pwm
   // 10
-  { GPIOB, GPIO_Pin_7,   RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // 
-  { GPIOB, GPIO_Pin_8,   RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // 
-  { GPIOB, GPIO_Pin_9,   RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // 
+  { GPIOB, GPIO_Pin_7,   RCC_APB2Periph_GPIOB, NONE, TIM4, TIM_Channel_2 }, // 10,TIM4_CH2,pwm
+  { GPIOB, GPIO_Pin_8,   RCC_APB2Periph_GPIOB, NONE, TIM4, TIM_Channel_3 }, // 11,TIM4_CH3,pwm
+  { GPIOB, GPIO_Pin_9,   RCC_APB2Periph_GPIOB, NONE, TIM4, TIM_Channel_4 }, // 12,TIM4_CH4,pwm
 
   // 13 - AMBER LED
   { GPIOE, GPIO_Pin_0,   RCC_APB2Periph_GPIOE, NONE, NULL, NONE}, // 
