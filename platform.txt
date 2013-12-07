@@ -81,12 +81,12 @@ tools.bossac.upload.params.quiet=
 tools.bossac.upload.pattern="{path}/{cmd}" {upload.verbose} --port={serial.port.file} -U {upload.native_usb} -e -w -v -b "{build.path}/{build.project_name}.bin" -R
 
 
-tools.sloadhost-stm32.cmd=sloadhost-stm32
-tools.sloadhost-stm32.cmd.windows=sloadhost-stm32.exe
-tools.sloadhost-stm32.path={runtime.ide.path}/hardware/tools
+tools.sloadhost.cmd=sloadhost
+tools.sloadhost.cmd.windows=sloadhost.exe
+tools.sloadhost.path={runtime.ide.path}/hardware/arduino/stm32
 
 
-tools.sloadhost-stm32.upload.params.verbose= 
-tools.sloadhost-stm32.upload.params.quiet=
-tools.sloadhost-stm32.upload.pattern="{path}/{cmd}" --serialdev {serial.port} --baudrate 115200 --dtrrtsconfigboot --go 0x8000000 --globalerase --loadfile "{build.path}/{build.project_name}.bin" --write 0x08000000
+tools.sloadhost.upload.params.verbose= 
+tools.sloadhost.upload.params.quiet=
+tools.sloadhost.upload.pattern="{path}/{cmd}" --serialdev {serial.port} --baudrate 115200 --dtrrtsconfigboot --globalerase --loadfile "{build.path}/{build.project_name}.bin" --write 0x08000000
 
