@@ -87,7 +87,7 @@ void attachInterrupt(uint32_t pin, void (*callback)(void), uint32_t mode)
 
 	uint8_t GPIO_PortSource = 0;	//variable to hold the port number
 	uint8_t GPIO_PinSource = 0;	//variable to hold the pin number
-	uint8_t PinNumber;				//temp variable to calculate the pin number
+	uint16_t PinNumber;				//temp variable to calculate the pin number
 
 
 	//EXTI structure to init EXT
@@ -95,7 +95,6 @@ void attachInterrupt(uint32_t pin, void (*callback)(void), uint32_t mode)
 	//NVIC structure to set up NVIC controller
 	NVIC_InitTypeDef NVIC_InitStructure;
 
-	//Map the Spark pin to the appropriate port and pin on the STM32
 	GPIO_TypeDef *gpio_port = g_APinDescription[pin].pPort;
 	uint16_t gpio_pin = g_APinDescription[pin].ulPin;
 
@@ -131,6 +130,7 @@ void attachInterrupt(uint32_t pin, void (*callback)(void), uint32_t mode)
 		PinNumber = PinNumber >> 1;
 		GPIO_PinSource++;
 	}
+
 
 	// Register the handler for the user function name
   callbacksEXTI[GPIO_PinSource] = callback;
@@ -244,6 +244,9 @@ void noInterrupts(void){
 
 /* interrupt handler for PA0,PB0,PC0,PD0,PE0 */
 void EXTI0_IRQHandler      (void) {
+
+  digitalWrite(72,HIGH);
+
 	if (EXTI_GetITStatus(EXTI_Line0) != RESET)
 	{
 		/* Clear the EXTI line pending bit */
@@ -258,6 +261,9 @@ void EXTI0_IRQHandler      (void) {
 
 /* interrupt handler for PA1,PB1,PC1,PD1,PE1 */
 void EXTI1_IRQHandler    (void) {
+
+  digitalWrite(72,HIGH);
+
 	if (EXTI_GetITStatus(EXTI_Line1) != RESET)
 	{
 		/* Clear the EXTI line pending bit */
@@ -272,6 +278,9 @@ void EXTI1_IRQHandler    (void) {
 
 /* interrupt handler for PA2,PB2,PC2,PD2,PE2 */
 void EXTI2_IRQHandler    (void) {
+
+  digitalWrite(72,HIGH);
+
 	if (EXTI_GetITStatus(EXTI_Line2) != RESET)
 	{
 		/* Clear the EXTI line pending bit */
@@ -286,6 +295,9 @@ void EXTI2_IRQHandler    (void) {
 
 /* interrupt handler for PA3,PB3,PC3,PD3,PE3 */
 void EXTI3_IRQHandler    (void) {
+
+  digitalWrite(72,HIGH);
+
 	if (EXTI_GetITStatus(EXTI_Line3) != RESET)
 	{
 		/* Clear the EXTI line pending bit */
@@ -300,6 +312,9 @@ void EXTI3_IRQHandler    (void) {
 
 /* interrupt handler for PA4,PB4,PC4,PD4,PE4 */
 void EXTI4_IRQHandler    (void) {
+
+  digitalWrite(72,HIGH);
+
 	if (EXTI_GetITStatus(EXTI_Line4) != RESET)
 	{
 		/* Clear the EXTI line pending bit */
@@ -314,6 +329,8 @@ void EXTI4_IRQHandler    (void) {
 
 /* interrupt handler for PA5~9,PB5~9,PC5~9,PD5~9,PE5~9 */
 void EXTI9_5_IRQHandler  (void) {
+
+  digitalWrite(72,HIGH);
 
 	if (EXTI_GetITStatus(EXTI_Line5) != RESET)
 	{
@@ -373,6 +390,8 @@ void EXTI9_5_IRQHandler  (void) {
 
 /* interrupt handler for PA10~15,PB10~15,PC10~15,PD1015,PE10~15 */
 void EXTI15_10_IRQHandler(void) {
+
+  digitalWrite(72,HIGH);
 
 	if (EXTI_GetITStatus(EXTI_Line10) != RESET)
 	{

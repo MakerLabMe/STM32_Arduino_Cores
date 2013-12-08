@@ -26,7 +26,6 @@
  *   2       TIOA0 |  PD4   |
  *   3       TIOA7 |  PD5  |
  *   4       NPCS1 |  PD6  |
- *           TIOB6 |  PC26  |
  *   5       TIOA6 |  PD7  |
  *   6       PWML7 |  PB3  |
  *   7       PWML6 |  PB4  |
@@ -437,6 +436,9 @@ void init( void )
     g_APinDescription[PINS_CAN1].ulPin,
     g_APinDescription[PINS_CAN1].ulPinConfiguration);
 */
+
+  //disable JTAG-DP,release pin 6(PB3),7(PB4),21(PA15)
+  GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable,ENABLE);
   // Initialize Analog Controller
 
 	ADC_InitTypeDef ADC_InitStructure;
