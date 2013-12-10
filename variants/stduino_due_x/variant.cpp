@@ -19,95 +19,95 @@
 #include "variant.h"
 
 /*
- * DUE Board pin   |  PORT  | Label
- * ----------------+--------+-------
- *   0             |  PA10   | "RX0"
- *   1             |  PA9   | "TX0"
- *   2       TIOA0 |  PD4   |
- *   3       TIOA7 |  PD5  |
- *   4       NPCS1 |  PD6  |
- *   5       TIOA6 |  PD7  |
- *   6       PWML7 |  PB3  |
- *   7       PWML6 |  PB4  |
- *   8       PWML5 |  PB5  |
- *   9       PWML4 |  PB6  |
- *  10       NPCS0 |  PB7  |
- *           TIOB7 |  PC29  |
- *  11       TIOA8 |  PB8   |
- *  12       TIOB8 |  PB9   |
- *  13       TIOB0 |  PE0  | not LED 
- *  14       TXD3  |  PD3   | "TX3"
- *  15       RXD3  |  PD2   | "RX3"
- *  16       TXD1  |  PD1  | "TX2"
- *  17       RXD1  |  PD0  | "RX2"
- *  18       TXD0  |  PC12  | "TX1"
- *  19       RXD0  |  PC11  | "RX1"
- *  20             |  PC10  | "SDA"
- *  21             |  PA15  | "SCL"
- *  22             |  PE3  |
- *  23             |  PE2  |
- *  24             |  PA8  |
- *  25             |  PC9   |
- *  26             |  PC8   |
- *  27             |  PC7   |
- *  28             |  PC6   |
- *  29             |  PD15   |
- *  30             |  PD14   |
- *  31             |  PD13   |
- *  32             |  PD12  |
- *  33             |  PD11   |
- *  34             |  PD10   |
- *  35             |  PD9   |
- *  36             |  PD8   |
- *  37             |  PB15   |
- *  38             |  PB14   |
- *  39             |  PB13   |
- *  40             |  PB12   |
- *  41             |  PB11   |
- *  42             |  PB10  |
- *  43             |  PE5  |
- *  44             |  PE6  |
- *  45             |  PE7  |
- *  46             |  PE8  |
- *  47             |  PE9  |
- *  48             |  PE10  |
- *  49             |  PE11  |
- *  50             |  PE12  |
- *  51             |  PE13  |
- *  52       NPCS2 |  PE14  |
- *  53             |  PE15  |
- *  54             |  PC0  | "A0"
- *  55             |  PC1  | "A1"
- *  56             |  PC2  | "A2"
- *  57             |  PC3  | "A3"
- *  58       TIOB2 |  PA0   | "A4"
- *  69             |  PA1   | "A5"
- *  60       TIOB1 |  PA2   | "A6"
- *  61       TIOA1 |  PA3   | "A7"
- *  62             |  PA4  | "A8"
- *  63             |  PA5  | "A9"
- *  64             |  PA6  | "A10"
- *  65             |  PA7  | "A11"
- *  66             |  PC4  | "A12"//"DAC0"
- *  67             |  PC5  | "A13"//"DAC1"
- *  68             |  PB0   | "A14"//"CANRX"
- *  69             |  PB1   | "A15"//"CANTX"
- *  70             |  PC14  | "SDA1"
- *  71             |  PC15  | "SCL1"
- *  72             |  PE4  | LED AMBER "L"
+ * DUE Board pin                    |  PORT  | Label
+ * ---------------------------------+--------+-------
+ *   0                              |  PA10  | "RX0",pwm
+ *   1                              |  PA9   | "TX0",pwm
+ *   2       TIOA0                  |  PD4   |
+ *   3       TIOA7                  |  PD5   |
+ *   4       NPCS1                  |  PD6   |
+ *   5       TIOA6                  |  PD7   |
+ *   6       SPI3_SCK,I2S3_CK       |  PB3   |
+ *   7       SPI3_MISO              |  PB4   |
+ *   8  I2C1_SMBA,SPI3_MOSI,I2S3_SD |  PB5   |
+ *   9       I2C1_SCL               |  PB6   |pwm
+ *  10       I2C1_SDA               |  PB7   |pwm
+ *  11       SDIO_D4                |  PB8   |pwm
+ *  12       SDIO_D5                |  PB9   |pwm
+ *  13                              |  PE0   | not LED 
+ *  14                              |  PD3   |
+ *  15       USART5_RX,SDIO_CMD     |  PD2   | 
+ *  16                              |  PD1   |
+ *  17                              |  PD0   | 
+ *  18       USART5_TX,SDIO_CK      |  PC12  | 
+ *  19       USART4_RX,SDIO_D3      |  PC11  | 
+ *  20       USART4_TX,SDIO_D2      |  PC10  | 
+ *  21       SPI3_NSS,I2S3_WS       |  PA15  |
+ *  22                              |  PE3   |
+ *  23                              |  PE2   |
+ *  24                              |  PA8   |
+ *  25       SDIO_D1                |  PC9   |pwm
+ *  26       SDIO_D0                |  PC8   |pwm
+ *  27       I2S3_MCK               |  PC7   |pwm
+ *  28       I2S2_MCK               |  PC6   |pwm
+ *  29                              |  PD15  |
+ *  30                              |  PD14  |
+ *  31                              |  PD13  |
+ *  32                              |  PD12  |
+ *  33                              |  PD11  |
+ *  34                              |  PD10  |
+ *  35                              |  PD9   |
+ *  36                              |  PD8   |
+ *  37       SPI2_MOSI,I2S2_SD      |  PB15  |
+ *  38       SPI2_MISO              |  PB14  |
+ *  39       SPI2_SCK,I2S2_CK       |  PB13  |
+ *  40  SPI2_NSS,I2S2_WS,I2C2_SMBA  |  PB12  |
+ *  41       I2C2_SDA,USART3_RX     |  PB11  |
+ *  42       I2C2_SCL,USART3_TX     |  PB10  |
+ *  43                              |  PE5   |
+ *  44                              |  PE6   |
+ *  45                              |  PE7   |
+ *  46                              |  PE8   |
+ *  47                              |  PE9   |
+ *  48                              |  PE10  |
+ *  49                              |  PE11  |
+ *  50                              |  PE12  |
+ *  51                              |  PE13  |
+ *  52                              |  PE14  |
+ *  53                              |  PE15  |
+ *  54                              |  PC0   | "A0"
+ *  55                              |  PC1   | "A1"
+ *  56                              |  PC2   | "A2"
+ *  57                              |  PC3   | "A3"
+ *  58                              |  PA0   | "A4"
+ *  69                              |  PA1   | "A5"
+ *  60       USART2_TX              |  PA2   | "A6",pwm
+ *  61       USART2_RX              |  PA3   | "A7",pwm
+ *  62       DAC_OUT1,SPI1_NSS      |  PA4   | "A8"
+ *  63       DAC_OUT2,SPI1_SCK      |  PA5   | "A9"
+ *  64       SPI1_MISO              |  PA6   | "A10"
+ *  65       SPI1_MOSI              |  PA7   | "A11"
+ *  66                              |  PC4   | "A12"
+ *  67                              |  PC5   | "A13"
+ *  68                              |  PB0   | "A14",pwm
+ *  69                              |  PB1   | "A15",pwm
+ *  70                              |  PC14  | "SDA1"
+ *  71                              |  PC15  | "SCL1"
+ *  72                              |  PE4   | LED AMBER "L"
+ *  73                              |  PB2   |BOOT1
 not support
-           *  73             |  PA21  | LED AMBER "TX"
-           *  74       MISO  |  PA25  |
-           *  75       MOSI  |  PA26  |
-           *  76       SCLK  |  PA27  |
-           *  77       NPCS0 |  PA28  |
-           *  78       NPCS3 |  PB23  | unconnected!
+           *  73                              |  PA21  | LED AMBER "TX"
+           *  74                        MISO  |  PA25  |
+           *  75                        MOSI  |  PA26  |
+           *  76                        SCLK  |  PA27  |
+           *  77                        NPCS0 |  PA28  |
+           *  78                        NPCS3 |  PB23  | unconnected!
  *
- * USB pin         |  PORT
- * ----------------+--------
- *  USBDM          |  PA11
- *  USBDP          |  PA12
- *  USBDIS         |  PC13
+ * USB pin                          |  PORT
+ * ----------------                 +--------
+ *  USBDM                           |  PA11
+ *  USBDP                           |  PA12
+ *  USBDIS                          |  PC13
  */
 
 #ifdef __cplusplus
@@ -240,6 +240,7 @@ extern const PinDescription g_APinDescription[]=
 
   // 72/73 - LEDs
   { GPIOE, GPIO_Pin_4,   RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // LED AMBER RXL
+  { GPIOB, GPIO_Pin_2,   RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, //BOOT1
   /*
   { PIOA, PIO_PA21,          ID_Pioa, pio_output_0, PIO_DEFAULT}, // LED AMBER TXL
 
