@@ -24,61 +24,79 @@ extern "C" {
 
 #include "Wire.h"
 
-static inline bool TWI_FailedAcknowledge(Twi *pTwi) {
+static inline bool TWI_FailedAcknowledge(I2C_TypeDef *pTwi) {
+#if 0
 	return pTwi->TWI_SR & TWI_SR_NACK;
+#endif
 }
 
-static inline bool TWI_WaitTransferComplete(Twi *_twi, uint32_t _timeout) {
+static inline bool TWI_WaitTransferComplete(I2C_TypeDef *_twi, uint32_t _timeout) {
+#if 0
 	while (!TWI_TransferComplete(_twi)) {
 		if (TWI_FailedAcknowledge(_twi))
 			return false;
 		if (--_timeout == 0)
 			return false;
 	}
+#endif
 	return true;
 }
 
-static inline bool TWI_WaitByteSent(Twi *_twi, uint32_t _timeout) {
+static inline bool TWI_WaitByteSent(I2C_TypeDef *_twi, uint32_t _timeout) {
+#if 0
 	while (!TWI_ByteSent(_twi)) {
 		if (TWI_FailedAcknowledge(_twi))
 			return false;
 		if (--_timeout == 0)
 			return false;
 	}
+#endif
 	return true;
 }
 
-static inline bool TWI_WaitByteReceived(Twi *_twi, uint32_t _timeout) {
+static inline bool TWI_WaitByteReceived(I2C_TypeDef *_twi, uint32_t _timeout) {
+#if 0
 	while (!TWI_ByteReceived(_twi)) {
 		if (TWI_FailedAcknowledge(_twi))
 			return false;
 		if (--_timeout == 0)
 			return false;
 	}
+#endif
 	return true;
 }
 
 static inline bool TWI_STATUS_SVREAD(uint32_t status) {
+#if 0
 	return (status & TWI_SR_SVREAD) == TWI_SR_SVREAD;
+#endif
 }
 
 static inline bool TWI_STATUS_SVACC(uint32_t status) {
+#if 0
 	return (status & TWI_SR_SVACC) == TWI_SR_SVACC;
+#endif
 }
 
 static inline bool TWI_STATUS_GACC(uint32_t status) {
+#if 0
 	return (status & TWI_SR_GACC) == TWI_SR_GACC;
+#endif
 }
 
 static inline bool TWI_STATUS_EOSACC(uint32_t status) {
+#if 0
 	return (status & TWI_SR_EOSACC) == TWI_SR_EOSACC;
+#endif
 }
 
 static inline bool TWI_STATUS_NACK(uint32_t status) {
+#if 0
 	return (status & TWI_SR_NACK) == TWI_SR_NACK;
+#endif
 }
 
-TwoWire::TwoWire(Twi *_twi, void(*_beginCb)(void)) :
+TwoWire::TwoWire(I2C_TypeDef *_twi, void(*_beginCb)(void)) :
 	twi(_twi), rxBufferIndex(0), rxBufferLength(0), txAddress(0),
 			txBufferLength(0), srvBufferIndex(0), srvBufferLength(0), status(
 					UNINITIALIZED), onBeginCallback(_beginCb) {
@@ -86,6 +104,7 @@ TwoWire::TwoWire(Twi *_twi, void(*_beginCb)(void)) :
 }
 
 void TwoWire::begin(void) {
+#if 0
 	if (onBeginCallback)
 		onBeginCallback();
 
@@ -94,9 +113,11 @@ void TwoWire::begin(void) {
 
 	TWI_ConfigureMaster(twi, TWI_CLOCK, VARIANT_MCK);
 	status = MASTER_IDLE;
+#endif
 }
 
 void TwoWire::begin(uint8_t address) {
+#if 0
 	if (onBeginCallback)
 		onBeginCallback();
 
@@ -107,6 +128,7 @@ void TwoWire::begin(uint8_t address) {
 	status = SLAVE_IDLE;
 	TWI_EnableIt(twi, TWI_IER_SVACC);
 	//| TWI_IER_RXRDY | TWI_IER_TXRDY	| TWI_IER_TXCOMP);
+#endif
 }
 
 void TwoWire::begin(int address) {
@@ -114,6 +136,7 @@ void TwoWire::begin(int address) {
 }
 
 uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity, uint8_t sendStop) {
+#if 0
 	if (quantity > BUFFER_LENGTH)
 		quantity = BUFFER_LENGTH;
 
@@ -135,26 +158,35 @@ uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity, uint8_t sendStop
 	rxBufferLength = readed;
 
 	return readed;
+#endif
 }
 
 uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity) {
+#if 0
 	return requestFrom((uint8_t) address, (uint8_t) quantity, (uint8_t) true);
+#endif
 }
 
 uint8_t TwoWire::requestFrom(int address, int quantity) {
+#if 0
 	return requestFrom((uint8_t) address, (uint8_t) quantity, (uint8_t) true);
+#endif
 }
 
 uint8_t TwoWire::requestFrom(int address, int quantity, int sendStop) {
+#if 0
 	return requestFrom((uint8_t) address, (uint8_t) quantity, (uint8_t) sendStop);
+#endif
 }
 
 void TwoWire::beginTransmission(uint8_t address) {
+#if 0
 	status = MASTER_SEND;
 
 	// save address of target and empty buffer
 	txAddress = address;
 	txBufferLength = 0;
+#endif
 }
 
 void TwoWire::beginTransmission(int address) {
@@ -176,6 +208,7 @@ void TwoWire::beginTransmission(int address) {
 //
 uint8_t TwoWire::endTransmission(uint8_t sendStop) {
 	// transmit buffer (blocking)
+#if 0
 	TWI_StartWrite(twi, txAddress, 0, 0, txBuffer[0]);
 	TWI_WaitByteSent(twi, XMIT_TIMEOUT);
 	int sent = 1;
@@ -191,6 +224,7 @@ uint8_t TwoWire::endTransmission(uint8_t sendStop) {
 
 	status = MASTER_IDLE;
 	return sent;
+#endif
 }
 
 //	This provides backwards compatibility with the original
@@ -202,6 +236,7 @@ uint8_t TwoWire::endTransmission(void)
 }
 
 size_t TwoWire::write(uint8_t data) {
+#if 0
 	if (status == MASTER_SEND) {
 		if (txBufferLength >= BUFFER_LENGTH)
 			return 0;
@@ -213,9 +248,11 @@ size_t TwoWire::write(uint8_t data) {
 		srvBuffer[srvBufferLength++] = data;
 		return 1;
 	}
+#endif
 }
 
 size_t TwoWire::write(const uint8_t *data, size_t quantity) {
+#if 0
 	if (status == MASTER_SEND) {
 		for (size_t i = 0; i < quantity; ++i) {
 			if (txBufferLength >= BUFFER_LENGTH)
@@ -230,6 +267,7 @@ size_t TwoWire::write(const uint8_t *data, size_t quantity) {
 		}
 	}
 	return quantity;
+#endif
 }
 
 int TwoWire::available(void) {
@@ -237,15 +275,19 @@ int TwoWire::available(void) {
 }
 
 int TwoWire::read(void) {
+#if 0
 	if (rxBufferIndex < rxBufferLength)
 		return rxBuffer[rxBufferIndex++];
 	return -1;
+#endif
 }
 
 int TwoWire::peek(void) {
+#if 0
 	if (rxBufferIndex < rxBufferLength)
 		return rxBuffer[rxBufferIndex];
 	return -1;
+#endif
 }
 
 void TwoWire::flush(void) {
@@ -262,6 +304,7 @@ void TwoWire::onRequest(void(*function)(void)) {
 }
 
 void TwoWire::onService(void) {
+#if 0
 	// Retrieve interrupt status
 	uint32_t sr = TWI_GetStatus(twi);
 
@@ -327,10 +370,12 @@ void TwoWire::onService(void) {
 			TWI_WriteByte(twi, c);
 		}
 	}
+#endif
 }
 
 #if WIRE_INTERFACES_COUNT > 0
 static void Wire_Init(void) {
+#if 0
 	pmc_enable_periph_clk(WIRE_INTERFACE_ID);
 	PIO_Configure(
 			g_APinDescription[PIN_WIRE_SDA].pPort,
@@ -347,6 +392,7 @@ static void Wire_Init(void) {
 	NVIC_ClearPendingIRQ(TWI1_IRQn);
 	NVIC_SetPriority(TWI1_IRQn, 0);
 	NVIC_EnableIRQ(TWI1_IRQn);
+#endif
 }
 
 TwoWire Wire = TwoWire(WIRE_INTERFACE, Wire_Init);
@@ -358,6 +404,7 @@ void WIRE_ISR_HANDLER(void) {
 
 #if WIRE_INTERFACES_COUNT > 1
 static void Wire1_Init(void) {
+#if 0
 	pmc_enable_periph_clk(WIRE1_INTERFACE_ID);
 	PIO_Configure(
 			g_APinDescription[PIN_WIRE1_SDA].pPort,
@@ -374,6 +421,7 @@ static void Wire1_Init(void) {
 	NVIC_ClearPendingIRQ(TWI0_IRQn);
 	NVIC_SetPriority(TWI0_IRQn, 0);
 	NVIC_EnableIRQ(TWI0_IRQn);
+#endif
 }
 
 TwoWire Wire1 = TwoWire(WIRE1_INTERFACE, Wire1_Init);

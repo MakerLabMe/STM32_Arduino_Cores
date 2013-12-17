@@ -23,10 +23,10 @@
  * ---------------------------------+--------+-------
  *   0                              |  PA10  | "RX0",pwm
  *   1                              |  PA9   | "TX0",pwm
- *   2       TIOA0                  |  PD4   |
- *   3       TIOA7                  |  PD5   |
- *   4       NPCS1                  |  PD6   |
- *   5       TIOA6                  |  PD7   |
+ *   2                              |  PD4   |
+ *   3       USART2_TX(remap)       |  PD5   |
+ *   4       USART2_RX(remap)       |  PD6   |
+ *   5                              |  PD7   |
  *   6       SPI3_SCK,I2S3_CK       |  PB3   |
  *   7       SPI3_MISO              |  PB4   |
  *   8  I2C1_SMBA,SPI3_MOSI,I2S3_SD |  PB5   |
@@ -37,8 +37,8 @@
  *  13                              |  PE0   | not LED 
  *  14                              |  PD3   |
  *  15       USART5_RX,SDIO_CMD     |  PD2   | 
- *  16                              |  PD1   |
- *  17                              |  PD0   | 
+ *  16       CAN1_TX(remap)         |  PD1   |
+ *  17       CAN1_RX(remap)         |  PD0   | 
  *  18       USART5_TX,SDIO_CK      |  PC12  | 
  *  19       USART4_RX,SDIO_D3      |  PC11  | 
  *  20       USART4_TX,SDIO_D2      |  PC10  | 
@@ -50,14 +50,14 @@
  *  26       SDIO_D0                |  PC8   |pwm
  *  27       I2S3_MCK               |  PC7   |pwm
  *  28       I2S2_MCK               |  PC6   |pwm
- *  29                              |  PD15  |
- *  30                              |  PD14  |
- *  31                              |  PD13  |
- *  32                              |  PD12  |
+ *  29       TIM4_CH4(remap)        |  PD15  |
+ *  30       TIM4_CH3(remap)        |  PD14  |
+ *  31       TIM4_CH2(remap)        |  PD13  |
+ *  32       TIM4_CH1(remap)        |  PD12  |
  *  33                              |  PD11  |
  *  34                              |  PD10  |
- *  35                              |  PD9   |
- *  36                              |  PD8   |
+ *  35       USART3_RX(remap)       |  PD9   |
+ *  36       USART3_TX(remap)       |  PD8   |
  *  37       SPI2_MOSI,I2S2_SD      |  PB15  |
  *  38       SPI2_MISO              |  PB14  |
  *  39       SPI2_SCK,I2S2_CK       |  PB13  |

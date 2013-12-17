@@ -31,7 +31,7 @@
 
 class TwoWire : public Stream {
 public:
-	TwoWire(Twi *twi, void(*begin_cb)(void));
+	TwoWire(I2C_TypeDef *twi, void(*begin_cb)(void));
 	void begin();
 	void begin(uint8_t);
 	void begin(int);
@@ -84,7 +84,7 @@ private:
 	void (*onBeginCallback)(void);
 
 	// TWI instance
-	Twi *twi;
+	I2C_TypeDef *twi;
 
 	// TWI state
 	enum TwoWireStatus {

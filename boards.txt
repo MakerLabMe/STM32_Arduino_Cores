@@ -21,8 +21,8 @@ arduino_due_x_dbg.build.vid=0x2341
 arduino_due_x_dbg.build.pid=0x003e
 
 STduino_due_x.name=STduino Due 
-STduino_due_x.vid.0=0x2341
-STduino_due_x.pid.0=0x003e
+#STduino_due_x.vid.0=0x10C4
+#STduino_due_x.pid.0=0xEA60
 STduino_due_x.upload.tool=sloadhost
 STduino_due_x.upload.protocol=
 STduino_due_x.upload.maximum_size=524288
@@ -31,13 +31,13 @@ STduino_due_x.upload.wait_for_upload_port=false
 STduino_due_x.upload.native_usb=false
 STduino_due_x.build.mcu=cortex-m3
 STduino_due_x.build.f_cpu=72000000L
-STduino_due_x.build.usb_product="STduino Due"
+STduino_due_x.build.usb_product="SLAB_USBtoUART"
 STduino_due_x.build.board=STM32_DUE
 STduino_due_x.build.core=arduino
 STduino_due_x.build.extra_flags=-DSTM32F10X_HD -mthumb {build.usb_flags}
 STduino_due_x.build.ldscript=linker_scripts/gcc/flash.ld
 STduino_due_x.build.variant=stduino_due_x
 STduino_due_x.build.variant_system_lib=libstm_stm32f10x_hd_gcc_rel.a
-STduino_due_x.build.vid=0x2341
-STduino_due_x.build.pid=0x003e
+#STduino_due_x.build.vid=0x10C4
+#STduino_due_x.build.pid=0xEA60
 

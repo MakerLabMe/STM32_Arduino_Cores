@@ -133,13 +133,13 @@ static const uint8_t SCK2  = PIN_SPI_SCK2;
 
 #define PIN_WIRE_SDA         (20u)
 #define PIN_WIRE_SCL         (21u)
-#define WIRE_INTERFACE       TWI1
+#define WIRE_INTERFACE       I2C1
 #define WIRE_INTERFACE_ID    ID_TWI1
 #define WIRE_ISR_HANDLER     TWI1_Handler
 
 #define PIN_WIRE1_SDA        (70u)
 #define PIN_WIRE1_SCL        (71u)
-#define WIRE1_INTERFACE      TWI0
+#define WIRE1_INTERFACE      I2C2
 #define WIRE1_INTERFACE_ID   ID_TWI0
 #define WIRE1_ISR_HANDLER    TWI0_Handler
 
