@@ -1,10 +1,10 @@
 
-# Arduino SAM Core and platform.
+# MakerLab STM32 Core and platform.
 #
 # For more info:
 # https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5---3rd-party-Hardware-specification
 
-name=STduino ARM (32-bits) Boards(stm32f103)
+name=MakerLab (32-bits) Boards(stm32f103)
 version=1.5.4
 
 # stm32 compile variables
