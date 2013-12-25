@@ -53,21 +53,21 @@ void USARTClass::begin( const uint32_t dwBaudRate )
     // Configure USART Tx as alternate function push-pull
     pinMode(TX, AF_OUTPUT_PUSHPULL);
   }
-  else if(_dwId == id_usart4)//Serial0
+  else if(_dwId == id_usart4)//Serial1
   {
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC | RCC_APB2Periph_AFIO, ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, ENABLE);
     pinMode(RX0, INPUT);
     pinMode(TX0, AF_OUTPUT_PUSHPULL);
   }
-  else if(_dwId == id_usart2)//Serial1
+  else if(_dwId == id_usart2)//Serial2
   {
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD | RCC_APB2Periph_AFIO, ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
     pinMode(RX1, INPUT);
     pinMode(TX1, AF_OUTPUT_PUSHPULL);
   }
-  else if(_dwId == id_usart3)//Serial2
+  else if(_dwId == id_usart3)//Serial3
   {
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD | RCC_APB2Periph_AFIO, ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
