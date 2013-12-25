@@ -16,8 +16,8 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef _VARIANT_ARDUINO_DUE_X_
-#define _VARIANT_ARDUINO_DUE_X_
+#ifndef _VARIANT_MAKERLAB_SUN_
+#define _VARIANT_MAKERLAB_SUN_
 
 /*----------------------------------------------------------------------------
  *        Definitions
@@ -179,18 +179,11 @@ static const uint8_t A8  = 62;
 static const uint8_t A9  = 63;
 static const uint8_t A10 = 64;
 static const uint8_t A11 = 65;
-static const uint8_t A12 = 66;
-static const uint8_t A13 = 67;
-static const uint8_t A14 = 68;
-static const uint8_t A15 = 69;
+static const uint8_t DAC0 = 66;
+static const uint8_t DAC1 = 67;
+static const uint8_t CANRX = 68;
+static const uint8_t CANTX = 69;
 #define ADC_RESOLUTION		12
-
-/*
- * Complementary CAN pins
- */
-static const uint8_t CAN1RX = 68;//PD0
-static const uint8_t CAN1TX = 69;//PD1
-
 
 /*
  * DACC
@@ -239,5 +232,5 @@ extern USARTClass Serial2;
 
 #endif
 
-#endif /* _VARIANT_ARDUINO_DUE_X_ */
+#endif /* _VARIANT_MAKERLAB_SUN_ */
 
