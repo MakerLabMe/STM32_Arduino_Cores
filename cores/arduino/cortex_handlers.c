@@ -97,7 +97,6 @@ void FSMC_IRQHandler                 (void) __attribute__ ((weak, alias("__halt"
 void SDIO_IRQHandler                 (void) __attribute__ ((weak, alias("__halt")));
 void TIM5_IRQHandler                 (void) __attribute__ ((weak, alias("__halt")));
 void SPI3_IRQHandler                 (void) __attribute__ ((weak, alias("__halt")));
-void UART4_IRQHandler                (void) __attribute__ ((weak, alias("__halt")));
 void UART5_IRQHandler                (void) __attribute__ ((weak, alias("__halt")));
 void TIM6_IRQHandler                 (void) __attribute__ ((weak, alias("__halt")));
 void TIM7_IRQHandler                 (void) __attribute__ ((weak, alias("__halt")));

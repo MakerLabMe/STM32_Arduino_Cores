@@ -38,6 +38,7 @@ USARTClass::USARTClass( USART_TypeDef* pUsart, IRQn_Type dwIrq, uint32_t dwId, R
 void USARTClass::begin( const uint32_t dwBaudRate )
 {
 
+  //Serial
   if(_dwId == id_usart1)
   {
     // AFIO clock enable
@@ -47,24 +48,31 @@ void USARTClass::begin( const uint32_t dwBaudRate )
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
 
     // Configure USART Rx as input floating
-    pinMode(RX1, INPUT);
+    pinMode(RX, INPUT);
 
     // Configure USART Tx as alternate function push-pull
+    pinMode(TX, AF_OUTPUT_PUSHPULL);
+  }
+  else if(_dwId == id_usart4)//Serial0
+  {
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC | RCC_APB2Periph_AFIO, ENABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, ENABLE);
+    pinMode(RX0, INPUT);
+    pinMode(TX0, AF_OUTPUT_PUSHPULL);
+  }
+  else if(_dwId == id_usart2)//Serial1
+  {
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD | RCC_APB2Periph_AFIO, ENABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
+    pinMode(RX1, INPUT);
     pinMode(TX1, AF_OUTPUT_PUSHPULL);
   }
-  else if(_dwId == id_usart2)
+  else if(_dwId == id_usart3)//Serial2
   {
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO, ENABLE);
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD | RCC_APB2Periph_AFIO, ENABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
     pinMode(RX2, INPUT);
     pinMode(TX2, AF_OUTPUT_PUSHPULL);
-  }
-  else if(_dwId == id_usart3)
-  {
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_AFIO, ENABLE);
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
-    pinMode(RX3, INPUT);
-    pinMode(TX3, AF_OUTPUT_PUSHPULL);
   }
 	// USART default configuration
 	// USART configured as follow:
@@ -130,6 +138,10 @@ void USARTClass::end( void )
   else if(_dwId == id_usart3)
   {
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, DISABLE);
+  }
+  else if(_dwId == id_usart4)
+  {
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, DISABLE);
   }
 }
 

@@ -122,172 +122,143 @@ extern const PinDescription g_APinDescription[]=
   { GPIOA,  GPIO_Pin_9,  RCC_APB2Periph_GPIOA, NONE, TIM1, TIM_Channel_2 }, // UTXD1,TIM1_CH2,pwm
 
   // 2
-  { GPIOD, GPIO_Pin_4,   RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // 
-  { GPIOD, GPIO_Pin_5,   RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // 
-  { GPIOD, GPIO_Pin_6,   RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // 
+  { GPIOD, GPIO_Pin_10,  RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 34
+  { GPIOD, GPIO_Pin_11,  RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 33
 
-  // 5
-  { GPIOD, GPIO_Pin_7,   RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // 
-  { GPIOB, GPIO_Pin_3,   RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // 
-  { GPIOB, GPIO_Pin_4,   RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // 
-  { GPIOB, GPIO_Pin_5,   RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // 
-  { GPIOB, GPIO_Pin_6,   RCC_APB2Periph_GPIOB, NONE, TIM4, TIM_Channel_1 }, // 9,TIM4_CH1,pwm
-  // 10
-  { GPIOB, GPIO_Pin_7,   RCC_APB2Periph_GPIOB, NONE, TIM4, TIM_Channel_2 }, // 10,TIM4_CH2,pwm
-  { GPIOB, GPIO_Pin_8,   RCC_APB2Periph_GPIOB, NONE, TIM4, TIM_Channel_3 }, // 11,TIM4_CH3,pwm
-  { GPIOB, GPIO_Pin_9,   RCC_APB2Periph_GPIOB, NONE, TIM4, TIM_Channel_4 }, // 12,TIM4_CH4,pwm
+  //4~7 pwm
+  { GPIOD, GPIO_Pin_12,  RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 32
+  { GPIOD, GPIO_Pin_13,  RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 31
+  { GPIOD, GPIO_Pin_14,  RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 30
+  { GPIOD, GPIO_Pin_15,  RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 29
 
+  //8~11 pwm
+  { GPIOC, GPIO_Pin_6,   RCC_APB2Periph_GPIOC, NONE, TIM8, TIM_Channel_1 }, // PIN 28,TIM8_CH1,pwm
+  { GPIOC, GPIO_Pin_7,   RCC_APB2Periph_GPIOC, NONE, TIM8, TIM_Channel_2 }, // PIN 27,TIM8_CH2,pwm
+  { GPIOC, GPIO_Pin_8,   RCC_APB2Periph_GPIOC, NONE, TIM8, TIM_Channel_3 }, // PIN 26,TIM8_CH3,pwm
+  { GPIOC, GPIO_Pin_9,   RCC_APB2Periph_GPIOC, NONE, TIM8, TIM_Channel_4 }, // PIN 25,TIM8_CH4,pwm
+
+  //12
+  { GPIOE, GPIO_Pin_0,   RCC_APB2Periph_GPIOE, NONE, NULL, NONE}, // 
   // 13 - AMBER LED
   { GPIOE, GPIO_Pin_1,   RCC_APB2Periph_GPIOE, NONE, NULL, NONE}, // 
 
-  // 14/15 
-  { GPIOD, GPIO_Pin_3,   RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // 
-  { GPIOD, GPIO_Pin_2,   RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // 
-
-  // 16/17 
-  { GPIOD, GPIO_Pin_1,   RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // 
-  { GPIOD, GPIO_Pin_0,   RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // 
-
-  // 18/19 
-  { GPIOC, GPIO_Pin_12,  RCC_APB2Periph_GPIOC, NONE, NULL, NONE }, // 
+  //14(USART4_TX),15(USARt4_RX)
+  { GPIOC, GPIO_Pin_10,  RCC_APB2Periph_GPIOC, NONE, NULL, NONE}, // 
   { GPIOC, GPIO_Pin_11,  RCC_APB2Periph_GPIOC, NONE, NULL, NONE }, // 
 
-  // 20/21 
-  { GPIOC, GPIO_Pin_10,  RCC_APB2Periph_GPIOC, NONE, NULL, NONE}, // 
-  { GPIOA, GPIO_Pin_15,  RCC_APB2Periph_GPIOA, NONE, NULL, NONE}, //
+  //16(USART2_TX remap),17(USART2_RX remap)
+  { GPIOD, GPIO_Pin_5,   RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // 
+  { GPIOD, GPIO_Pin_6,   RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // 
 
-  // 22
-  { GPIOE, GPIO_Pin_3,   RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 22
-  { GPIOE, GPIO_Pin_2,   RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 23
-  { GPIOA, GPIO_Pin_8,   RCC_APB2Periph_GPIOA, NONE, TIM1, TIM_Channel_1 }, // PIN 24,TIM1_CH1,pwm
-  { GPIOC, GPIO_Pin_9,   RCC_APB2Periph_GPIOC, NONE, TIM8, TIM_Channel_4 }, // PIN 25,TIM8_CH4,pwm
-
-  // 26
-  { GPIOC, GPIO_Pin_8,   RCC_APB2Periph_GPIOC, NONE, TIM8, TIM_Channel_3 }, // PIN 26,TIM8_CH3,pwm
-  { GPIOC, GPIO_Pin_7,   RCC_APB2Periph_GPIOC, NONE, TIM8, TIM_Channel_2 }, // PIN 27,TIM8_CH2,pwm
-  { GPIOC, GPIO_Pin_6,   RCC_APB2Periph_GPIOC, NONE, TIM8, TIM_Channel_1 }, // PIN 28,TIM8_CH1,pwm
-  { GPIOD, GPIO_Pin_15,  RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 29
-
-  // 30
-  { GPIOD, GPIO_Pin_14,  RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 30
-  { GPIOD, GPIO_Pin_13,  RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 31
-  { GPIOD, GPIO_Pin_12,  RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 32
-  { GPIOD, GPIO_Pin_11,  RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 33
-
-  // 34
-  { GPIOD, GPIO_Pin_10,  RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 34
-  { GPIOD, GPIO_Pin_9,   RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 35
+  //18(USART3_TX remap),19(USART3_RX remap)
   { GPIOD, GPIO_Pin_8,   RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 36
-  { GPIOB, GPIO_Pin_15,  RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // PIN 37
+  { GPIOD, GPIO_Pin_9,   RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 35
 
-  // 38
-  { GPIOB, GPIO_Pin_14,  RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // PIN 38
-  { GPIOB, GPIO_Pin_13,  RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // PIN 39
+  //20(SDA,pwm),21(SCL,pwm)
+  { GPIOB, GPIO_Pin_7,   RCC_APB2Periph_GPIOB, NONE, TIM4, TIM_Channel_2 }, // 10,TIM4_CH2,pwm
+  { GPIOB, GPIO_Pin_6,   RCC_APB2Periph_GPIOB, NONE, TIM4, TIM_Channel_1 }, // 9,TIM4_CH1,pwm
+
+  //22,23,24,25
+  { GPIOA, GPIO_Pin_8,   RCC_APB2Periph_GPIOA, NONE, TIM1, TIM_Channel_1 }, // PIN 24,TIM1_CH1,pwm
+  { GPIOA, GPIO_Pin_15,  RCC_APB2Periph_GPIOA, NONE, NULL, NONE}, //
+  { GPIOC, GPIO_Pin_12,  RCC_APB2Periph_GPIOC, NONE, NULL, NONE }, // 
+  { GPIOD, GPIO_Pin_2,   RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // 
+
+  //26,27,28
+  { GPIOD, GPIO_Pin_3,   RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // 
+  { GPIOD, GPIO_Pin_4,   RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // 
+  { GPIOD, GPIO_Pin_7,   RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // 
+  //29,SPI3_SCK
+  { GPIOB, GPIO_Pin_3,   RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // 
+  //30,SPI3_MISO
+  { GPIOB, GPIO_Pin_4,   RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // 
+
+  //31,USBDP(D+)
+  { GPIOA, GPIO_Pin_12,   RCC_APB2Periph_GPIOA, NONE, NULL, NONE }, // 
+  //32,USBDM(D-)
+  { GPIOA, GPIO_Pin_11,   RCC_APB2Periph_GPIOA, NONE, NULL, NONE }, // 
+
+  // 33,SPI3_MOSI
+  { GPIOB, GPIO_Pin_5,   RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // 
+  // 34,35
+  { GPIOB, GPIO_Pin_8,   RCC_APB2Periph_GPIOB, NONE, TIM4, TIM_Channel_3 }, // 11,TIM4_CH3,pwm
+  { GPIOB, GPIO_Pin_9,   RCC_APB2Periph_GPIOB, NONE, TIM4, TIM_Channel_4 }, // 12,TIM4_CH4,pwm
+  
+  // 36
   { GPIOB, GPIO_Pin_12,  RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // PIN 40
-  { GPIOB, GPIO_Pin_11,  RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // PIN 41
 
-  // 42
-  { GPIOB, GPIO_Pin_10,  RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // PIN 42
-  { GPIOE, GPIO_Pin_5,   RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 43
-  { GPIOE, GPIO_Pin_6,   RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 44
+  //37
+  { GPIOE, GPIO_Pin_15,  RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 53
+  { GPIOE, GPIO_Pin_14,  RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 52
+  { GPIOE, GPIO_Pin_13,  RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 51
+  { GPIOE, GPIO_Pin_12,  RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 50
+  { GPIOE, GPIO_Pin_11,  RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 49
+  { GPIOE, GPIO_Pin_10,  RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 48
+  
+  //43
+  { GPIOE, GPIO_Pin_9,   RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 47
+  { GPIOE, GPIO_Pin_8,   RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 46
   { GPIOE, GPIO_Pin_7,   RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 45
 
-  // 46
-  { GPIOE, GPIO_Pin_8,   RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 46
-  { GPIOE, GPIO_Pin_9,   RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 47
-  { GPIOE, GPIO_Pin_10,  RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 48
-  { GPIOE, GPIO_Pin_11,  RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 49
+  //46,BOOT1, pulldown withe 10k resistor
+  { GPIOB, GPIO_Pin_2,   RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, //BOOT1
 
-  // 50
-  { GPIOE, GPIO_Pin_12,  RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 50
-  { GPIOE, GPIO_Pin_13,  RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 51
-  { GPIOE, GPIO_Pin_14,  RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 52
-  { GPIOE, GPIO_Pin_15,  RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 53
+  //47,48
+  { GPIOE, GPIO_Pin_6,   RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 44
+  { GPIOE, GPIO_Pin_5,   RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 43
+  // 49,50,51
+  { GPIOE, GPIO_Pin_4,   RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // LED AMBER RXL
+  { GPIOE, GPIO_Pin_3,   RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 22
+  { GPIOE, GPIO_Pin_2,   RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // PIN 23
 
-
+  //52(SPI1_MOSI, adc),53(SPI1_MISO, adc)
+  { GPIOA, GPIO_Pin_7,  RCC_APB2Periph_GPIOA, ADC_Channel_7, TIM3, TIM_Channel_2}, // AD11,TIM3_CH2,pwm
+  { GPIOA, GPIO_Pin_6,  RCC_APB2Periph_GPIOA, ADC_Channel_6, TIM3, TIM_Channel_1}, // AD10,TIM3_CH1,pwm
+  
   // 54 .. 65 - Analog pins
   // ----------------------
   { GPIOC, GPIO_Pin_0,  RCC_APB2Periph_GPIOC, ADC_Channel_10, NULL ,NONE }, // AD0
   { GPIOC, GPIO_Pin_1,  RCC_APB2Periph_GPIOC, ADC_Channel_11, NULL ,NONE }, // AD1
   { GPIOC, GPIO_Pin_2,  RCC_APB2Periph_GPIOC, ADC_Channel_12, NULL ,NONE }, // AD2
   { GPIOC, GPIO_Pin_3,  RCC_APB2Periph_GPIOC, ADC_Channel_13, NULL ,NONE }, // AD3
+
   // 58
   { GPIOA, GPIO_Pin_0,  RCC_APB2Periph_GPIOA, ADC_Channel_0, TIM5, TIM_Channel_1 }, // AD4,TIM5_CH1,pwm
   { GPIOA, GPIO_Pin_1,  RCC_APB2Periph_GPIOA, ADC_Channel_1, TIM2, TIM_Channel_2 }, // AD5,TIM2_CH2/TIM5_CH2,pwm
+  //60,pwm
   { GPIOA, GPIO_Pin_2,  RCC_APB2Periph_GPIOA, ADC_Channel_2, TIM2, TIM_Channel_3 }, // AD6,TIM2_CH3/TIM5_CH3,pwm
+  //61,pwm
   { GPIOA, GPIO_Pin_3,  RCC_APB2Periph_GPIOA, ADC_Channel_3, TIM2, TIM_Channel_4 }, // AD7,TIM2_CH4/TIM5_CH4,pwm
-  // 62
-  { GPIOA, GPIO_Pin_4,  RCC_APB2Periph_GPIOA, ADC_Channel_4, NULL, NONE}, // AD8,DAC1
-  { GPIOA, GPIO_Pin_5,  RCC_APB2Periph_GPIOA, ADC_Channel_5, NULL, NONE}, // AD9,DAC2
-  { GPIOA, GPIO_Pin_6,  RCC_APB2Periph_GPIOA, ADC_Channel_6, TIM3, TIM_Channel_1}, // AD10,TIM3_CH1,pwm
-  { GPIOA, GPIO_Pin_7,  RCC_APB2Periph_GPIOA, ADC_Channel_7, TIM3, TIM_Channel_2}, // AD11,TIM3_CH2,pwm
 
-  // 66/67 - DAC0/DAC1
+  //62,63
   { GPIOC, GPIO_Pin_4,  RCC_APB2Periph_GPIOC, ADC_Channel_14,NULL, NONE }, // AD12
   { GPIOC, GPIO_Pin_5,  RCC_APB2Periph_GPIOC, ADC_Channel_15,NULL, NONE }, // AD13
-
-  // 68/69 - AD14/AD15
+  
+  // 64/65 - AD10/AD11
   { GPIOB, GPIO_Pin_0,  RCC_APB2Periph_GPIOB, ADC_Channel_8, TIM3, TIM_Channel_3}, // AD14,TIM3_CH3,pwm
   { GPIOB, GPIO_Pin_1,  RCC_APB2Periph_GPIOB, ADC_Channel_9, TIM3, TIM_Channel_4}, // AD15,TIM3_CH4,pwm
 
-  // 70/71 - TWI0
-  { GPIOC, GPIO_Pin_14,  RCC_APB2Periph_GPIOC, NONE, NULL, NONE }, // TWD0 - SDA1
-  { GPIOC, GPIO_Pin_15,  RCC_APB2Periph_GPIOC, NONE, NULL, NONE }, // TWCK0 - SCL1
+  // 66/67 - DAC0/DAC1
+  { GPIOA, GPIO_Pin_4,  RCC_APB2Periph_GPIOA, ADC_Channel_4, NULL, NONE}, // AD8,DAC1
+  { GPIOA, GPIO_Pin_5,  RCC_APB2Periph_GPIOA, ADC_Channel_5, NULL, NONE}, // AD9,DAC2
 
-  // 72/73 - LEDs
-  { GPIOE, GPIO_Pin_4,   RCC_APB2Periph_GPIOE, NONE, NULL, NONE }, // LED AMBER RXL
-  { GPIOB, GPIO_Pin_2,   RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, //BOOT1
-  /*
-  { PIOA, PIO_PA21,          ID_Pioa, pio_output_0, PIO_DEFAULT}, // LED AMBER TXL
+  // 68/69 ,CAN1_RX/CAN1_TX
+  { GPIOD, GPIO_Pin_0,   RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // 
+  { GPIOD, GPIO_Pin_1,   RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // 
 
-  // 74/75/76 - SPI
-  { PIOA, PIO_PA25A_SPI0_MISO,ID_pioa,pio_periph_A, PIO_DEFAULT}, // MISO
-  { PIOA, PIO_PA26A_SPI0_MOSI,ID_pioa,pio_periph_A, PIO_DEFAULT}, // MOSI
-  { PIOA, PIO_PA27A_SPI0_SPCK,ID_pioa,pio_periph_A, PIO_DEFAULT}, // SPCK
+  // 70 SDA1,71 SCL1
+  { GPIOB, GPIO_Pin_11,  RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // PIN 41
+  { GPIOB, GPIO_Pin_10,  RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // PIN 42
 
-  // 77 - SPI CS0
-  { PIOA, PIO_PA28A_SPI0_NPCS0,ID_pioa,pio_peripH_A,PIO_DEFAULT}, // NPCS0
-
-  // 78 - SPI CS3 (unconnected)
-  { PIOB, PIO_PB23B_SPI0_NPCS3,ID_piob,pio_peripH_B,PIO_DEFAULT}, // NPCS3
-
-  // 79 .. 84 - "All pins" masks
-
-  // 79 - TWI0 all pins
-  { PIOA, PIO_PA17A_TWD0|PIO_PA18a_twck0, id_pioA, PIO_PERIPH_A, PIO_DEFAULT, (PIN_ATTR_DIGITAL|PIN_ATTR_COMBO), NO_ADC, NO_ADC, NOT_ON_PWM, NOT_ON_TIMER },
-  // 80 - TWI1 all pins
-  { PIOB, PIO_PB12A_TWD1|PIO_PB13a_twck1, id_pioB, PIO_PERIPH_A, PIO_DEFAULT, (PIN_ATTR_DIGITAL|PIN_ATTR_COMBO), NO_ADC, NO_ADC, NOT_ON_PWM, NOT_ON_TIMER },
-  // 81 - UART (Serial) all pins
-  { PIOA, PIO_PA8A_URXD|PIO_PA9A_utxd, id_pioa, PIO_PERIPH_A, PIO_DEFAULT, (PIN_ATTR_DIGITAL|PIN_ATTR_COMBO), NO_ADC, NO_ADC, NOT_ON_PWM, NOT_ON_TIMER },
-  // 82 - USART0 (Serial1) all pins
-  { PIOA, PIO_PA11A_TXD0|PIO_PA10a_rxd0, id_pioa, PIO_PERIPH_A, PIO_DEFAULT, (PIN_ATTR_DIGITAL|PIN_ATTR_COMBO), NO_ADC, NO_ADC, NOT_ON_PWM, NOT_ON_TIMER },
-  // 83 - USART1 (Serial2) all pins
-  { PIOA, PIO_PA13A_TXD1|PIO_PA12a_rxd1, id_pioa, PIO_PERIPH_A, PIO_DEFAULT, (PIN_ATTR_DIGITAL|PIN_ATTR_COMBO), NO_ADC, NO_ADC, NOT_ON_PWM, NOT_ON_TIMER },
-  // 84 - USART3 (Serial3) all pins
-  { PIOD, PIO_PD4B_TXD3|PIO_PD5B_rxd3, id_piod, PIO_PERIPH_B, PIO_DEFAULT, (PIN_ATTR_DIGITAL|PIN_ATTR_COMBO), NO_ADC, NO_ADC, NOT_ON_PWM, NOT_ON_TIMER },
-
-  // 85 - USB
-  { PIOB, PIO_PB11A_UOTGID|PIO_PB10a_uotgvbof, iD_PIOB, PIO_PERIPH_A, PIO_DEFAULT, PIN_ATTR_DIGITAL,NO_ADC, NO_ADC, NOT_ON_PWM,  NOT_ON_TIMER }, // ID - VBOF
-
-  // 86 - SPI CS2
-  { PIOB, PIO_PB21B_SPI0_NPCS2, Id_piob, pio_perIPH_B, PIO_DEFAULT, PIN_ATTR_DIGITAL,                  NO_ADC, NO_ADC, NOT_ON_PWM,  NOT_ON_TIMER }, // NPCS2
-
-  // 87 - SPI CS1
-  { PIOA, PIO_PA29A_SPI0_NPCS1, Id_pioa, pio_perIPH_A, PIO_DEFAULT, PIN_ATTR_DIGITAL,                  NO_ADC, NO_ADC, NOT_ON_PWM,  NOT_ON_TIMER }, // NPCS1
-
-  // 88/89 - CANRX1/CANTX1 (same physical pin for 66/53)
-  { PIOB, PIO_PB15A_CANRX1,     Id_piob, pio_perIPH_A, PIO_DEFAULT, PIN_ATTR_DIGITAL,                  NO_ADC, NO_ADC, NOT_ON_PWM,  NOT_ON_TIMER }, // CANRX1
-  { PIOB, PIO_PB14A_CANTX1,     Id_piob, pio_perIPH_A, PIO_DEFAULT, PIN_ATTR_DIGITAL,                  NO_ADC, NO_ADC, NOT_ON_PWM,  NOT_ON_TIMER }, // CANTX1
-
-  // 90 .. 91 - "All CAN pins" masks
-  // 90 - CAN0 all pins
-  { PIOA, PIO_PA1A_CANRX0|PIO_PA0a_cantx0, id_piOA, PIO_PERIPH_A, PIO_DEFAULT, (PIN_ATTR_DIGITAL|PIN_ATTR_COMBO), NO_ADC,  NO_ADC, NOT_ON_PWM,  NOT_ON_TIMER },
-  // 91 - CAN1 all pins
-  { PIOB, PIO_PB15A_CANRX1|PIO_PB14a_cantx1, id_PIOB, PIO_PERIPH_A, PIO_DEFAULT, (PIN_ATTR_DIGITAL|PIN_ATTR_COMBO), NO_ADC, NO_ADC, NOT_ON_PWM,  NOT_ON_TIMER },
+  // 72,SPI2_MISO
+  { GPIOB, GPIO_Pin_14,  RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // PIN 38
+  // 73,SPI2_MOSI
+  { GPIOB, GPIO_Pin_15,  RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // PIN 37
+  // 74,SPI2_SCK
+  { GPIOB, GPIO_Pin_13,  RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // PIN 39
 
   // END
-  { NULL, 0, 0, PIO_NOT_A_PIN, PIo_default, 0, nO_ADC, NO_ADC, NOT_ON_PWM, NOT_ON_TIMER }
-  */
+  //{ NULL, 0, 0, PIO_NOT_A_PIN, PIo_default, 0, nO_ADC, NO_ADC, NOT_ON_PWM, NOT_ON_TIMER }
 } ;
 
 #ifdef __cplusplus
@@ -313,17 +284,21 @@ extern const PinDescription g_APinDescription[]=
 /*
  * USART objects
  */
+RingBuffer rx_buffer1;
 RingBuffer rx_buffer2;
 RingBuffer rx_buffer3;
 RingBuffer rx_buffer4;
 
-USARTClass Serial(USART1, USART1_IRQn, id_usart1, &rx_buffer2);
+USARTClass Serial(USART1, USART1_IRQn, id_usart1, &rx_buffer1);
+void serialEvent() __attribute__((weak));
+void serialEvent() { }
+USARTClass Serial0(UART4, UART4_IRQn, id_usart4, &rx_buffer2);
 void serialEvent1() __attribute__((weak));
 void serialEvent1() { }
-USARTClass Serial2(USART2, USART2_IRQn, id_usart2, &rx_buffer3);
+USARTClass Serial1(USART2, USART2_IRQn, id_usart2, &rx_buffer3);
 void serialEvent2() __attribute__((weak));
 void serialEvent2() { }
-USARTClass Serial3(USART3, USART3_IRQn, id_usart3, &rx_buffer4);
+USARTClass Serial2(USART3, USART3_IRQn, id_usart3, &rx_buffer4);
 void serialEvent3() __attribute__((weak));
 void serialEvent3() { }
 
@@ -333,24 +308,29 @@ void USART1_IRQHandler(void)
   Serial.IrqHandler();//USART1 must be Serial,for usart flash programming.
 }
 
+void UART4_IRQHandler(void) 
+{
+  Serial0.IrqHandler();
+}
+
 void USART2_IRQHandler(void) 
 {
-  Serial2.IrqHandler();
+  Serial1.IrqHandler();
 }
 
 void USART3_IRQHandler(void) 
 {
-  Serial3.IrqHandler();
+  Serial2.IrqHandler();
 }
 
 // ----------------------------------------------------------------------------
 
 void serialEventRun(void)
 {
-  //if (Serial.available()) serialEvent();
-  if (Serial.available()) serialEvent1();
-  if (Serial2.available()) serialEvent2();
-  if (Serial3.available()) serialEvent3();
+  if (Serial.available()) serialEvent();
+  if (Serial0.available()) serialEvent1();
+  if (Serial1.available()) serialEvent2();
+  if (Serial2.available()) serialEvent3();
 }
 
 // ----------------------------------------------------------------------------
@@ -436,6 +416,15 @@ void init( void )
 
   //disable JTAG-DP,release pin 6(PB3),7(PB4),21(PA15)
   GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable,ENABLE);
+  //remap Timer4
+  GPIO_PinRemapConfig(GPIO_Remap_TIM4,ENABLE);
+  //remap USART3
+  GPIO_PinRemapConfig(GPIO_FullRemap_USART3,ENABLE);
+  //remap USART2
+  GPIO_PinRemapConfig(GPIO_Remap_USART2,ENABLE);
+  //remap CAN1,to PD0,PD1
+  GPIO_PinRemapConfig(GPIO_Remap2_CAN1,ENABLE);
+
   // Initialize Analog Controller
 
 	ADC_InitTypeDef ADC_InitStructure;

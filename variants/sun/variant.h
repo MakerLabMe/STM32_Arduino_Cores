@@ -147,19 +147,17 @@ static const uint8_t SCK2  = PIN_SPI_SCK2;
  * UART/USART Interfaces
  */
 // Serial
-#define PINS_UART            (81u)
+#define RX               (0u)  //PA10
+#define TX               (1u)  //PA9
+// Serial0
+#define RX0              (15u) //PC11
+#define TX0              (14u) //PC10
 // Serial1
-#define PINS_USART0          (82u)
-#define RX1               (0u)  //PA10
-#define TX1               (1u)  //PA9
+#define RX1              (17u) //PD6
+#define TX1              (16u) //PD5
 // Serial2
-#define PINS_USART1          (83u)
-#define RX2                 (61u) //A7,PA3
-#define TX2                 (60u) //A6,PA2
-// Serial3
-#define PINS_USART3          (84u)
-#define RX3                (41u) //PB11
-#define TX3                (42u) //PB10
+#define RX2              (18u) //PD9
+#define TX2              (19u) //PD8
 
 /*
  * USB Interfaces
@@ -190,13 +188,8 @@ static const uint8_t A15 = 69;
 /*
  * Complementary CAN pins
  */
-static const uint8_t CAN1RX = 88;
-static const uint8_t CAN1TX = 89;
-
-// CAN0
-#define PINS_CAN0            (90u)
-// CAN1
-#define PINS_CAN1            (91u)
+static const uint8_t CAN1RX = 68;//PD0
+static const uint8_t CAN1TX = 69;//PD1
 
 
 /*
@@ -240,8 +233,9 @@ static const uint8_t CAN1TX = 89;
 
 //extern UARTClass Serial;
 extern USARTClass Serial;
+extern USARTClass Serial0;
+extern USARTClass Serial1;
 extern USARTClass Serial2;
-extern USARTClass Serial3;
 
 #endif
 
