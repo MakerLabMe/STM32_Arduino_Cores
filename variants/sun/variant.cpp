@@ -414,7 +414,8 @@ void init( void )
     g_APinDescription[PINS_CAN1].ulPinConfiguration);
 */
 
-  //disable JTAG-DP,release pin 6(PB3),7(PB4),21(PA15)
+  //disable JTAG-DP,release pin 29(PB3),30(PB4),23(PA15)
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO , ENABLE);
   GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable,ENABLE);
   //remap Timer4
   GPIO_PinRemapConfig(GPIO_Remap_TIM4,ENABLE);
