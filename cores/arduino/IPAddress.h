@@ -30,7 +30,6 @@
 
 // A class to make it easier to handle and pass around IP addresses
 
-#if 0
 class IPAddress : public Printable {
 private:
     uint8_t _address[4];  // IPv4 address
@@ -75,4 +74,3 @@ const IPAddress INADDR_NONE(0,0,0,0);
 #endif
 
 
-#endif

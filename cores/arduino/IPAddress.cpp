@@ -2,7 +2,6 @@
 #include <Arduino.h>
 #include <IPAddress.h>
 
-#if 0
 
 IPAddress::IPAddress()
 {
@@ -56,5 +55,4 @@ size_t IPAddress::printTo(Print& p) const
     return n;
 }
 
-#endif
 
