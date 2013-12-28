@@ -26,14 +26,14 @@ SUBMAKE_OPTIONS=--no-builtin-rules --no-builtin-variables --no-print-directory
 
 # libsam_sam3s4c_gcc_rel.a libsam_sam3u4e_gcc_rel.a libsam_sam3x8e_gcc_rel.a libsam_sam3x8h_gcc_rel.a
 #all: libsam_sam3s4c_gcc_dbg.a libsam_sam3u4e_gcc_dbg.a libsam_sam3x8e_gcc_dbg.a libsam_sam3x8h_gcc_dbg.a arduino_due_x
-all: libstm_stm32f103hd_gcc_dbg.a stduino_due_x
+all: libstm_stm32f103md_gcc_dbg.a libstm_stm32f103md_gcc_rel.a libstm_stm32f103hd_gcc_dbg.a libstm_stm32f103hd_gcc_rel.a MakerLab_Sun_R1 MakerLab_Earth_R1
 
-.PHONY: stduino_due_x
-stduino_due_x:
+.PHONY: MakerLab_Sun_R1
+MakerLab_Sun_R1:
 	@echo ------------------------------------------------------------------------------------
 	@echo --- Making $@
 	@echo ---
-	@$(MAKE) CHIP=STM32F10X_HD $(SUBMAKE_OPTIONS) OUTPUT_BIN=../../../variants/stduino_due_x -f stm32.mk
+	@$(MAKE) CHIP=STM32F10X_HD $(SUBMAKE_OPTIONS) OUTPUT_BIN=../../../variants/sun -f stm32.mk
 	@echo ------------------------------------------------------------------------------------
 
 .PHONY: libstm_stm32f103hd_gcc_dbg.a
@@ -41,15 +41,39 @@ libstm_stm32f103hd_gcc_dbg.a:
 	@echo ------------------------------------------------------------------------------------
 	@echo --- Making $@
 	@echo ---
-	@$(MAKE) CHIP=STM32F10X_HD DEBUG=1 $(SUBMAKE_OPTIONS) -f stm32.mk
+	@$(MAKE) CHIP=STM32F10X_HD DEBUG=1 $(SUBMAKE_OPTIONS) OUTPUT_BIN=../../../variants/template -f stm32.mk
 	@echo ------------------------------------------------------------------------------------
 
-.PHONY: libsam_sam3s4c_gcc_rel.a
+.PHONY: libstm_stm32f103hd_gcc_rel.a
 libstm_stm32f103hd_gcc_rel.a:
 	@echo ------------------------------------------------------------------------------------
 	@echo --- Making $@
 	@echo ---
-	@$(MAKE) CHIP=STM32F10X_HD $(SUBMAKE_OPTIONS) -f stm32.mk
+	@$(MAKE) CHIP=STM32F10X_HD $(SUBMAKE_OPTIONS) OUTPUT_BIN=../../../variants/template -f stm32.mk
+	@echo ------------------------------------------------------------------------------------
+
+.PHONY: MakerLab_Earth_R1
+MakerLab_Earth_R1:
+	@echo ------------------------------------------------------------------------------------
+	@echo --- Making $@
+	@echo ---
+	@$(MAKE) CHIP=STM32F10X_MD $(SUBMAKE_OPTIONS) OUTPUT_BIN=../../../variants/earth -f stm32.mk
+	@echo ------------------------------------------------------------------------------------
+
+.PHONY: libstm_stm32f103md_gcc_dbg.a
+libstm_stm32f103md_gcc_dbg.a:
+	@echo ------------------------------------------------------------------------------------
+	@echo --- Making $@
+	@echo ---
+	@$(MAKE) CHIP=STM32F10X_MD DEBUG=1 $(SUBMAKE_OPTIONS) OUTPUT_BIN=../../../variants/template -f stm32.mk
+	@echo ------------------------------------------------------------------------------------
+
+.PHONY: libstm_stm32f103md_gcc_rel.a
+libstm_stm32f103md_gcc_rel.a:
+	@echo ------------------------------------------------------------------------------------
+	@echo --- Making $@
+	@echo ---
+	@$(MAKE) CHIP=STM32F10X_MD $(SUBMAKE_OPTIONS) OUTPUT_BIN=../../../variants/template -f stm32.mk
 	@echo ------------------------------------------------------------------------------------
 
 

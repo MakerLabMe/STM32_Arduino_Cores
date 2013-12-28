@@ -40,4 +40,4 @@
 
 #include "STM32F10x/Include/stm32f10x.h"
 
-#endif /* _SAM_INCLUDED_ */
+#endif /* _STM_INCLUDED_ */

@@ -89,6 +89,7 @@ void SPI1_IRQHandler                 (void) __attribute__ ((weak, alias("__halt"
 void SPI2_IRQHandler                 (void) __attribute__ ((weak, alias("__halt")));
 void RTCAlarm_IRQHandler             (void) __attribute__ ((weak, alias("__halt")));
 void USBWakeUp_IRQHandler            (void) __attribute__ ((weak, alias("__halt")));
+#ifdef STM32F10X_HD
 void TIM8_BRK_IRQHandler             (void) __attribute__ ((weak, alias("__halt")));
 void TIM8_UP_IRQHandler              (void) __attribute__ ((weak, alias("__halt")));
 void TIM8_TRG_COM_IRQHandler         (void) __attribute__ ((weak, alias("__halt")));
@@ -105,6 +106,7 @@ void DMA2_Channel1_IRQHandler        (void) __attribute__ ((weak, alias("__halt"
 void DMA2_Channel2_IRQHandler        (void) __attribute__ ((weak, alias("__halt")));
 void DMA2_Channel3_IRQHandler        (void) __attribute__ ((weak, alias("__halt")));
 void DMA2_Channel4_5_IRQHandler      (void) __attribute__ ((weak, alias("__halt")));
+#endif //STM32F10X_HD
 
 #ifdef __cplusplus
 }

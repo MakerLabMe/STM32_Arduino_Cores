@@ -111,6 +111,7 @@ const DeviceVectors exception_table = {
 	EXTI15_10_IRQHandler,
 	RTCAlarm_IRQHandler,
   USBWakeUp_IRQHandler,
+#ifdef STM32F10X_HD
   TIM8_BRK_IRQHandler ,
   TIM8_UP_IRQHandler  ,
   TIM8_TRG_COM_IRQHandler,
@@ -128,5 +129,6 @@ const DeviceVectors exception_table = {
 	DMA2_Channel2_IRQHandler,
 	DMA2_Channel3_IRQHandler,
 	DMA2_Channel4_5_IRQHandler,
+#endif //STM32F10X_HD
 
 	};

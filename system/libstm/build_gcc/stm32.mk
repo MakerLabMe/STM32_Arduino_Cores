@@ -63,8 +63,11 @@ CHIP_SERIE=sam3xa
 else ifeq ($(CHIP), __SAM3X8H__)
 CHIP_NAME=sam3x8h
 CHIP_SERIE=sam3xa
-else
+else ifeq ($(CHIP), STM32F10X_HD)
 CHIP_NAME=stm32f10x_hd
+CHIP_SERIE=STM32F10x
+else ifeq ($(CHIP), STM32F10X_MD)
+CHIP_NAME=stm32f10x_md
 CHIP_SERIE=STM32F10x
 endif
 

@@ -20,7 +20,7 @@
 #include "variant.h"
 
 /*
- * MakerLab Sun Board pin           |  PORT  | Label
+ * MakerLab Earth Board pin         |  PORT  | Label
  * ---------------------------------+--------+-------
  *   0                              |  PA10  | "RX0",pwm
  *   1                              |  PA9   | "TX0",pwm

@@ -518,6 +518,7 @@ typedef struct _DeviceVectors
   void* pfnEXTI15_10_IRQHandler;           /* 40 */
   void* pfnRTCAlarm_IRQHandler;             /* 41 */
   void* pfnUSBWakeUp_IRQHandler;             /* 42 */
+#ifdef STM32F10X_HD
   void* pfnTIM8_BRK_IRQHandler;             /* 43  */
   void* pfnTIM8_UP_IRQHandler;             /* 44  */
   void* pfnTIM8_TRG_COM_IRQHandler;             /* 45 */
@@ -535,6 +536,7 @@ typedef struct _DeviceVectors
   void* pfnDMA2_Channel2_IRQHandler;   /* 57  */
   void* pfnDMA2_Channel3_IRQHandler;   /* 58  */
   void* pfnDMA2_Channel4_5_IRQHandler;   /* 59  */
+#endif //STM32F10X_HD
 } DeviceVectors;
 
 /* Cortex-M3 core handlers */
@@ -593,6 +595,7 @@ void USART3_IRQHandler                ( void );
 void EXTI15_10_IRQHandler             ( void );
 void RTCAlarm_IRQHandler              ( void );
 void USBWakeUp_IRQHandler             ( void );
+#ifdef STM32F10X_HD
 void TIM8_BRK_IRQHandler              ( void );
 void TIM8_UP_IRQHandler               ( void );
 void TIM8_TRG_COM_IRQHandler          ( void );
@@ -610,6 +613,7 @@ void DMA2_Channel1_IRQHandler         ( void );
 void DMA2_Channel2_IRQHandler         ( void );
 void DMA2_Channel3_IRQHandler         ( void );
 void DMA2_Channel4_5_IRQHandler       ( void );
+#endif //STM32F10X_HD
 
 /**
   * @}
