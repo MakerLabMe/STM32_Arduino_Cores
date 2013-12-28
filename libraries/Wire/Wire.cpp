@@ -1,5 +1,7 @@
 /*
- * TwoWire.h - TWI/I2C library for Arduino Due
+ * TwoWire.h - TWI/I2C library for MakerLabBoard(Arduino compatible)
+ * Copyright (c) 2014 MakerLab.me & Andy Sze(andy.sze.mail@gmail.com) 
+ * ported to stm32
  * Copyright (c) 2011 Cristian Maglie <c.maglie@bug.st>.
  * All rights reserved.
  *

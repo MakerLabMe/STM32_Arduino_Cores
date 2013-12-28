@@ -1,4 +1,5 @@
 /*
+ Copyright (c) 2014 MakerLab.me & Andy Sze(andy.sze.mail@gmail.com)  All right reserved.
  Copyright (c) 2011 Arduino.  All right reserved.
 
  This library is free software; you can redistribute it and/or

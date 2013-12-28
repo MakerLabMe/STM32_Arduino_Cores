@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2014 MakerLab.me & Andy Sze(andy.sze.mail@gmail.com) 
+ * ported to stm32
  * Copyright (c) 2010 by Cristian Maglie <c.maglie@bug.st>
  * SPI Master library for arduino.
  *
