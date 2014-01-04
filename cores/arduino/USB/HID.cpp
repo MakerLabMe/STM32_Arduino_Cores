@@ -22,7 +22,6 @@
 
 //	Singletons for mouse and keyboard
 
-#if 0
 Mouse_ Mouse;
 Keyboard_ Keyboard;
 
@@ -516,5 +515,4 @@ size_t Keyboard_::write(uint8_t c)
 	return (p);		// Just return the result of press() since release() almost always returns 1
 }
 
-#endif
 #endif

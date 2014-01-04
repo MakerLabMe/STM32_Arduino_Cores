@@ -27,7 +27,6 @@
 //================================================================================
 //	USB
 
-#if 0
 class USBDevice_
 {
 public:
@@ -217,6 +216,5 @@ uint32_t USBD_Recv(uint32_t ep);							// non-blocking
 void USBD_Flush(uint32_t ep);
 uint32_t USBD_Connected(void);
 
-#endif
 #endif
 #endif
