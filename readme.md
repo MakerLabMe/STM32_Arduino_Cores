@@ -18,6 +18,7 @@ Like this:
 ```
 hardware/arduino > ls    
 avr	sam	stm32
+#The folder name must be **stm32**,because I hardcoded the folder name.
 hardware/arduino > cd stm32
 hardware/arduino/stm32 > ls
 firmwares	programmers.txt	system
