@@ -10,7 +10,7 @@ You can use git or
 zip(https://github.com/MakerLabMe/MakerLabBoard/archive/master.zip).
 Then put the folder in the Arduino IDE hardware/arduino directory.Like this:
 
-Mac: right click the Arduino.app --> "Show Page Contents" and go to `Contents/Resources/Java/hardware/arduino`
+Mac: right click the Arduino.app --> "Show Package Contents" and go to `Contents/Resources/Java/hardware/arduino`
 and copy the core files to there.
 
 Like this:
