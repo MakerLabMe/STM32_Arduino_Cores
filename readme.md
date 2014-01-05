@@ -15,7 +15,7 @@ and copy the core files to there.
 
 Like this:
 
-```
+```sh
 hardware/arduino > ls    
 avr	sam	stm32
 #The folder name must be **stm32**,because I hardcoded the folder name.
