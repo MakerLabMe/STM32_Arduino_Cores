@@ -1,6 +1,8 @@
 # MakerLabBoard
 This is MakerLabBoard core source files, make Arduino IDE supports STM32F103XX cortex-m3 arm cpu.
 
+中文详细教程:http://makerlab.me/guides/2
+
 # how to install
 ## download Arduino IDE 1.5
 known working version 1.5.4, 1.5.5 beta
