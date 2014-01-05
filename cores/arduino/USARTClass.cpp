@@ -40,7 +40,7 @@ void USARTClass::begin( const uint32_t dwBaudRate )
 {
 
   //Serial
-  if(_dwId == id_usart1)
+  if(_dwId == id_serial)
   {
     // AFIO clock enable
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO, ENABLE);
@@ -54,27 +54,41 @@ void USARTClass::begin( const uint32_t dwBaudRate )
     // Configure USART Tx as alternate function push-pull
     pinMode(TX, AF_OUTPUT_PUSHPULL);
   }
-  else if(_dwId == id_usart4)//Serial1
+  else if(_dwId == id_serial1)//Serial1
   {
+#ifdef STM32F10X_HD
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC | RCC_APB2Periph_AFIO, ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, ENABLE);
+#endif
+#ifdef STM32F10X_MD
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO, ENABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
+#endif
     pinMode(RX0, INPUT);
     pinMode(TX0, AF_OUTPUT_PUSHPULL);
   }
-  else if(_dwId == id_usart2)//Serial2
+  else if(_dwId == id_serial2)//Serial2
   {
+#ifdef STM32F10X_HD
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD | RCC_APB2Periph_AFIO, ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
+#endif
+#ifdef STM32F10X_MD
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_AFIO, ENABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
+#endif
     pinMode(RX1, INPUT);
     pinMode(TX1, AF_OUTPUT_PUSHPULL);
   }
-  else if(_dwId == id_usart3)//Serial3
+#ifdef STM32F10X_HD
+  else if(_dwId == id_serial3)//Serial3
   {
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD | RCC_APB2Periph_AFIO, ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
     pinMode(RX2, INPUT);
     pinMode(TX2, AF_OUTPUT_PUSHPULL);
   }
+#endif
 	// USART default configuration
 	// USART configured as follow:
 	// - BaudRate = (set baudRate as 9600 baud)
@@ -127,22 +141,27 @@ void USARTClass::end( void )
   
   USART_Cmd(_pUsart, DISABLE);
 
-  if(_dwId == id_usart1)
+  if(_dwId == id_serial)//Serial
   {
     // Disable USART Clock
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, DISABLE);
   }
-  else if(_dwId == id_usart2)
+  else if(_dwId == id_serial2)//Serial2
   {
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, DISABLE);
   }
-  else if(_dwId == id_usart3)
+  else if(_dwId == id_serial3)//Serial3
   {
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, DISABLE);
   }
-  else if(_dwId == id_usart4)
+  else if(_dwId == id_serial1)//Serial1
   {
+#ifdef STM32F10X_HD
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, DISABLE);
+#endif
+#ifdef STM32F10X_MD
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, DISABLE);
+#endif
   }
 }
 

@@ -27,10 +27,10 @@
 //#include <chip.h>
 #include <stm32f10x_conf.h>
 
-#define id_usart1 1
-#define id_usart2 2
-#define id_usart3 3
-#define id_usart4 4
+#define id_serial  0
+#define id_serial1 1
+#define id_serial2 2
+#define id_serial3 3
 
 
 class USARTClass : public HardwareSerial
