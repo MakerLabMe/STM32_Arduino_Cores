@@ -106,9 +106,46 @@ TwoWire::TwoWire(I2C_TypeDef *_twi, void(*_beginCb)(void)) :
 }
 
 void TwoWire::begin(void) {
-#if 0
 	if (onBeginCallback)
 		onBeginCallback();
+
+  if(twi==I2C1)
+  {
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C1, ENABLE);
+
+    pinMode(PIN_WIRE_SCL, AF_OUTPUT_DRAIN);
+    pinMode(PIN_WIRE_SDA, AF_OUTPUT_DRAIN);
+  }else
+  {
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C2, ENABLE);
+
+    pinMode(PIN_WIRE1_SCL, AF_OUTPUT_DRAIN);
+    pinMode(PIN_WIRE1_SDA, AF_OUTPUT_DRAIN);
+  }
+
+
+	I2C_DeInit(twi);
+
+	I2C_InitStructure.I2C_Mode = I2C_Mode_I2C;
+	I2C_InitStructure.I2C_DutyCycle = I2C_DutyCycle_2;
+	//	I2C_InitStructure.I2C_OwnAddress1 = 0x00;
+	I2C_InitStructure.I2C_Ack = I2C_Ack_Enable;
+	I2C_InitStructure.I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit;
+	I2C_InitStructure.I2C_ClockSpeed = 100000;
+	I2C_Init(twi, &I2C_InitStructure);
+
+	//	I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_BUF, ENABLE);
+	//
+	//	NVIC_InitStructure.NVIC_IRQChannel = I2C1_EV_IRQn;
+	//	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 12;
+	//	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	//	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	//	NVIC_Init(&NVIC_InitStructure);
+
+	I2C_Cmd(twi, ENABLE);
+
+	status = MASTER_IDLE;
+#if 0
 
 	// Disable PDC channel
 	twi->TWI_PTCR = UART_PTCR_RXTDIS | UART_PTCR_TXTDIS;
@@ -119,9 +156,11 @@ void TwoWire::begin(void) {
 }
 
 void TwoWire::begin(uint8_t address) {
-#if 0
 	if (onBeginCallback)
 		onBeginCallback();
+	I2C_InitStructure.I2C_OwnAddress1 = address;
+  begin();
+#if 0
 
 	// Disable PDC channel
 	twi->TWI_PTCR = UART_PTCR_RXTDIS | UART_PTCR_TXTDIS;
@@ -138,10 +177,70 @@ void TwoWire::begin(int address) {
 }
 
 uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity, uint8_t sendStop) {
-#if 0
 	if (quantity > BUFFER_LENGTH)
 		quantity = BUFFER_LENGTH;
 
+  uint32_t _millis;
+
+  //START
+  I2C_GenerateSTART(twi,ENABLE);
+
+  _millis = millis();
+	while(!I2C_CheckEvent(twi, I2C_EVENT_MASTER_MODE_SELECT))
+	{
+		if(EVENT_TIMEOUT < (millis() - _millis)) return 0;
+	}
+
+	/* Send Slave address for read */
+	I2C_Send7bitAddress(twi, address, I2C_Direction_Receiver);
+
+	_millis = millis();
+	while(!I2C_CheckEvent(twi, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED))
+	{
+		if(RECV_TIMEOUT< (millis() - _millis)) return 0;
+	}
+
+	/* perform blocking read into buffer */
+	uint8_t *pBuffer = rxBuffer;
+	uint8_t numByteToRead = quantity;
+	uint8_t bytesRead = 0;
+
+	/* While there is data to be read */
+	while(numByteToRead)
+	{
+		if(numByteToRead == 1 && sendStop == true)
+		{
+			/* Disable Acknowledgement */
+			I2C_AcknowledgeConfig(twi, DISABLE);
+
+			/* Send STOP Condition */
+			I2C_GenerateSTOP(twi, ENABLE);
+		}
+
+		if(I2C_CheckEvent(twi, I2C_EVENT_MASTER_BYTE_RECEIVED))
+		{
+			/* Read a byte from the Slave */
+			*pBuffer = I2C_ReceiveData(twi);
+
+			bytesRead++;
+
+			/* Point to the next location where the byte read will be saved */
+			pBuffer++;
+
+			/* Decrement the read bytes counter */
+			numByteToRead--;
+		}
+	}
+
+	/* Enable Acknowledgement to be ready for another reception */
+	I2C_AcknowledgeConfig(twi, ENABLE);
+
+	// set rx buffer iterator vars
+	rxBufferIndex = 0;
+	rxBufferLength = bytesRead;
+
+	return bytesRead;
+#if 0
 	// perform blocking read into buffer
 	int readed = 0;
 	TWI_StartRead(twi, address, 0, 0);
@@ -164,31 +263,23 @@ uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity, uint8_t sendStop
 }
 
 uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity) {
-#if 0
 	return requestFrom((uint8_t) address, (uint8_t) quantity, (uint8_t) true);
-#endif
 }
 
 uint8_t TwoWire::requestFrom(int address, int quantity) {
-#if 0
 	return requestFrom((uint8_t) address, (uint8_t) quantity, (uint8_t) true);
-#endif
 }
 
 uint8_t TwoWire::requestFrom(int address, int quantity, int sendStop) {
-#if 0
 	return requestFrom((uint8_t) address, (uint8_t) quantity, (uint8_t) sendStop);
-#endif
 }
 
 void TwoWire::beginTransmission(uint8_t address) {
-#if 0
 	status = MASTER_SEND;
 
 	// save address of target and empty buffer
 	txAddress = address;
 	txBufferLength = 0;
-#endif
 }
 
 void TwoWire::beginTransmission(int address) {
@@ -210,6 +301,58 @@ void TwoWire::beginTransmission(int address) {
 //
 uint8_t TwoWire::endTransmission(uint8_t sendStop) {
 	// transmit buffer (blocking)
+	uint32_t _millis;
+
+	/* Send START condition */
+	I2C_GenerateSTART(twi, ENABLE);
+
+	_millis = millis();
+	while(!I2C_CheckEvent(twi, I2C_EVENT_MASTER_MODE_SELECT))
+	{
+		if(XMIT_TIMEOUT < (millis() - _millis)) return 4;
+	}
+
+	/* Send Slave address for write */
+	I2C_Send7bitAddress(twi, txAddress, I2C_Direction_Transmitter);
+
+	_millis = millis();
+	while(!I2C_CheckEvent(twi, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED))
+	{
+		if(XMIT_TIMEOUT < (millis() - _millis)) return 4;
+	}
+
+	uint8_t *pBuffer = txBuffer;
+	uint8_t NumByteToWrite = txBufferLength;
+
+	/* While there is data to be written */
+	while(NumByteToWrite--)
+	{
+		/* Send the current byte to slave */
+		I2C_SendData(twi, *pBuffer);
+
+		/* Point to the next byte to be written */
+		pBuffer++;
+
+		_millis = millis();
+		while (!I2C_CheckEvent(twi, I2C_EVENT_MASTER_BYTE_TRANSMITTED))
+		{
+			if(XMIT_TIMEOUT < (millis() - _millis)) return 4;
+		}
+	}
+
+	if(sendStop == true)
+	{
+		/* Send STOP condition */
+		I2C_GenerateSTOP(twi, ENABLE);
+	}
+
+	// reset tx buffer iterator vars
+	txBufferIndex = 0;
+	txBufferLength = 0;
+
+	status = MASTER_IDLE;
+
+	return 0;
 #if 0
 	TWI_StartWrite(twi, txAddress, 0, 0, txBuffer[0]);
 	TWI_WaitByteSent(twi, XMIT_TIMEOUT);
@@ -238,7 +381,6 @@ uint8_t TwoWire::endTransmission(void)
 }
 
 size_t TwoWire::write(uint8_t data) {
-#if 0
 	if (status == MASTER_SEND) {
 		if (txBufferLength >= BUFFER_LENGTH)
 			return 0;
@@ -250,11 +392,9 @@ size_t TwoWire::write(uint8_t data) {
 		srvBuffer[srvBufferLength++] = data;
 		return 1;
 	}
-#endif
 }
 
 size_t TwoWire::write(const uint8_t *data, size_t quantity) {
-#if 0
 	if (status == MASTER_SEND) {
 		for (size_t i = 0; i < quantity; ++i) {
 			if (txBufferLength >= BUFFER_LENGTH)
@@ -269,7 +409,6 @@ size_t TwoWire::write(const uint8_t *data, size_t quantity) {
 		}
 	}
 	return quantity;
-#endif
 }
 
 int TwoWire::available(void) {
@@ -277,19 +416,15 @@ int TwoWire::available(void) {
 }
 
 int TwoWire::read(void) {
-#if 0
 	if (rxBufferIndex < rxBufferLength)
 		return rxBuffer[rxBufferIndex++];
 	return -1;
-#endif
 }
 
 int TwoWire::peek(void) {
-#if 0
 	if (rxBufferIndex < rxBufferLength)
 		return rxBuffer[rxBufferIndex];
 	return -1;
-#endif
 }
 
 void TwoWire::flush(void) {

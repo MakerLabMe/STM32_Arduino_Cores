@@ -87,6 +87,7 @@ private:
 
 	// TWI instance
 	I2C_TypeDef *twi;
+	I2C_InitTypeDef I2C_InitTypeStructure;
 
 	// TWI state
 	enum TwoWireStatus {
