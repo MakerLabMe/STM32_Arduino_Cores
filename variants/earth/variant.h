@@ -164,6 +164,23 @@ static const uint8_t SCK1  = PIN_SPI_SCK1;
  * USB Interfaces
  */
 #define PINS_USB      D_DACC
+/*
+ * Analog pins
+ */
+static const uint8_t A0  = 14;
+static const uint8_t A1  = 15;
+static const uint8_t A2  = 16;
+static const uint8_t A3  = 17;
+static const uint8_t A4  = 18;
+static const uint8_t A5  = 19;
+static const uint8_t A6  = 5;
+static const uint8_t A7  = 6;
+static const uint8_t A8  = 7;
+static const uint8_t A9  = 8;
+//static const uint8_t CANRX = 68;
+//static const uint8_t CANTX = 69;
+#define ADC_RESOLUTION		12
+
 #define DACC_RESOLUTION		12
 #define DACC_ISR_HANDLER    DACC_Handler
 #define DACC_ISR_ID         DACC_IRQn
