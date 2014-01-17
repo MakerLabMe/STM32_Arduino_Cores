@@ -290,16 +290,16 @@ RingBuffer rx_buffer2;
 RingBuffer rx_buffer3;
 RingBuffer rx_buffer4;
 
-USARTClass Serial(USART1, USART1_IRQn, id_usart1, &rx_buffer1);
+USARTClass Serial(USART1, USART1_IRQn, id_serial, &rx_buffer1);
 void serialEvent() __attribute__((weak));
 void serialEvent() { }
-USARTClass Serial1(UART4, UART4_IRQn, id_usart4, &rx_buffer2);
+USARTClass Serial1(UART4, UART4_IRQn, id_serial1, &rx_buffer2);
 void serialEvent1() __attribute__((weak));
 void serialEvent1() { }
-USARTClass Serial2(USART2, USART2_IRQn, id_usart2, &rx_buffer3);
+USARTClass Serial2(USART2, USART2_IRQn, id_serial2, &rx_buffer3);
 void serialEvent2() __attribute__((weak));
 void serialEvent2() { }
-USARTClass Serial3(USART3, USART3_IRQn, id_usart3, &rx_buffer4);
+USARTClass Serial3(USART3, USART3_IRQn, id_serial3, &rx_buffer4);
 void serialEvent3() __attribute__((weak));
 void serialEvent3() { }
 
@@ -361,9 +361,9 @@ void init( void )
   // Initialize C library
   __libc_init_array();
 
-  // Disable pull-up on every pin
-  for (int i = 0; i < PINS_COUNT; i++)
-	  digitalWrite(i, LOW);
+  // default 13pin led will off.
+  pinMode(13,OUTPUT);
+  digitalWrite(13, LOW);
 
   /*
   // Enable parallel access on PIo output data registers

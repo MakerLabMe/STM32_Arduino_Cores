@@ -234,9 +234,9 @@ void init( void )
   // Initialize C library
   __libc_init_array();
 
-  // Disable pull-up on every pin
-  for (int i = 0; i < PINS_COUNT; i++)
-	  digitalWrite(i, LOW);
+  // default 13pin led will off.
+  pinMode(13,OUTPUT);
+  digitalWrite(13, LOW);
 
   //disable JTAG-DP,release pin 2(PB3),3(PB4),19(PA15)
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO , ENABLE);
