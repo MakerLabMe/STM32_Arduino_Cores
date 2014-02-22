@@ -34,6 +34,7 @@ void TimeTick_Increment(void)
 int main( void )
 {
 	init();
+  TimingMillis=0;
 
 	//delay(1);
 
