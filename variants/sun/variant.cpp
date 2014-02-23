@@ -127,10 +127,10 @@ extern const PinDescription g_APinDescription[]=
   { GPIOD, GPIO_Pin_11,  RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 33
 
   //4~7 pwm
-  { GPIOD, GPIO_Pin_12,  RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 32
-  { GPIOD, GPIO_Pin_13,  RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 31
-  { GPIOD, GPIO_Pin_14,  RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 30
-  { GPIOD, GPIO_Pin_15,  RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 29
+  { GPIOD, GPIO_Pin_12,  RCC_APB2Periph_GPIOD, NONE, TIM4, TIM_Channel_1 }, // PIN 4,pwm
+  { GPIOD, GPIO_Pin_13,  RCC_APB2Periph_GPIOD, NONE, TIM4, TIM_Channel_2 }, // PIN 5,pwm
+  { GPIOD, GPIO_Pin_14,  RCC_APB2Periph_GPIOD, NONE, TIM4, TIM_Channel_3 }, // PIN 6,pwm
+  { GPIOD, GPIO_Pin_15,  RCC_APB2Periph_GPIOD, NONE, TIM4, TIM_Channel_4 }, // PIN 7,pwm
 
   //8~11 pwm
   { GPIOC, GPIO_Pin_6,   RCC_APB2Periph_GPIOC, NONE, TIM8, TIM_Channel_1 }, // PIN 28,TIM8_CH1,pwm
@@ -155,9 +155,9 @@ extern const PinDescription g_APinDescription[]=
   { GPIOD, GPIO_Pin_8,   RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 36
   { GPIOD, GPIO_Pin_9,   RCC_APB2Periph_GPIOD, NONE, NULL, NONE }, // PIN 35
 
-  //20(SDA,pwm),21(SCL,pwm)
-  { GPIOB, GPIO_Pin_7,   RCC_APB2Periph_GPIOB, NONE, TIM4, TIM_Channel_2 }, // 10,TIM4_CH2,pwm
-  { GPIOB, GPIO_Pin_6,   RCC_APB2Periph_GPIOB, NONE, TIM4, TIM_Channel_1 }, // 9,TIM4_CH1,pwm
+  //20(SDA),21(SCL)
+  { GPIOB, GPIO_Pin_7,   RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // 
+  { GPIOB, GPIO_Pin_6,   RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // 
 
   //22,23,24,25
   { GPIOA, GPIO_Pin_8,   RCC_APB2Periph_GPIOA, NONE, TIM1, TIM_Channel_1 }, // PIN 24,TIM1_CH1,pwm
@@ -182,8 +182,8 @@ extern const PinDescription g_APinDescription[]=
   // 33,SPI3_MOSI
   { GPIOB, GPIO_Pin_5,   RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // 
   // 34,35
-  { GPIOB, GPIO_Pin_8,   RCC_APB2Periph_GPIOB, NONE, TIM4, TIM_Channel_3 }, // 11,TIM4_CH3,pwm
-  { GPIOB, GPIO_Pin_9,   RCC_APB2Periph_GPIOB, NONE, TIM4, TIM_Channel_4 }, // 12,TIM4_CH4,pwm
+  { GPIOB, GPIO_Pin_8,   RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // 
+  { GPIOB, GPIO_Pin_9,   RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // 
   
   // 36
   { GPIOB, GPIO_Pin_12,  RCC_APB2Periph_GPIOB, NONE, NULL, NONE }, // PIN 40
