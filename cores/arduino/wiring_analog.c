@@ -174,6 +174,9 @@ void analogWrite(uint32_t ulPin, uint32_t ulValue) {
     TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;//0
     TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
 
+    //for TIM1 and TIM8
+    TIM_TimeBaseStructure.TIM_RepetitionCounter = 0;
+
     TIM_TimeBaseInit(g_APinDescription[ulPin].ulTimerPeripheral, &TIM_TimeBaseStructure);
     pinEnabled[ulPin] = 1;
   }
@@ -183,6 +186,12 @@ void analogWrite(uint32_t ulPin, uint32_t ulValue) {
 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
 	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
 	TIM_OCInitStructure.TIM_Pulse = TIM_CCR;
+
+  //for TIM1 and TIM8
+  TIM_OCInitStructure.TIM_OutputNState = TIM_OutputNState_Disable;
+  TIM_OCInitStructure.TIM_OCNPolarity = TIM_OCNPolarity_Low;
+  TIM_OCInitStructure.TIM_OCIdleState = TIM_OCIdleState_Reset;
+  TIM_OCInitStructure.TIM_OCNIdleState = TIM_OCIdleState_Reset;
 
 	if(g_APinDescription[ulPin].ulTimerChannel == TIM_Channel_1)
 	{
@@ -213,6 +222,9 @@ void analogWrite(uint32_t ulPin, uint32_t ulValue) {
 
 	// TIM enable counter
 	TIM_Cmd(g_APinDescription[ulPin].ulTimerPeripheral, ENABLE);
+
+  //for TIM1 and TIM8
+  TIM_CtrlPWMOutputs(g_APinDescription[ulPin].ulTimerPeripheral, ENABLE);
 
 }
 
