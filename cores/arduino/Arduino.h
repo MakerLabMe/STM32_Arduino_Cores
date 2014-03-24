@@ -63,8 +63,8 @@ extern void TimeTick_Increment( void ) ;
 #define digitalPinToBitMask(P)     ( g_APinDescription[P].ulPin )
 #define digitalPinToTimer(P)       (  )
 //#define analogInPinToBit(P)        ( )
-#define portOutputRegister(port)   ( &(port->PIO_ODSR) )
-#define portInputRegister(port)    ( &(port->PIO_PDSR) )
+#define portOutputRegister(port)   ( &(port->ODR) )
+#define portInputRegister(port)    ( &(port->IDR) )
 //#define portModeRegister(P)        (  )
 
 //#define NOT_A_PIN 0  // defined in pio.h/EPioType
