@@ -104,3 +104,24 @@ MakerLab_EARTH_R1.build.variant_system_lib=libstm_stm32f10x_md_gcc_rel.a
 MakerLab_EARTH_R1.build.vid=0x10C4
 MakerLab_EARTH_R1.build.pid=0xEA60
 
+STM32F4_Discovery.name=STM32F4Discovery(USB_To_Serial)
+STM32F4_Discovery.vid.0=0x10C4
+STM32F4_Discovery.pid.0=0xEA60
+STM32F4_Discovery.upload.tool=sloadhost
+STM32F4_Discovery.upload.protocol=
+STM32F4_Discovery.upload.maximum_size=393216
+STM32F4_Discovery.upload.use_1200bps_touch=false
+STM32F4_Discovery.upload.wait_for_upload_port=false
+STM32F4_Discovery.upload.native_usb=false
+STM32F4_Discovery.build.mcu=cortex-m4
+STM32F4_Discovery.build.f_cpu=168000000L
+STM32F4_Discovery.build.usb_product="STM32F4Discovery"
+STM32F4_Discovery.build.board=STM32F4Discovery
+STM32F4_Discovery.build.core=arduino
+STM32F4_Discovery.build.extra_flags=-DSTM32F4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=softfp {build.usb_flags}
+STM32F4_Discovery.build.ldscript=linker_scripts/gcc/flash.ld
+STM32F4_Discovery.build.variant=F4Discovery
+STM32F4_Discovery.build.variant_system_lib=libstm_stm32f40x_gcc_rel.a
+STM32F4_Discovery.build.vid=0x10C4
+STM32F4_Discovery.build.pid=0xEA60
+
