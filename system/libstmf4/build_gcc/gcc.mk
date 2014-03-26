@@ -61,7 +61,7 @@ CFLAGS += -DUSE_STDPERIPH_DRIVER
 # To reduce application size use only integer printf function.
 CFLAGS += -Dprintf=iprintf
 
-CFLAGS += --param max-inline-insns-single=500 -mcpu=cortex-m3 -mthumb -mlong-calls -ffunction-sections -fdata-sections -std=c99
+CFLAGS += --param max-inline-insns-single=500 -mcpu=cortex-m4 -mthumb -mlong-calls -ffunction-sections -fdata-sections -std=c99 -mfpu=fpv4-sp-d16
 CFLAGS += $(OPTIMIZATION) $(INCLUDES) -D$(CHIP)
 
 
