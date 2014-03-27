@@ -456,6 +456,220 @@ typedef enum IRQn
 
 } IRQn_Type;
 
+
+typedef struct _DeviceVectors
+{
+  /* Stack pointer */
+  void* pvStack;
+
+  /* Cortex-M handlers */
+  void* pfnReset_Handler;
+  void* pfnNMI_Handler;
+  void* pfnHardFault_Handler;
+  void* pfnMemManage_Handler;
+  void* pfnBusFault_Handler;
+  void* pfnUsageFault_Handler;
+  void* pfnReserved1_Handler;
+  void* pfnReserved2_Handler;
+  void* pfnReserved3_Handler;
+  void* pfnReserved4_Handler;
+  void* pfnSVC_Handler;
+  void* pfnDebugMon_Handler;
+  void* pfnReserved5_Handler;
+  void* pfnPendSV_Handler;
+  void* pfnSysTick_Handler;
+
+  /* Peripheral handlers */
+  void* pfnWWDG_IRQHandler;                  /*  0 */
+  void* pfnPVD_IRQHandler;                   /*  1  */
+  void* pfnTAMP_STAMP_IRQHandler;                   /*  2 */
+  void* pfnRTC_WKUP_IRQHandler;                   /*  3 */
+  void* pfnFLASH_IRQHandler;                   /*  4*/
+  void* pfnRCC_IRQHandler;                   /*  5 */
+  void* pfnEXTI0_IRQHandler;                  /*  6  */
+  void* pfnEXTI1_IRQHandler;                  /*  7  */
+  void* pfnEXTI2_IRQHandler;                  /*  8 */
+  void* pfnEXTI3_IRQHandler;                   /*  9*/
+  void* pfnEXTI4_IRQHandler;                 /* 10 */
+  void* pfnDMA1_Stream0_IRQHandler;           /* 11  */
+  void* pfnDMA1_Stream1_IRQHandler;           /* 12 */
+  void* pfnDMA1_Stream2_IRQHandler;           /* 13 */
+  void* pfnDMA1_Stream3_IRQHandler;           /* 14 */
+  void* pfnDMA1_Stream4_IRQHandler;           /* 15 */
+  void* pfnDMA1_Stream5_IRQHandler;           /* 16 */
+  void* pfnDMA1_Stream6_IRQHandler;         /* 17  */
+
+  void* pfnADC_IRQHandler;                       /* 18  */
+  void* pfnCAN1_TX_IRQHandler;        /* 19  */
+  void* pfnCAN1_RX0_IRQHandler;        /* 20  */
+  void* pfnCAN1_RX1_IRQHandler;            /* 21 */
+  void* pfnCAN1_SCE_IRQHandler;             /* 22*/
+  void* pfnEXTI9_5_IRQHandler;             /* 23*/
+  void* pfnTIM1_BRK_TIM9_IRQHandler;       /* 24*/
+  void* pfnTIM1_UP_TIM10_IRQHandler;         /* 25*/
+  void* pfnTIM1_TRG_COM_TIM11_IRQHandler;    /* 26 */
+  void* pfnTIM1_CC_IRQHandler;                  /* 27  */
+  void* pfnTIM2_IRQHandler;                  /* 28  */
+  void* pfnTIM3_IRQHandler;                  /* 29  */
+  void* pfnTIM4_IRQHandler;                  /* 30  */
+
+  void* pfnI2C1_EV_IRQHandler;                  /* 31  */
+  void* pfnI2C1_ER_IRQHandler;                  /* 32  */
+  void* pfnI2C2_EV_IRQHandler;                  /* 33  */
+  void* pfnI2C2_ER_IRQHandler;                  /* 34  */
+  void* pfnSPI1_IRQHandler;                  /* 35  */
+  void* pfnSPI2_IRQHandler;                  /* 36 */
+  void* pfnUSART1_IRQHandler;                  /* 37  */
+  void* pfnUSART2_IRQHandler;                 /* 38 */
+  void* pfnUSART3_IRQHandler;                 /* 39 */
+  void* pfnEXTI15_10_IRQHandler;           /* 40 */
+  void* pfnRTC_Alarm_IRQHandler;             /* 41 */
+  void* pfnOTG_FS_WKUP_IRQHandler;             /* 42 */
+
+  void* pfnTIM8_BRK_TIM12_IRQHandler;             /* 43  */
+  void* pfnTIM8_UP_TIM13_IRQHandler;             /* 44  */
+  void* pfnTIM8_TRG_COM_TIM14_IRQHandler;             /* 45 */
+  void* pfnTIM8_CC_IRQHandler;             /* 46  */
+  void* pfnDMA1_Stream7_IRQHandler;               /* 47  */
+  void* pfnFSMC_IRQHandler;               /* 48  */
+  void* pfnSDIO_IRQHandler;               /* 49  */
+  void* pfnTIM5_IRQHandler;               /* 50  */
+  void* pfnSPI3_IRQHandler;               /* 51  */
+  void* pfnUART4_IRQHandler;              /* 52  */
+  void* pfnUART5_IRQHandler;              /* 53  */
+  void* pfnTIM6_DAC_IRQHandler;               /* 54  */
+  void* pfnTIM7_IRQHandler;               /* 55  */
+
+  void* pfnDMA2_Stream0_IRQHandler;   /* 56  */
+  void* pfnDMA2_Stream1_IRQHandler;   /* 57  */
+  void* pfnDMA2_Stream2_IRQHandler;   /* 58  */
+  void* pfnDMA2_Stream3_IRQHandler;   /* 59  */
+  void* pfnDMA2_Stream4_IRQHandler;   /* 59  */
+  void* pfnETH_IRQHandler           ;         /* Ethernet                     */                   
+  void* pfnETH_WKUP_IRQHandler      ;         /* Ethernet Wakeup through EXTI line */                     
+  void* pfnCAN2_TX_IRQHandler       ;         /* CAN2 TX                      */                          
+  void* pfnCAN2_RX0_IRQHandler      ;         /* CAN2 RX0                     */                          
+  void* pfnCAN2_RX1_IRQHandler      ;         /* CAN2 RX1                     */                          
+  void* pfnCAN2_SCE_IRQHandler      ;         /* CAN2 SCE                     */                          
+  void* pfnOTG_FS_IRQHandler        ;         /* USB OTG FS                   */                   
+  void* pfnDMA2_Stream5_IRQHandler  ;         /* DMA2 Stream 5                */                   
+  void* pfnDMA2_Stream6_IRQHandler  ;         /* DMA2 Stream 6                */                   
+  void* pfnDMA2_Stream7_IRQHandler  ;         /* DMA2 Stream 7                */                   
+  void* pfnUSART6_IRQHandler        ;         /* USART6                       */                    
+  void* pfnI2C3_EV_IRQHandler       ;         /* I2C3 event                   */                          
+  void* pfnI2C3_ER_IRQHandler       ;         /* I2C3 error                   */                          
+  void* pfnOTG_HS_EP1_OUT_IRQHandler;         /* USB OTG HS End Point 1 Out   */                   
+  void* pfnOTG_HS_EP1_IN_IRQHandler ;         /* USB OTG HS End Point 1 In    */                   
+  void* pfnOTG_HS_WKUP_IRQHandler   ;         /* USB OTG HS Wakeup through EXTI */                         
+  void* pfnOTG_HS_IRQHandler        ;         /* USB OTG HS                   */                   
+  void* pfnDCMI_IRQHandler          ;         /* DCMI                         */                   
+  void* pfnCRYP_IRQHandler          ;         /* CRYP crypto                  */                   
+  void* pfnHASH_RNG_IRQHandler      ;         /* Hash and Rng                 */
+  void* pfnFPU_IRQHandler           ;         /* FPU                          */                         
+} DeviceVectors;
+
+/* Cortex-M4 core handlers */
+void Reset_Handler      ( void );
+void NMI_Handler        ( void );
+void HardFault_Handler  ( void );
+void MemManage_Handler  ( void );
+void BusFault_Handler   ( void );
+void UsageFault_Handler ( void );
+void SVC_Handler        ( void );
+void DebugMon_Handler   ( void );
+void PendSV_Handler     ( void );
+void SysTick_Handler    ( void );
+
+/* Peripherals handlers */
+void WWDG_IRQHandler                  ( void );
+void PVD_IRQHandler                   ( void );
+void TAMP_STAMP_IRQHandler                ( void );
+void RTC_WKUP_IRQHandler                   ( void );
+void FLASH_IRQHandler                 ( void );
+void RCC_IRQHandler                   ( void );
+void EXTI0_IRQHandler                 ( void );
+void EXTI1_IRQHandler                 ( void );
+void EXTI2_IRQHandler                 ( void );
+void EXTI3_IRQHandler                 ( void );
+void EXTI4_IRQHandler                 ( void );
+void DMA1_Stream0_IRQHandler         ( void );
+void DMA1_Stream1_IRQHandler         ( void );
+void DMA1_Stream2_IRQHandler         ( void );
+void DMA1_Stream3_IRQHandler         ( void );
+void DMA1_Stream4_IRQHandler         ( void );
+void DMA1_Stream5_IRQHandler         ( void );
+void DMA1_Stream6_IRQHandler         ( void );
+void ADC_IRQHandler                ( void );
+void CAN1_TX_IRQHandler        ( void );
+void CAN1_RX0_IRQHandler       ( void );
+void CAN1_RX1_IRQHandler              ( void );
+void CAN1_SCE_IRQHandler              ( void );
+void EXTI9_5_IRQHandler               ( void );
+void TIM1_BRK_TIM9_IRQHandler        ( void );
+void TIM1_UP_TIM10_IRQHandler         ( void );
+void TIM1_TRG_COM_TIM11_IRQHandler    ( void );
+void TIM1_CC_IRQHandler               ( void );
+void TIM2_IRQHandler                  ( void );
+void TIM3_IRQHandler                  ( void );
+void TIM4_IRQHandler                  ( void );
+
+void I2C1_EV_IRQHandler               ( void );
+void I2C1_ER_IRQHandler               ( void );
+void I2C2_EV_IRQHandler               ( void );
+void I2C2_ER_IRQHandler               ( void );
+void SPI1_IRQHandler                  ( void );
+void SPI2_IRQHandler                  ( void );
+void USART1_IRQHandler                ( void );
+void USART2_IRQHandler                ( void );
+void USART3_IRQHandler                ( void );
+void EXTI15_10_IRQHandler             ( void );
+void RTC_Alarm_IRQHandler              ( void );
+void OTG_FS_WKUP_IRQHandler             ( void );
+
+void TIM8_BRK_TIM12_IRQHandler              ( void );
+void TIM8_UP_TIM13_IRQHandler               ( void );
+void TIM8_TRG_COM_TIM14_IRQHandler          ( void );
+void TIM8_CC_IRQHandler               ( void );
+void DMA1_Stream7_IRQHandler                  ( void );
+void FSMC_IRQHandler                  ( void );
+void SDIO_IRQHandler                  ( void );
+void TIM5_IRQHandler                  ( void );
+void SPI3_IRQHandler                  ( void );
+void UART4_IRQHandler                 ( void );
+void UART5_IRQHandler                 ( void );
+void TIM6_DAC_IRQHandler                  ( void );
+void TIM7_IRQHandler                  ( void );
+
+void DMA2_Stream0_IRQHandler         ( void );
+void DMA2_Stream1_IRQHandler         ( void );
+void DMA2_Stream2_IRQHandler         ( void );
+void DMA2_Stream3_IRQHandler         ( void );
+void DMA2_Stream4_IRQHandler       ( void );
+
+void  ETH_IRQHandler           (void);         /* Ethernet                     */                   
+void  ETH_WKUP_IRQHandler      (void);         /* Ethernet Wakeup through EXTI line */                     
+void  CAN2_TX_IRQHandler       (void);         /* CAN2 TX                      */                          
+void  CAN2_RX0_IRQHandler      (void);         /* CAN2 RX0                     */                          
+void  CAN2_RX1_IRQHandler      (void);         /* CAN2 RX1                     */                          
+void  CAN2_SCE_IRQHandler      (void);         /* CAN2 SCE                     */                          
+void  OTG_FS_IRQHandler        (void);         /* USB OTG FS                   */                   
+void  DMA2_Stream5_IRQHandler  (void);         /* DMA2 Stream 5                */                   
+void  DMA2_Stream6_IRQHandler  (void);         /* DMA2 Stream 6                */                   
+void  DMA2_Stream7_IRQHandler  (void);         /* DMA2 Stream 7                */                   
+void  USART6_IRQHandler        (void);         /* USART6                       */                    
+void  I2C3_EV_IRQHandler       (void);         /* I2C3 event                   */                          
+void  I2C3_ER_IRQHandler       (void);         /* I2C3 error                   */                          
+void  OTG_HS_EP1_OUT_IRQHandler(void);         /* USB OTG HS End Point 1 Out   */                   
+void  OTG_HS_EP1_IN_IRQHandler (void);         /* USB OTG HS End Point 1 In    */                   
+void  OTG_HS_WKUP_IRQHandler   (void);         /* USB OTG HS Wakeup through EXTI */                         
+void  OTG_HS_IRQHandler        (void);         /* USB OTG HS                   */                   
+void  DCMI_IRQHandler          (void);         /* DCMI                         */                   
+void  CRYP_IRQHandler          (void);         /* CRYP crypto                  */                   
+void  HASH_RNG_IRQHandler      (void);         /* Hash and Rng                 */
+void  FPU_IRQHandler           (void);         /* FPU                          */                         
+
+
+
 /**
   * @}
   */
