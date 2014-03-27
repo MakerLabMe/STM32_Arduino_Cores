@@ -29,7 +29,7 @@ SUBMAKE_OPTIONS=--no-builtin-rules --no-builtin-variables --no-print-directory
 all: STM32F4Discovery libstm_stm32f4_gcc_dbg.a libstm_stm32f4_gcc_rel.a 
 
 .PHONY: STM32F4Discovery
-MakerLab_Sun_R1:
+STM32F4Discovery:
 	@echo ------------------------------------------------------------------------------------
 	@echo --- Making $@
 	@echo ---
@@ -37,7 +37,7 @@ MakerLab_Sun_R1:
 	@echo ------------------------------------------------------------------------------------
 
 .PHONY: libstm_stm32f4_gcc_dbg.a
-libstm_stm32f103hd_gcc_dbg.a:
+libstm_stm32f4_gcc_dbg.a:
 	@echo ------------------------------------------------------------------------------------
 	@echo --- Making $@
 	@echo ---
@@ -45,7 +45,7 @@ libstm_stm32f103hd_gcc_dbg.a:
 	@echo ------------------------------------------------------------------------------------
 
 .PHONY: libstm_stm32f4_gcc_rel.a
-libstm_stm32f103hd_gcc_rel.a:
+libstm_stm32f4_gcc_rel.a:
 	@echo ------------------------------------------------------------------------------------
 	@echo --- Making $@
 	@echo ---
