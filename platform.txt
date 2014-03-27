@@ -31,7 +31,7 @@ compiler.define=-DARDUINO=
 build.extra_flags=
 
 
-compiler.libstm.c.flags="-I{build.system.path}/libstm" "-I{build.system.path}/CMSIS/CMSIS/Include/" "-I{build.system.path}/CMSIS/Device/ST/"
+compiler.libstm.c.flags="-I{build.system.path}/libstm" "-I{build.system.path}/libstmf4"  "-I{build.system.path}/CMSIS/CMSIS/Include/" "-I{build.system.path}/CMSIS/Device/ST/"
 
 # USB Flags
 # ---------
