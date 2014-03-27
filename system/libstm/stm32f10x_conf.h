@@ -31,7 +31,6 @@
 /* Uncomment the line below to enable peripheral header file inclusion */
 #include "stm.h"
 
-#if defined (STM32F10X_MD) || defined (STM32F10X_HD)
 #include "include/stm32f10x_adc.h"
 #include "include/stm32f10x_bkp.h"
 #include "include/stm32f10x_can.h"
@@ -54,10 +53,6 @@
 #include "include/stm32f10x_usart.h"
 #include "include/stm32f10x_wwdg.h"
 #include "include/misc.h"   /* High level functions for NVIC and SysTick (add-on to CMSIS functions) */
-
-#elif defined (STM32F40_41xxx)
-#include "../libstmf4/stm32f4xx_conf.h"
-#endif
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
