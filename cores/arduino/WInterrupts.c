@@ -99,28 +99,32 @@ void attachInterrupt(uint32_t pin, void (*callback)(void), uint32_t mode)
 	GPIO_TypeDef *gpio_port = g_APinDescription[pin].pPort;
 	uint16_t gpio_pin = g_APinDescription[pin].ulPin;
 
+#if defined(STM32F10X_HD) || defined (STM32F10X_MD)
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO,ENABLE);
+#elif defined (STM32F40_41xxx)
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG,ENABLE);
+#endif
 
 	//Select the port source
 	if (gpio_port == GPIOA )
 	{
-		GPIO_PortSource = GPIO_PortSourceGPIOA;
+		GPIO_PortSource = EXTI_PortSourceGPIOA;
 	}
 	else if (gpio_port == GPIOB )
 	{
-		GPIO_PortSource = GPIO_PortSourceGPIOB;
+		GPIO_PortSource = EXTI_PortSourceGPIOB;
 	}
 	else if (gpio_port == GPIOC )
 	{
-		GPIO_PortSource = GPIO_PortSourceGPIOC;
+		GPIO_PortSource = EXTI_PortSourceGPIOC;
 	}
 	else if (gpio_port == GPIOD )
 	{
-		GPIO_PortSource = GPIO_PortSourceGPIOD;
+		GPIO_PortSource = EXTI_PortSourceGPIOD;
 	}
 	else if (gpio_port == GPIOE )
 	{
-		GPIO_PortSource = GPIO_PortSourceGPIOE;
+		GPIO_PortSource = EXTI_PortSourceGPIOE;
 	}
 
 	//Find out the pin number from the mask

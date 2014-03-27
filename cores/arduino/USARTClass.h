@@ -25,7 +25,13 @@
 
 // Includes Atmel CMSIS
 //#include <chip.h>
+#if defined (STM32F10X_MD) || defined (STM32F10X_HD)
 #include <stm32f10x_conf.h>
+#endif
+
+#ifdef STM32F40_41xxx
+#include <stm32f4xx_conf.h>
+#endif
 
 #define id_serial  0
 #define id_serial1 1

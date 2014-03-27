@@ -65,7 +65,11 @@ uint32_t analogRead(uint32_t ulPin)
 		return -1;
 	}
 
+#if defined (STM32F10X_HD) || (STM32F10X_MD)
 	ADC_RegularChannelConfig(ADC1, g_APinDescription[ulPin].ulADCChannelNumber, 1, ADC_SampleTime_55Cycles5);
+#elif defined (STM32F40_41xxx)
+	ADC_RegularChannelConfig(ADC1, g_APinDescription[ulPin].ulADCChannelNumber, 1, ADC_SampleTime_15Cycles);
+#endif
 	//Start ADC1 Software Conversion
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 
@@ -143,7 +147,11 @@ void analogWrite(uint32_t ulPin, uint32_t ulValue) {
     // Setup PWM for this pin
 
     // AFIO clock enable
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+#if defined(STM32F10X_HD) || defined (STM32F10X_MD)
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO,ENABLE);
+#elif defined (STM32F40_41xxx)
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG,ENABLE);
+#endif
 
 
     // TIM clock enable

@@ -45,7 +45,7 @@ extern "C"{
 #endif
 
 // Includes STM32F40x CMSIS
-#ifdef STM32F4
+#ifdef STM32F40_41xxx
 #include <stm32f4xx_conf.h>
 #endif
 
