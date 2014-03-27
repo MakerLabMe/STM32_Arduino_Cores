@@ -33,7 +33,7 @@ MakerLab_Sun_R1:
 	@echo ------------------------------------------------------------------------------------
 	@echo --- Making $@
 	@echo ---
-	@$(MAKE) CHIP=STM32F4 $(SUBMAKE_OPTIONS) OUTPUT_BIN=../../../variants/F4Discovery -f stm32.mk
+	@$(MAKE) CHIP=STM32F40_41xxx  $(SUBMAKE_OPTIONS) OUTPUT_BIN=../../../variants/F4Discovery -f stm32.mk
 	@echo ------------------------------------------------------------------------------------
 
 .PHONY: libstm_stm32f4_gcc_dbg.a
@@ -41,7 +41,7 @@ libstm_stm32f103hd_gcc_dbg.a:
 	@echo ------------------------------------------------------------------------------------
 	@echo --- Making $@
 	@echo ---
-	@$(MAKE) CHIP=STM32F4 DEBUG=1 $(SUBMAKE_OPTIONS) OUTPUT_BIN=../../../variants/F4Discovery -f stm32.mk
+	@$(MAKE) CHIP=STM32F40_41xxx  DEBUG=1 $(SUBMAKE_OPTIONS) OUTPUT_BIN=../../../variants/F4Discovery -f stm32.mk
 	@echo ------------------------------------------------------------------------------------
 
 .PHONY: libstm_stm32f4_gcc_rel.a
@@ -49,7 +49,7 @@ libstm_stm32f103hd_gcc_rel.a:
 	@echo ------------------------------------------------------------------------------------
 	@echo --- Making $@
 	@echo ---
-	@$(MAKE) CHIP=STM32F4 $(SUBMAKE_OPTIONS) OUTPUT_BIN=../../../variants/F4Discovery -f stm32.mk
+	@$(MAKE) CHIP=STM32F40_41xxx $(SUBMAKE_OPTIONS) OUTPUT_BIN=../../../variants/F4Discovery -f stm32.mk
 	@echo ------------------------------------------------------------------------------------
 
 
@@ -57,8 +57,8 @@ libstm_stm32f103hd_gcc_rel.a:
 clean:
 	@echo ------------------------------------------------------------------------------------
 	@echo --- Cleaning STM32F4 release and debug
-	@$(MAKE) CHIP=STM32F4 $(SUBMAKE_OPTIONS) -f stm32.mk $@
-	@$(MAKE) CHIP=STM32F4 DEBUG=1 $(SUBMAKE_OPTIONS) -f stm32.mk $@
+	@$(MAKE) CHIP=STM32F40_41xxx  $(SUBMAKE_OPTIONS) -f stm32.mk $@
+	@$(MAKE) CHIP=STM32F40_41xxx  DEBUG=1 $(SUBMAKE_OPTIONS) -f stm32.mk $@
 	@echo ------------------------------------------------------------------------------------
 
 
