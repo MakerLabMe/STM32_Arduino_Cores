@@ -108,23 +108,43 @@ void attachInterrupt(uint32_t pin, void (*callback)(void), uint32_t mode)
 	//Select the port source
 	if (gpio_port == GPIOA )
 	{
+#if defined(STM32F10X_HD) || defined (STM32F10X_MD)
+		GPIO_PortSource = GPIO_PortSourceGPIOA;
+#elif defined (STM32F40_41xxx)
 		GPIO_PortSource = EXTI_PortSourceGPIOA;
+#endif
 	}
 	else if (gpio_port == GPIOB )
 	{
+#if defined(STM32F10X_HD) || defined (STM32F10X_MD)
+		GPIO_PortSource = GPIO_PortSourceGPIOB;
+#elif defined (STM32F40_41xxx)
 		GPIO_PortSource = EXTI_PortSourceGPIOB;
+#endif
 	}
 	else if (gpio_port == GPIOC )
 	{
+#if defined(STM32F10X_HD) || defined (STM32F10X_MD)
+		GPIO_PortSource = GPIO_PortSourceGPIOC;
+#elif defined (STM32F40_41xxx)
 		GPIO_PortSource = EXTI_PortSourceGPIOC;
+#endif
 	}
 	else if (gpio_port == GPIOD )
 	{
+#if defined(STM32F10X_HD) || defined (STM32F10X_MD)
+		GPIO_PortSource = GPIO_PortSourceGPIOD;
+#elif defined (STM32F40_41xxx)
 		GPIO_PortSource = EXTI_PortSourceGPIOD;
+#endif
 	}
 	else if (gpio_port == GPIOE )
 	{
+#if defined(STM32F10X_HD) || defined (STM32F10X_MD)
+		GPIO_PortSource = GPIO_PortSourceGPIOE;
+#elif defined (STM32F40_41xxx)
 		GPIO_PortSource = EXTI_PortSourceGPIOE;
+#endif
 	}
 
 	//Find out the pin number from the mask
