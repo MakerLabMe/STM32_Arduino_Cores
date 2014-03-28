@@ -118,7 +118,7 @@ STM32F4_Discovery.build.f_cpu=168000000L
 STM32F4_Discovery.build.usb_product="STM32F4Discovery"
 STM32F4_Discovery.build.board=STM32F4Discovery
 STM32F4_Discovery.build.core=arduino
-STM32F4_Discovery.build.extra_flags=-DSTM32F4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=softfp {build.usb_flags}
+STM32F4_Discovery.build.extra_flags=-DSTM32F40_41xxx -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=softfp {build.usb_flags}
 STM32F4_Discovery.build.ldscript=linker_scripts/gcc/flash.ld
 STM32F4_Discovery.build.variant=F4Discovery
 STM32F4_Discovery.build.variant_system_lib=libstm_stm32f40x_gcc_rel.a

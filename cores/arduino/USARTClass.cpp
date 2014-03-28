@@ -43,7 +43,10 @@ void USARTClass::begin( const uint32_t dwBaudRate )
   if(_dwId == id_serial)
   {
     // AFIO clock enable
+#if defined (STM32F10X_HD) || (STM32F10X_MD)
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO, ENABLE);
+#elif defined (STM32F40_41xxx)
+#endif
 
     // Enable USART Clock
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);

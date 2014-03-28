@@ -42,34 +42,62 @@ extern void pinMode( uint32_t ulPin, uint32_t ulMode )
 	switch ( ulMode )
     {
         case INPUT:
+#if defined (STM32F10X_HD) || (STM32F10X_MD)
           GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+#elif defined (STM32F40_41xxx)
+
+#endif
         break ;
 
         case INPUT_PULLUP:
+#if defined (STM32F10X_HD) || (STM32F10X_MD)
           GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+#elif defined (STM32F40_41xxx)
+
+#endif
         break ;
 
         case INPUT_PULLDOWN:
+#if defined (STM32F10X_HD) || (STM32F10X_MD)
           GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;
+#elif defined (STM32F40_41xxx)
+
+#endif
         break;
 
         case OUTPUT:
+#if defined (STM32F10X_HD) || (STM32F10X_MD)
           GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
           GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+#elif defined (STM32F40_41xxx)
+
+#endif
         break ;
 
         case AF_OUTPUT_PUSHPULL:	//Used internally for Alternate Function Output PushPull(TIM, UART, SPI etc)
+#if defined (STM32F10X_HD) || (STM32F10X_MD)
           GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
           GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+#elif defined (STM32F40_41xxx)
+
+#endif
         break;
 
         case AF_OUTPUT_DRAIN:		//Used internally for Alternate Function Output Drain(I2C etc)
+#if defined (STM32F10X_HD) || (STM32F10X_MD)
           GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD;
           GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+#elif defined (STM32F40_41xxx)
+
+#endif
         break;
 
         case AN_INPUT:				//Used internally for ADC Input
+#if defined (STM32F10X_HD) || (STM32F10X_MD)
           GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
+#elif defined (STM32F40_41xxx)
+
+#endif
         break;
 
         default:
@@ -89,11 +117,19 @@ extern void digitalWrite( uint32_t ulPin, uint32_t ulVal )
 
   if ( ulVal == HIGH )
   {
+#if defined (STM32F10X_HD) || (STM32F10X_MD)
     g_APinDescription[ulPin].pPort->BSRR = g_APinDescription[ulPin].ulPin;
+#elif defined (STM32F40_41xxx)
+
+#endif
   }
   else
   {
+#if defined (STM32F10X_HD) || (STM32F10X_MD)
     g_APinDescription[ulPin].pPort->BRR = g_APinDescription[ulPin].ulPin;
+#elif defined (STM32F40_41xxx)
+
+#endif
   }
 }
 
