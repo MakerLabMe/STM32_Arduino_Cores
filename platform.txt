@@ -88,5 +88,5 @@ tools.sloadhost.path={runtime.ide.path}/hardware/arduino/stm32
 
 tools.sloadhost.upload.params.verbose= 
 tools.sloadhost.upload.params.quiet=
-tools.sloadhost.upload.pattern="{path}/{cmd}" --serialdev {serial.port} --baudrate 115200 --dtrrtsconfigboot --extendglobalerase --loadfile "{build.path}/{build.project_name}.bin" --write 0x08000000
+tools.sloadhost.upload.pattern="{path}/{cmd}" --serialdev {serial.port} --baudrate 115200 --dtrrtsconfigboot {upload.global_erase_flag} --loadfile "{build.path}/{build.project_name}.bin" --write 0x08000000
 
