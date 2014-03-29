@@ -88,14 +88,5 @@ tools.sloadhost.path={runtime.ide.path}/hardware/arduino/stm32
 
 tools.sloadhost.upload.params.verbose= 
 tools.sloadhost.upload.params.quiet=
-tools.sloadhost.upload.pattern="{path}/{cmd}" --serialdev {serial.port} --baudrate 115200 --dtrrtsconfigboot --globalerase --loadfile "{build.path}/{build.project_name}.bin" --write 0x08000000
-
-tools.stm32loader.cmd=python stm32loader.py
-tools.stm32loader.cmd.windows=sloadhost.exe
-tools.stm32loader.path={runtime.ide.path}/hardware/arduino/stm32
-
-
-tools.stm32loader.upload.params.verbose= -V
-tools.stm32loader.upload.params.quiet= -q
-tools.stm32loader.upload.pattern="{path}/{cmd}" -p {serial.port} -b 115200 -e -a 0x8000000 -w "{build.path}/{build.project_name}.bin"
+tools.sloadhost.upload.pattern="{path}/{cmd}" --serialdev {serial.port} --baudrate 115200 --dtrrtsconfigboot --extendglobalerase --loadfile "{build.path}/{build.project_name}.bin" --write 0x08000000
 
