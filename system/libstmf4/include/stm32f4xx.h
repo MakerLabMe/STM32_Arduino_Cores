@@ -1,5 +1,6 @@
 /**
   ******************************************************************************
+  * Copyright (c) 2014 MakerLab.me && Andy Sze(andy.sze.mail@gmail.com).  All right reserved.
   * @file    stm32f4xx.h
   * @author  MCD Application Team
   * @version V1.3.0
