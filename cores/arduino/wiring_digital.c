@@ -120,7 +120,7 @@ extern void digitalWrite( uint32_t ulPin, uint32_t ulVal )
 #if defined (STM32F10X_HD) || (STM32F10X_MD)
     g_APinDescription[ulPin].pPort->BSRR = g_APinDescription[ulPin].ulPin;
 #elif defined (STM32F40_41xxx)
-
+    g_APinDescription[ulPin].pPort->BSRRL = g_APinDescription[ulPin].ulPin;
 #endif
   }
   else
@@ -128,7 +128,7 @@ extern void digitalWrite( uint32_t ulPin, uint32_t ulVal )
 #if defined (STM32F10X_HD) || (STM32F10X_MD)
     g_APinDescription[ulPin].pPort->BRR = g_APinDescription[ulPin].ulPin;
 #elif defined (STM32F40_41xxx)
-
+    g_APinDescription[ulPin].pPort->BSRRH = g_APinDescription[ulPin].ulPin;
 #endif
   }
 }
