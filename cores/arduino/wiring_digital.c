@@ -35,7 +35,11 @@ extern void pinMode( uint32_t ulPin, uint32_t ulMode )
 
   GPIO_InitTypeDef GPIO_InitStructure;
 
+#if defined (STM32F10X_HD) || (STM32F10X_MD)
   RCC_APB2PeriphClockCmd(g_APinDescription[ulPin].ulPeripheral,ENABLE);
+#elif defined (STM32F40_41xxx)
+  RCC_AHB1PeriphClockCmd(g_APinDescription[ulPin].ulPeripheral,ENABLE);
+#endif
 
   GPIO_InitStructure.GPIO_Pin = gpio_pin;
 
@@ -45,7 +49,8 @@ extern void pinMode( uint32_t ulPin, uint32_t ulMode )
 #if defined (STM32F10X_HD) || (STM32F10X_MD)
           GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
 #elif defined (STM32F40_41xxx)
-
+          GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
+          GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
 #endif
         break ;
 
@@ -53,7 +58,8 @@ extern void pinMode( uint32_t ulPin, uint32_t ulMode )
 #if defined (STM32F10X_HD) || (STM32F10X_MD)
           GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
 #elif defined (STM32F40_41xxx)
-
+          GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
+          GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
 #endif
         break ;
 
@@ -61,7 +67,8 @@ extern void pinMode( uint32_t ulPin, uint32_t ulMode )
 #if defined (STM32F10X_HD) || (STM32F10X_MD)
           GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;
 #elif defined (STM32F40_41xxx)
-
+          GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
+          GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;
 #endif
         break;
 
@@ -70,7 +77,10 @@ extern void pinMode( uint32_t ulPin, uint32_t ulMode )
           GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
           GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 #elif defined (STM32F40_41xxx)
-
+          GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+          GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+          GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+          GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 #endif
         break ;
 
@@ -79,7 +89,9 @@ extern void pinMode( uint32_t ulPin, uint32_t ulMode )
           GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
           GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 #elif defined (STM32F40_41xxx)
-
+          GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+          GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+          GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 #endif
         break;
 
@@ -88,7 +100,9 @@ extern void pinMode( uint32_t ulPin, uint32_t ulMode )
           GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD;
           GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 #elif defined (STM32F40_41xxx)
-
+          GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+          GPIO_InitStructure.GPIO_OType = GPIO_OType_OD;
+          GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 #endif
         break;
 
@@ -96,7 +110,7 @@ extern void pinMode( uint32_t ulPin, uint32_t ulMode )
 #if defined (STM32F10X_HD) || (STM32F10X_MD)
           GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
 #elif defined (STM32F40_41xxx)
-
+          GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
 #endif
         break;
 

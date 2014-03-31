@@ -469,7 +469,6 @@ void init( void )
 
 	// Start ADC1 calibration
 	//ADC_StartCalibration(ADC1);
-#warning
 
 	// Check the end of ADC1 calibration
 	//while(ADC_GetCalibrationStatus(ADC1));
