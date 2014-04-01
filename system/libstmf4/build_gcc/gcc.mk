@@ -55,6 +55,9 @@ CFLAGS += -Wcast-align
 #CFLAGS += -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" 
 #CFLAGS += -MT"$(@:%.o=%.d)" -mcpu=cortex-m3 -mthumb 
 #CFLAGS += -g3 -gdwarf-2 -o "$@" "$<"
+ifdef HSE_8M
+	CFLAGS+= -DHSE_8M
+endif
 CFLAGS += -DUSE_STDPERIPH_DRIVER
 #CFLAGS += -Wmissing-noreturn
 #CFLAGS += -Wconversion
@@ -62,7 +65,7 @@ CFLAGS += -DUSE_STDPERIPH_DRIVER
 # To reduce application size use only integer printf function.
 CFLAGS += -Dprintf=iprintf
 
-CFLAGS += --param max-inline-insns-single=500 -mcpu=cortex-m4 -mthumb -mlong-calls -ffunction-sections -fdata-sections -std=c99 -mfpu=fpv4-sp-d16
+CFLAGS += --param max-inline-insns-single=500 -mcpu=cortex-m4 -mthumb -mlong-calls -ffunction-sections -fdata-sections -std=c99 -mfpu=fpv4-sp-d16 -mfloat-abi=softfp
 CFLAGS += $(OPTIMIZATION) $(INCLUDES) -D$(CHIP)
 
 
