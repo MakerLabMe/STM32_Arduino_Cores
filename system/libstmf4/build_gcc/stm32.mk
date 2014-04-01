@@ -108,13 +108,19 @@ endif
 
 include $(TOOLCHAIN).mk
 
+ifdef HSE_8M
+	OUTPUT_HSE=8Mhz
+else
+	OUTPUT_HSE=25Mhz
+endif
+
 #-------------------------------------------------------------------------------
 ifdef DEBUG
 OUTPUT_OBJ=debug
-OUTPUT_LIB=$(LIBNAME)_$(CHIP_NAME)_$(TOOLCHAIN)_dbg.a
+OUTPUT_LIB=$(LIBNAME)_$(CHIP_NAME)_$(OUTPUT_HSE)_$(TOOLCHAIN)_dbg.a
 else
 OUTPUT_OBJ=release
-OUTPUT_LIB=$(LIBNAME)_$(CHIP_NAME)_$(TOOLCHAIN)_rel.a
+OUTPUT_LIB=$(LIBNAME)_$(CHIP_NAME)_$(OUTPUT_HSE)_$(TOOLCHAIN)_rel.a
 endif
 
 OUTPUT_PATH=$(OUTPUT_OBJ)_$(CHIP_NAME)
