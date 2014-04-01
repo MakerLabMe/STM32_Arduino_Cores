@@ -120,7 +120,13 @@
   */           
 
 #if !defined  (HSE_VALUE) 
+#if defined(HSE_8M)
   #define HSE_VALUE    ((uint32_t)8000000) /*!< Value of the External oscillator in Hz */
+  #warning "HSE_8M"
+#else
+  #define HSE_VALUE ((uint32_t)25000000)
+  #warning "HSE_25M"
+#endif
   
 #endif /* HSE_VALUE */
 
