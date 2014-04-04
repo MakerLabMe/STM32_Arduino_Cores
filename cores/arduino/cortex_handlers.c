@@ -46,10 +46,10 @@ void PendSV_Handler    (void) {	pendSVHook(); }
 
 void SysTick_Handler(void)
 {
-	//if (sysTickHook())
-	//	return;
+	if (sysTickHook())
+		return;
 
-	//tickReset();
+	tickReset();
 
 	// Increment tick count each ms
 	TimeTick_Increment();
