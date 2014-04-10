@@ -290,7 +290,7 @@ RingBuffer rx_buffer2;
 RingBuffer rx_buffer3;
 RingBuffer rx_buffer4;
 
-USARTClass Serial(USART1, USART1_IRQn, id_serial, &rx_buffer1);
+USARTClass Serial(USART3, USART3_IRQn, id_serial, &rx_buffer1);
 void serialEvent() __attribute__((weak));
 void serialEvent() { }
 USARTClass Serial1(UART4, UART4_IRQn, id_serial1, &rx_buffer2);
@@ -319,9 +319,10 @@ void USART2_IRQHandler(void)
   Serial2.IrqHandler();
 }
 
+//Serial.begin() mapped to USART3(PC10,PC11)
 void USART3_IRQHandler(void) 
 {
-  Serial2.IrqHandler();
+  Serial.IrqHandler();
 }
 
 // ----------------------------------------------------------------------------
