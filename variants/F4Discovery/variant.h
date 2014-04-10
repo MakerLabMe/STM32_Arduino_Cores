@@ -148,7 +148,7 @@ static const uint8_t SCK2  = PIN_SPI_SCK2;
  * UART/USART Interfaces
  */
 // Serial
-#define RX               (15u)  //PA11
+#define RX               (15u)  //PC11
 #define TX               (14u)  //PC10
 // Serial1
 #define RX0              (15u) //PC11

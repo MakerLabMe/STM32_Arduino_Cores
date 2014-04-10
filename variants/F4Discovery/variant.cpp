@@ -293,15 +293,15 @@ RingBuffer rx_buffer4;
 USARTClass Serial(USART3, USART3_IRQn, id_serial, &rx_buffer1);
 void serialEvent() __attribute__((weak));
 void serialEvent() { }
-USARTClass Serial1(UART4, UART4_IRQn, id_serial1, &rx_buffer2);
-void serialEvent1() __attribute__((weak));
-void serialEvent1() { }
-USARTClass Serial2(USART2, USART2_IRQn, id_serial2, &rx_buffer3);
-void serialEvent2() __attribute__((weak));
-void serialEvent2() { }
-USARTClass Serial3(USART3, USART3_IRQn, id_serial3, &rx_buffer4);
-void serialEvent3() __attribute__((weak));
-void serialEvent3() { }
+//USARTClass Serial1(UART4, UART4_IRQn, id_serial1, &rx_buffer2);
+//void serialEvent1() __attribute__((weak));
+//void serialEvent1() { }
+//USARTClass Serial2(USART2, USART2_IRQn, id_serial2, &rx_buffer3);
+//void serialEvent2() __attribute__((weak));
+//void serialEvent2() { }
+//USARTClass Serial3(USART3, USART3_IRQn, id_serial3, &rx_buffer4);
+//void serialEvent3() __attribute__((weak));
+//void serialEvent3() { }
 
 // IT handlers
 void USART1_IRQHandler(void) 
@@ -330,9 +330,9 @@ void USART3_IRQHandler(void)
 void serialEventRun(void)
 {
   if (Serial.available()) serialEvent();
-  if (Serial1.available()) serialEvent1();
-  if (Serial2.available()) serialEvent2();
-  if (Serial3.available()) serialEvent3();
+  //if (Serial1.available()) serialEvent1();
+  //if (Serial2.available()) serialEvent2();
+  //if (Serial3.available()) serialEvent3();
 }
 
 // ----------------------------------------------------------------------------
