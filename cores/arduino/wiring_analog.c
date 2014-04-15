@@ -147,6 +147,10 @@ void analogWrite(uint32_t ulPin, uint32_t ulValue) {
 	// TIM Channel Duty Cycle(%) = (TIM_CCR / TIM_ARR + 1) * 100
 	uint16_t TIM_CCR = (uint16_t)((Duty_Cycle * (TIM_ARR + 1)) / 100);
 
+#if defined (STM32F40_41xxx)
+  uint8_t GPIO_AF_TIM;
+#endif
+
   pinMode(ulPin, AF_OUTPUT_PUSHPULL);
 
   if (!pinEnabled[ulPin]) {
@@ -162,25 +166,58 @@ void analogWrite(uint32_t ulPin, uint32_t ulValue) {
 
     // TIM clock enable
     if(g_APinDescription[ulPin].ulTimerPeripheral == TIM1)
+    {
       RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1 , ENABLE);
+#if defined (STM32F40_41xxx)
+      GPIO_AF_TIM = GPIO_AF_TIM1;
+#endif
+    }
     else if(g_APinDescription[ulPin].ulTimerPeripheral == TIM2)
     {
       RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+#if defined (STM32F40_41xxx)
+      GPIO_AF_TIM = GPIO_AF_TIM2;
+#endif
     }
     else if(g_APinDescription[ulPin].ulTimerPeripheral == TIM3)
     {
       RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
+#if defined (STM32F40_41xxx)
+      GPIO_AF_TIM = GPIO_AF_TIM3;
+#endif
     }
     else if(g_APinDescription[ulPin].ulTimerPeripheral == TIM4)
     {
       RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
+#if defined (STM32F40_41xxx)
+      GPIO_AF_TIM = GPIO_AF_TIM4;
+#endif
     }
     else if(g_APinDescription[ulPin].ulTimerPeripheral == TIM5)
     {
       RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
+#if defined (STM32F40_41xxx)
+      GPIO_AF_TIM = GPIO_AF_TIM5;
+#endif
     }
     else if(g_APinDescription[ulPin].ulTimerPeripheral == TIM8)
+    {
       RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM8 , ENABLE);
+#if defined (STM32F40_41xxx)
+      GPIO_AF_TIM = GPIO_AF_TIM8;
+#endif
+    }
+
+    uint8_t pin_source=0;
+    uint16_t pin_temp = ulPin;
+    while(pin_temp != 0x0001)
+    {
+      pin_temp = pin_temp>>1;
+      pin_source +=1;
+    }
+
+    GPIO_PinAFConfig(g_APinDescription[ulPin].pPort, pin_source, GPIO_AF_TIM);
+
 
     // Time base configuration
     TIM_TimeBaseStructure.TIM_Period = TIM_ARR;
