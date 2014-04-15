@@ -112,6 +112,7 @@ extern void pinMode( uint32_t ulPin, uint32_t ulMode )
           GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
 #elif defined (STM32F40_41xxx)
           GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
+          GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;
 #endif
         break;
 

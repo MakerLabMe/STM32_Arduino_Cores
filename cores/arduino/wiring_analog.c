@@ -65,6 +65,8 @@ uint32_t analogRead(uint32_t ulPin)
 		return -1;
 	}
 
+  pinMode(ulPin,AN_INPUT);
+
 #if defined (STM32F10X_HD) || (STM32F10X_MD)
 	ADC_RegularChannelConfig(ADC1, g_APinDescription[ulPin].ulADCChannelNumber, 1, ADC_SampleTime_55Cycles5);
 #elif defined (STM32F40_41xxx)

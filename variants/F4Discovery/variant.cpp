@@ -448,7 +448,7 @@ void init( void )
   ADC_CommonInit(&ADC_CommonInitStructure);  
 
 
-  ADC_InitStructure.ADC_Resolution = ADC_Resolution_8b;
+  ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;
 
   /* ADC1 regular channel 12 configuration ************************************/
   ADC_InitStructure.ADC_ScanConvMode = DISABLE;
