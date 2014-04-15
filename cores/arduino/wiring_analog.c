@@ -71,7 +71,11 @@ uint32_t analogRead(uint32_t ulPin)
 	ADC_RegularChannelConfig(ADC1, g_APinDescription[ulPin].ulADCChannelNumber, 1, ADC_SampleTime_15Cycles);
 #endif
 	//Start ADC1 Software Conversion
+#if defined (STM32F10X_HD) || (STM32F10X_MD)
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);
+#elif defined (STM32F40_41xxx)	
+	ADC_SoftwareStartConv(ADC1);
+#endif
 
 	// Wait until conversion completion
 	// while(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == RESET);
