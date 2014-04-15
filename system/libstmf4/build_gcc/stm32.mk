@@ -108,11 +108,7 @@ endif
 
 include $(TOOLCHAIN).mk
 
-ifdef HSE_8M
-	OUTPUT_HSE=8Mhz
-else
-	OUTPUT_HSE=25Mhz
-endif
+OUTPUT_HSE=8Mhz
 
 #-------------------------------------------------------------------------------
 ifdef DEBUG

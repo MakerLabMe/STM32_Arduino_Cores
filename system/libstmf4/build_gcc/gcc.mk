@@ -55,9 +55,6 @@ CFLAGS += -Wcast-align
 #CFLAGS += -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" 
 #CFLAGS += -MT"$(@:%.o=%.d)" -mcpu=cortex-m3 -mthumb 
 #CFLAGS += -g3 -gdwarf-2 -o "$@" "$<"
-ifdef HSE_8M
-	CFLAGS+= -DHSE_8M
-endif
 CFLAGS += -DUSE_STDPERIPH_DRIVER
 #CFLAGS += -Wmissing-noreturn
 #CFLAGS += -Wconversion
