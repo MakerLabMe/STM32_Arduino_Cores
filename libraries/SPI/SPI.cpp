@@ -13,7 +13,7 @@
 #include "SPI.h"
 
 SPIClass::SPIClass(SPI_TypeDef *_spi, void(*_initCb)(void)) :
-	spi(_spi),  initCb(_initCb), initialized(false),bitOrder(SPI_FirstBit_MSB),
+	spi(_spi),  initCb(_initCb), initialized(false),bitOrder(MSBFIRST),
   mode(SPI_MODE0),divider(SPI_CLOCK_DIV4)
 {
 	// Empty
@@ -76,7 +76,14 @@ void SPIClass::end() {
 void SPIClass::setBitOrder( uint16_t _bitOrder) {
 
   SPI_Cmd(spi,DISABLE);
-  SPI_InitStructure.SPI_FirstBit = _bitOrder;
+  if(_bitOrder == LSBFIRST)
+	{
+		SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_LSB;
+	}
+	else
+	{
+		SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
+	}
   bitOrder = _bitOrder;
 
   SPI_Init(spi,&SPI_InitStructure);
@@ -122,7 +129,7 @@ void SPIClass::setClockDivider( uint8_t _divider) {
 byte SPIClass::transfer( uint8_t _data) {
 	//uint32_t ch = BOARD_PIN_TO_SPI_CHANNEL(_pin);
 	// Reverse bit order
-	if (bitOrder == SPI_FirstBit_LSB)
+	if (bitOrder == LSBFIRST)
 		_data = __REV(__RBIT(_data));
 	uint8_t d = _data; //| SPI_PCS(ch);
 	//if (_mode == SPI_LAST)
@@ -138,7 +145,7 @@ byte SPIClass::transfer( uint8_t _data) {
     	;
     d = SPI_I2S_ReceiveData(spi);//->SPI_RDR;
 	// Reverse bit order
-	if (bitOrder == SPI_FirstBit_LSB)
+	if (bitOrder == LSBFIRST)
 		d = __REV(__RBIT(d));
     return d ;
 }
@@ -153,9 +160,13 @@ void SPIClass::detachInterrupt(void) {
 
 #if SPI_INTERFACES_COUNT > 0
 static void SPI_1_Init(void) {
+#if defined(ARDUINO_STM32_EARTH)
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI2,ENABLE);
+#elif defined(ARDUINO_STM32_SUN)
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1,ENABLE);
+#endif
 
-  pinMode(MISO,AF_OUTPUT_PUSHPULL);
+  pinMode(MISO,INPUT);
   pinMode(MOSI,AF_OUTPUT_PUSHPULL);
   pinMode(SCK, AF_OUTPUT_PUSHPULL);
 
@@ -167,7 +178,7 @@ SPIClass SPI(SPI_INTERFACE,  SPI_1_Init);
 static void SPI_2_Init(void) {
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI2,ENABLE);
 
-  pinMode(MISO1,AF_OUTPUT_PUSHPULL);
+  pinMode(MISO1,INPUT);
   pinMode(MOSI1,AF_OUTPUT_PUSHPULL);
   pinMode(SCK1, AF_OUTPUT_PUSHPULL);
 }
@@ -178,7 +189,7 @@ SPIClass SPI_1(SPI_INTERFACE1,  SPI_2_Init);
 static void SPI_3_Init(void) {
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI3,ENABLE);
 
-  pinMode(MISO2,AF_OUTPUT_PUSHPULL);
+  pinMode(MISO2,INPUT);
   pinMode(MOSI2,AF_OUTPUT_PUSHPULL);
   pinMode(SCK2, AF_OUTPUT_PUSHPULL);
 }
