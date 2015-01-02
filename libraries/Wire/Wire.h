@@ -26,10 +26,12 @@
 // Include Atmel CMSIS driver
 //#include <include/twi.h>
 
+
 #include "Stream.h"
 #include "variant.h"
 
 #define BUFFER_LENGTH 32
+#define EVENT_TIMEOUT 100
 
 class TwoWire : public Stream {
 public:
@@ -64,17 +66,18 @@ public:
 
 private:
 	// RX Buffer
-	uint8_t rxBuffer[BUFFER_LENGTH];
+	static uint8_t rxBuffer[BUFFER_LENGTH];
 	uint8_t rxBufferIndex;
 	uint8_t rxBufferLength;
 
 	// TX Buffer
 	uint8_t txAddress;
-	uint8_t txBuffer[BUFFER_LENGTH];
+	static uint8_t txBuffer[BUFFER_LENGTH];
 	uint8_t txBufferLength;
+	static uint8_t txBufferIndex;
 
 	// Service buffer
-	uint8_t srvBuffer[BUFFER_LENGTH];
+	static uint8_t srvBuffer[BUFFER_LENGTH];
 	uint8_t srvBufferIndex;
 	uint8_t srvBufferLength;
 
@@ -87,7 +90,7 @@ private:
 
 	// TWI instance
 	I2C_TypeDef *twi;
-	I2C_InitTypeDef I2C_InitTypeStructure;
+	static I2C_InitTypeDef I2C_InitTypeStructure;
 
 	// TWI state
 	enum TwoWireStatus {
