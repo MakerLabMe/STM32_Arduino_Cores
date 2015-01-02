@@ -196,6 +196,7 @@ void USARTClass::flush( void )
   while ((_pUsart->US_CSR & US_CSR_TXRDY) != US_CSR_TXRDY)
 	;
 #endif
+  _rx_buffer->_iTail = _rx_buffer->_iHead;
 }
 
 size_t USARTClass::write( const uint8_t uc_data )
