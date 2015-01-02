@@ -190,6 +190,7 @@ extern const PinDescription g_APinDescription[] ;
 #include "WMath.h"
 #include "HardwareSerial.h"
 #include "wiring_pulse.h"
+#include "HardwareTimer.h"
 
 #endif // __cplusplus
 
@@ -201,6 +202,7 @@ extern const PinDescription g_APinDescription[] ;
 #include "wiring_analog.h"
 #include "wiring_shift.h"
 #include "WInterrupts.h"
+
 
 
 // USB Device
