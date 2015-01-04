@@ -230,7 +230,7 @@ public:
      * @brief Get a pointer to the underlying libmaple timer_dev for
      *        this HardwareTimer instance.
      */
-    timer_dev* c_dev(void) { return this->dev; }
+    // timer_dev* c_dev(void) { return this->dev; }
 
 /* -- The rest of this file is deprecated. --------------------------------- */
 

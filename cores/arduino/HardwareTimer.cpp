@@ -41,15 +41,15 @@
  * http://yosefk.com/c++fqa/function.html#fqa-33.2
  */
 
-extern "C" {
-    static timer_dev **this_devp;
+// extern "C" {
+//     static timer_dev **this_devp;
     // static rcc_clk_id this_id;
     // static void set_this_dev(timer_dev *dev) {
     //     if (dev->clk_id == this_id) {
     //         *this_devp = dev;
     //     }
     // }
-}
+// }
 
 // const HardwareTimer::Timer HardwareTimer::Timers[NUM_TIMERS] = {
 //     {TIM1,},
@@ -81,9 +81,10 @@ HardwareTimer::HardwareTimer(uint8_t timerNum) {
 void HardwareTimer::pause(void) 
 {
     // TIM_Cmd(this->dev，DISABLE);
+    TIM_Cmd(this->dev, DISABLE);
 }
 void HardwareTimer::resume(void) {
-    // TIM_Cmd(this->dev，ENABLE);
+    TIM_Cmd(this->dev, ENABLE);
 }
 
 uint32_t HardwareTimer::getPrescaleFactor(void) {
