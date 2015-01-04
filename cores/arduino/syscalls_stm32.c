@@ -33,7 +33,15 @@
 
 #include <stdio.h>
 #include <stdarg.h>
-#include "stm32f10x_conf.h"
+// Includes STM32F10x CMSIS
+#if defined ( STM32F10X_HD ) || defined (STM32F10X_MD)
+#include <stm32f10x_conf.h>
+#endif
+
+// Includes STM32F40x CMSIS
+#ifdef STM32F40_41xxx
+#include <stm32f4xx_conf.h>
+#endif
 #if defined (  __GNUC__  ) /* GCC CS3 */
   #include <sys/types.h>
   #include <sys/stat.h>

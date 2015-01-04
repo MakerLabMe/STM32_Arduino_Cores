@@ -37,7 +37,12 @@
  * Header inclusion
  * ----------------------------------------------------------------------------
  */
-
+#ifdef STM32F10X_HD || STM32F10X_MD
 #include "STM32F10x/Include/stm32f10x.h"
+#endif
+
+#ifdef STM32F40_41xxx
+#include "STM32F4xx/include/stm32f4xx.h"
+#endif
 
 #endif /* _STM_INCLUDED_ */
