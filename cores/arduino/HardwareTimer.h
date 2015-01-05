@@ -34,18 +34,23 @@
 #define _HARDWARETIMER_H_
 
 // TODO [0.1.0] Remove deprecated pieces, pick a better API
-
+#if defined (STM32F10X_MD) || defined (STM32F10X_HD)
 #include <stm32f10x_conf.h>
+#endif
+
+#ifdef STM32F40_41xxx
+#include <stm32f4xx_conf.h>
+#endif
 
 /** Timer mode. */
 typedef uint16_t timer_mode ;//TimerMode;
 typedef TIM_TypeDef timer_dev;
 typedef void (*voidFuncPtr)(void);
 
-#define TIMER_CH1 TIM_Channel_1
-#define TIMER_CH2 TIM_Channel_2
-#define TIMER_CH3 TIM_Channel_3
-#define TIMER_CH4 TIM_Channel_4
+#define TIMER_CH1 1
+#define TIMER_CH2 2
+#define TIMER_CH3 3
+#define TIMER_CH4 4
 #define NUM_TIMERS 8// 1,2,3,4,5,8
 
 /**
@@ -53,30 +58,38 @@ typedef void (*voidFuncPtr)(void);
  */
 class HardwareTimer {
 protected:
-    static void (*callbacks[NUM_TIMERS])();
-    // struct Timer
-    // {
-    //     TIM_TypeDef *timer;
-    // };
-    // const Timer Timers[NUM_TIMERS];
+    static void (*callbacks[NUM_TIMERS * 4])();
+    uint8_t timerNum;
+    friend void TIM1_TRG_COM_TIM17_IRQHandler(void);
+    friend void TIM2_IRQHandler(void);
+    friend void TIM3_IRQHandler(void);
+    friend void TIM4_IRQHandler(void);
+#if defined(STM32F10X_HD)
+    friend void TIM5_IRQHandler(void);
+    friend void TIM6_IRQHandler(void);
+    friend void TIM7_IRQHandler(void);
+    friend void TIM8_IRQHandler(void);
+#endif //STM32F10X_HD
 private:
     TIM_TypeDef *dev;
-    TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure ;
-    TIM_OCInitTypeDef        TIM_OCInitStructure;
+    TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure ;
+    TIM_OCInitTypeDef        TIM_OCInitStructure ;
 
 public:
     /**
      * @brief Construct a new HardwareTimer instance.
-     * @param timerNum number of the timer to control.
+     * @param timerNum number of the timer to control 1~8.
      */
-    HardwareTimer(uint8_t timerNum);
+    HardwareTimer(uint8_t _timerNum);
+    void begin( void ) ;
+    void end( void ) ;
 
     /**
      * @brief Stop the counter, without affecting its configuration.
      *
      * @see HardwareTimer::resume()
      */
-    void pause(void);
+    void pause(void) {  end(); };
 
     /**
      * @brief Resume a paused timer, without affecting its configuration.
@@ -338,7 +351,7 @@ extern HardwareTimer Timer3;
  * Pre-instantiated timer.
  */
 extern HardwareTimer Timer4;
-#if (STM32_MCU_SERIES == STM32_SERIES_F1) && defined(STM32_HIGH_DENSITY)
+#if defined(STM32F10X_HD)
 /**
  * @brief Deprecated.
  *
