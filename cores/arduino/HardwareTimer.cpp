@@ -90,38 +90,68 @@ HardwareTimer::HardwareTimer(uint8_t _timerNum) {
 }
 void HardwareTimer::begin(void) 
 {
+    NVIC_InitTypeDef NVIC_InitStructure;
+
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+
     if(timerNum == 1)
     {
+        NVIC_InitStructure.NVIC_IRQChannel = TIM1_CC_IRQn;
+        NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
     }else if(timerNum == 2)
     {
-        NVIC_InitTypeDef NVIC_InitStructure;
 
       /* Enable the TIM2 global Interrupt */
         NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
-        NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-        NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
-        NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+        NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;
 
         NVIC_Init(&NVIC_InitStructure);
         RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
     }else if(timerNum == 3)
     {
+
+      /* Enable the TIM3 global Interrupt */
+        NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn;
+        NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;
+
+        NVIC_Init(&NVIC_InitStructure);
         RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
     }else if(timerNum == 4)
     {
+        NVIC_InitStructure.NVIC_IRQChannel = TIM4_IRQn;
+        NVIC_InitStructure.NVIC_IRQChannelSubPriority = 4;
+
+        NVIC_Init(&NVIC_InitStructure);
         RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
     }else if(timerNum == 5)
     {
+        NVIC_InitStructure.NVIC_IRQChannel = TIM5_IRQn;
+        NVIC_InitStructure.NVIC_IRQChannelSubPriority = 5;
+
+        NVIC_Init(&NVIC_InitStructure);
         RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
     }else if(timerNum == 6)
     {
+        NVIC_InitStructure.NVIC_IRQChannel = TIM6_IRQn;
+        NVIC_InitStructure.NVIC_IRQChannelSubPriority = 6;
+
+        NVIC_Init(&NVIC_InitStructure);
         RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, ENABLE);
     }else if(timerNum == 7)
     {
+        NVIC_InitStructure.NVIC_IRQChannel = TIM7_IRQn;
+        NVIC_InitStructure.NVIC_IRQChannelSubPriority = 7;
+
+        NVIC_Init(&NVIC_InitStructure);
         RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7, ENABLE);
     }else if(timerNum == 8)
     {
+        NVIC_InitStructure.NVIC_IRQChannel = TIM8_CC_IRQn;
+        NVIC_InitStructure.NVIC_IRQChannelSubPriority = 8;
+
+        NVIC_Init(&NVIC_InitStructure);
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM8, ENABLE);
     } 
 
@@ -328,19 +358,19 @@ void TIM2_IRQHandler(void)
 {
   if (TIM_GetITStatus(TIM2, TIM_IT_CC1) != RESET)
   {
-    Serial.println("1");
+    // Serial.println("1");
     TIM_ClearITPendingBit(TIM2, TIM_IT_CC1);    
     if(HardwareTimer::callbacks[1*4 + 0] != NULL)
         HardwareTimer::callbacks[1*4 + 0]();
   }
   if (TIM_GetITStatus(TIM2, TIM_IT_CC2) != RESET)
   {
-    Serial.println("2");
+    // Serial.println("2");
     TIM_ClearITPendingBit(TIM2, TIM_IT_CC2);
     void (*handler)(void) = HardwareTimer::callbacks[1*4 + 1];
     if( handler)
         handler();
-    Serial.println("21");
+    // Serial.println("21");
   }
   if (TIM_GetITStatus(TIM2, TIM_IT_CC3) != RESET)
   {
@@ -360,22 +390,141 @@ void TIM3_IRQHandler(void)
 {
   if (TIM_GetITStatus(TIM3, TIM_IT_CC1) != RESET)
   {
-    TIM_ClearITPendingBit(TIM3, TIM_IT_CC1);
-    HardwareTimer::callbacks[2*4 + 0]();
+    TIM_ClearITPendingBit(TIM3, TIM_IT_CC1);    
+    if(HardwareTimer::callbacks[2*4 + 0] != NULL)
+        HardwareTimer::callbacks[2*4 + 0]();
   }
-  else if (TIM_GetITStatus(TIM3, TIM_IT_CC2) != RESET)
+  if (TIM_GetITStatus(TIM3, TIM_IT_CC2) != RESET)
   {
     TIM_ClearITPendingBit(TIM3, TIM_IT_CC2);
-    HardwareTimer::callbacks[2*4 + 1]();
+    void (*handler)(void) = HardwareTimer::callbacks[2*4 + 1];
+    if( handler)
+        handler();
   }
-  else if (TIM_GetITStatus(TIM3, TIM_IT_CC3) != RESET)
+  if (TIM_GetITStatus(TIM3, TIM_IT_CC3) != RESET)
   {
     TIM_ClearITPendingBit(TIM3, TIM_IT_CC3);
-    HardwareTimer::callbacks[2*4 + 2]();
+    if(HardwareTimer::callbacks[2*4 + 2] != NULL)
+        HardwareTimer::callbacks[2*4 + 2]();
   }
-  else
+  if (TIM_GetITStatus(TIM3, TIM_IT_CC4) != RESET)
   {
     TIM_ClearITPendingBit(TIM3, TIM_IT_CC4);
-    HardwareTimer::callbacks[2*4 + 3]();
+    if(HardwareTimer::callbacks[2*4 + 3] != NULL)
+        HardwareTimer::callbacks[2*4 + 3]();
+  } 
+}
+
+void TIM4_IRQHandler(void)
+{
+  if (TIM_GetITStatus(TIM4, TIM_IT_CC1) != RESET)
+  {
+    TIM_ClearITPendingBit(TIM4, TIM_IT_CC1);    
+    if(HardwareTimer::callbacks[3*4 + 0] != NULL)
+        HardwareTimer::callbacks[3*4 + 0]();
   }
+  if (TIM_GetITStatus(TIM4, TIM_IT_CC2) != RESET)
+  {
+    TIM_ClearITPendingBit(TIM4, TIM_IT_CC2);
+    void (*handler)(void) = HardwareTimer::callbacks[3*4 + 1];
+    if( handler)
+        handler();
+  }
+  if (TIM_GetITStatus(TIM4, TIM_IT_CC3) != RESET)
+  {
+    TIM_ClearITPendingBit(TIM4, TIM_IT_CC3);
+    if(HardwareTimer::callbacks[3*4 + 2] != NULL)
+        HardwareTimer::callbacks[3*4 + 2]();
+  }
+  if (TIM_GetITStatus(TIM4, TIM_IT_CC4) != RESET)
+  {
+    TIM_ClearITPendingBit(TIM4, TIM_IT_CC4);
+    if(HardwareTimer::callbacks[3*4 + 3] != NULL)
+        HardwareTimer::callbacks[3*4 + 3]();
+  } 
+}
+
+void TIM5_IRQHandler(void)
+{
+  if (TIM_GetITStatus(TIM5, TIM_IT_CC1) != RESET)
+  {
+    TIM_ClearITPendingBit(TIM5, TIM_IT_CC1);    
+    if(HardwareTimer::callbacks[4*4 + 0] != NULL)
+        HardwareTimer::callbacks[4*4 + 0]();
+  }
+  if (TIM_GetITStatus(TIM5, TIM_IT_CC2) != RESET)
+  {
+    TIM_ClearITPendingBit(TIM5, TIM_IT_CC2);
+    if( HardwareTimer::callbacks[4*4 + 1])
+        HardwareTimer::callbacks[4*4 + 1]();
+  }
+  if (TIM_GetITStatus(TIM5, TIM_IT_CC3) != RESET)
+  {
+    TIM_ClearITPendingBit(TIM5, TIM_IT_CC3);
+    if(HardwareTimer::callbacks[4*4 + 2] != NULL)
+        HardwareTimer::callbacks[4*4 + 2]();
+  }
+  if (TIM_GetITStatus(TIM5, TIM_IT_CC4) != RESET)
+  {
+    TIM_ClearITPendingBit(TIM5, TIM_IT_CC4);
+    if(HardwareTimer::callbacks[4*4 + 3] != NULL)
+        HardwareTimer::callbacks[4*4 + 3]();
+  } 
+}
+
+void TIM1_CC_IRQHandler(void)
+{
+    if (TIM_GetITStatus(TIM1, TIM_IT_CC1) != RESET)
+  {
+    TIM_ClearITPendingBit(TIM1, TIM_IT_CC1);    
+    if(HardwareTimer::callbacks[0*4 + 0] != NULL)
+        HardwareTimer::callbacks[0*4 + 0]();
+  }
+  if (TIM_GetITStatus(TIM1, TIM_IT_CC2) != RESET)
+  {
+    TIM_ClearITPendingBit(TIM1, TIM_IT_CC2);
+    if( HardwareTimer::callbacks[0*4 + 1])
+        HardwareTimer::callbacks[0*4 + 1]();
+  }
+  if (TIM_GetITStatus(TIM1, TIM_IT_CC3) != RESET)
+  {
+    TIM_ClearITPendingBit(TIM1, TIM_IT_CC3);
+    if(HardwareTimer::callbacks[0*4 + 2] != NULL)
+        HardwareTimer::callbacks[0*4 + 2]();
+  }
+  if (TIM_GetITStatus(TIM1, TIM_IT_CC4) != RESET)
+  {
+    TIM_ClearITPendingBit(TIM1, TIM_IT_CC4);
+    if(HardwareTimer::callbacks[0*4 + 3] != NULL)
+        HardwareTimer::callbacks[0*4 + 3]();
+  } 
+}
+
+void TIM8_CC_IRQHandler(void)
+{ 
+    if (TIM_GetITStatus(TIM8, TIM_IT_CC1) != RESET)
+  {
+    TIM_ClearITPendingBit(TIM8, TIM_IT_CC1);    
+    if(HardwareTimer::callbacks[7*4 + 0] != NULL)
+        HardwareTimer::callbacks[7*4 + 0]();
+  }
+  if (TIM_GetITStatus(TIM8, TIM_IT_CC2) != RESET)
+  {
+    TIM_ClearITPendingBit(TIM8, TIM_IT_CC2);
+    if( HardwareTimer::callbacks[7*4 + 1])
+        HardwareTimer::callbacks[7*4 + 1]();
+  }
+  if (TIM_GetITStatus(TIM8, TIM_IT_CC3) != RESET)
+  {
+    TIM_ClearITPendingBit(TIM8, TIM_IT_CC3);
+    if(HardwareTimer::callbacks[7*4 + 2] != NULL)
+        HardwareTimer::callbacks[7*4 + 2]();
+  }
+  if (TIM_GetITStatus(TIM8, TIM_IT_CC4) != RESET)
+  {
+    TIM_ClearITPendingBit(TIM8, TIM_IT_CC4);
+    if(HardwareTimer::callbacks[7*4 + 3] != NULL)
+        HardwareTimer::callbacks[7*4 + 3]();
+  } 
+
 }

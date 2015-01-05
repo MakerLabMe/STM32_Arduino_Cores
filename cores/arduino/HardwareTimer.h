@@ -60,7 +60,7 @@ class HardwareTimer {
 protected:
     static void (*callbacks[NUM_TIMERS * 4])();
     uint8_t timerNum;
-    friend void TIM1_TRG_COM_TIM17_IRQHandler(void);
+    friend void TIM1_CC_IRQHandler(void);
     friend void TIM2_IRQHandler(void);
     friend void TIM3_IRQHandler(void);
     friend void TIM4_IRQHandler(void);
@@ -68,7 +68,7 @@ protected:
     friend void TIM5_IRQHandler(void);
     friend void TIM6_IRQHandler(void);
     friend void TIM7_IRQHandler(void);
-    friend void TIM8_IRQHandler(void);
+    friend void TIM8_CC_IRQHandler(void);
 #endif //STM32F10X_HD
 private:
     TIM_TypeDef *dev;
