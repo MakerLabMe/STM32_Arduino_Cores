@@ -208,6 +208,7 @@ void analogWrite(uint32_t ulPin, uint32_t ulValue) {
 #endif
     }
 
+  #if defined (STM32F40_41xxx)
     uint8_t pin_source=0;
     uint16_t pin_temp = ulPin;
     while(pin_temp != 0x0001)
@@ -215,9 +216,9 @@ void analogWrite(uint32_t ulPin, uint32_t ulValue) {
       pin_temp = pin_temp>>1;
       pin_source +=1;
     }
-
+  
     GPIO_PinAFConfig(g_APinDescription[ulPin].pPort, pin_source, GPIO_AF_TIM);
-
+  #endif
 
     // Time base configuration
     TIM_TimeBaseStructure.TIM_Period = TIM_ARR;
