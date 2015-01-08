@@ -81,8 +81,8 @@ enum BitOrder {
 #define sq(x) ((x)*(x))
 
 //interrupts functions are in WInterrupts.c file
-//#define interrupts() __enable_irq()
-//#define noInterrupts() __disable_irq()
+#define interrupts() __enable_irq()
+#define noInterrupts() __disable_irq()
 
 #define lowByte(w) ((uint8_t) ((w) & 0xff))
 #define highByte(w) ((uint8_t) ((w) >> 8))

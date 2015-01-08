@@ -30,9 +30,9 @@ void attachInterrupt(uint32_t pin, void (*callback)(void), uint32_t mode);
 
 void detachInterrupt(uint32_t pin);
 
-void interrupts(void);
+// void interrupts(void);
 
-void noInterrupts(void);
+// void noInterrupts(void);
 
 #ifdef __cplusplus
 }
