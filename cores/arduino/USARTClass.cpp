@@ -205,7 +205,7 @@ int USARTClass::peek( void )
   return _rx_buffer->_aucBuffer[_rx_buffer->_iTail] ;
 }
 
-int USARTClass::read( void )
+int16_t USARTClass::read( void )
 {
   // if the head isn't ahead of the tail, we don't have any characters
   if ( _rx_buffer->_iHead == _rx_buffer->_iTail )

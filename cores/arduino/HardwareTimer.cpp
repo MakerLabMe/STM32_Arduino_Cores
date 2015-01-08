@@ -243,7 +243,7 @@ void HardwareTimer::setCount(uint16_t val) {
     this->dev->CNT = min(val, ovf);
 }
 
-#define MAX_RELOAD ((1 << 16) - 1)
+#define MAX_RELOAD ((1 << 16) - 1)//65535
 #if defined(STM32F10X_HD) || defined(STM32F10X_MD)
     #define CYCLES_PER_MICROSECOND    72 
 #endif

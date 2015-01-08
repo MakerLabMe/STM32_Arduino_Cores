@@ -58,7 +58,7 @@ class USARTClass : public HardwareSerial
     void end( void ) ;
     int available( void ) ;
     int peek( void ) ;
-    int read( void ) ;
+    int16_t read( void ) ;
     void flush( void ) ;
     size_t write( const uint8_t c ) ;
 

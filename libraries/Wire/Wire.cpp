@@ -415,7 +415,7 @@ int TwoWire::available(void) {
 	return rxBufferLength - rxBufferIndex;
 }
 
-int TwoWire::read(void) {
+int16_t TwoWire::read(void) {
 	if (rxBufferIndex < rxBufferLength)
 		return rxBuffer[rxBufferIndex++];
 	return -1;

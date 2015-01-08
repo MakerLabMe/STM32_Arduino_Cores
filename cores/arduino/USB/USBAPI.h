@@ -54,7 +54,7 @@ public:
 	virtual int available(void);
 	virtual void accept(void);
 	virtual int peek(void);
-	virtual int read(void);
+	virtual int16_t read(void);
 	virtual void flush(void);
 	virtual size_t write(uint8_t);
 	virtual size_t write(const uint8_t *buffer, size_t size);

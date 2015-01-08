@@ -20,7 +20,7 @@
 #define ARDUINO_MAIN
 #include "Arduino.h"
 
-__IO uint32_t TimingMillis;
+__IO uint32_t TimingMillis = 0;
 
 
 void TimeTick_Increment(void)
@@ -34,7 +34,7 @@ void TimeTick_Increment(void)
 int main( void )
 {
 	init();
-  TimingMillis=0;
+  TimingMillis;
 
 	//delay(1);
 
