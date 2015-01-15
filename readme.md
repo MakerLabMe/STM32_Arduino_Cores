@@ -4,8 +4,8 @@ This is MakerLabBoard core source files, make Arduino IDE supports STM32F103XX c
 中文详细教程:http://makerlab.me/guides/2
 
 # how to install
-## download Arduino IDE 1.5
-known working version 1.5.4, 1.5.5 beta
+## download Arduino IDE 1.5.8 Beta
+You must use 1.5.8 Beta.
 http://arduino.cc/en/Main/Software
 ## download The MakerLabBoard core files.
 You can use git or 
