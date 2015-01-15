@@ -354,7 +354,7 @@ HardwareTimer Timer8(8);
   * @param  None
   * @retval None
   */
-void TIM2_IRQHandler(void)
+void __attribute__((weak)) TIM2_IRQHandler(void)
 {
   if (TIM_GetITStatus(TIM2, TIM_IT_CC1) != RESET)
   {
@@ -386,7 +386,7 @@ void TIM2_IRQHandler(void)
   }    
 }
 
-void TIM3_IRQHandler(void)
+void __attribute__((weak)) TIM3_IRQHandler(void)
 {
   if (TIM_GetITStatus(TIM3, TIM_IT_CC1) != RESET)
   {
@@ -415,7 +415,7 @@ void TIM3_IRQHandler(void)
   } 
 }
 
-void TIM4_IRQHandler(void)
+void __attribute__((weak)) TIM4_IRQHandler(void)
 {
   if (TIM_GetITStatus(TIM4, TIM_IT_CC1) != RESET)
   {
@@ -444,7 +444,7 @@ void TIM4_IRQHandler(void)
   } 
 }
 
-void TIM5_IRQHandler(void)
+void __attribute__((weak)) TIM5_IRQHandler(void)
 {
   if (TIM_GetITStatus(TIM5, TIM_IT_CC1) != RESET)
   {
@@ -472,7 +472,7 @@ void TIM5_IRQHandler(void)
   } 
 }
 
-void TIM1_CC_IRQHandler(void)
+void __attribute__((weak)) TIM1_CC_IRQHandler(void)
 {
     if (TIM_GetITStatus(TIM1, TIM_IT_CC1) != RESET)
   {
@@ -500,7 +500,7 @@ void TIM1_CC_IRQHandler(void)
   } 
 }
 
-void TIM8_CC_IRQHandler(void)
+void __attribute__((weak)) TIM8_CC_IRQHandler(void)
 { 
     if (TIM_GetITStatus(TIM8, TIM_IT_CC1) != RESET)
   {
