@@ -65,7 +65,7 @@ extern void delay( uint32_t dwMs ) ;
  */
 static inline void delayMicroseconds(uint32_t) __attribute__((always_inline, unused));
 static inline void delayMicroseconds(uint32_t usec){
-    uint32_t n = usec * (VARIANT_MCK / 3000000);
+    uint32_t n = usec * (VARIANT_MCK / 6000000);
     asm volatile(
         "L_%=_delayMicroseconds:"       "\n\t"
         "subs   %0, #1"                 "\n\t"
