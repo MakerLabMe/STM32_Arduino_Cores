@@ -59,7 +59,16 @@ extern "C"{
 
 // Number of pins defined in PinDescription array
 #define PINS_COUNT           (30)
+#define NUM_DIGITAL_PINS     (14u)
+#define NUM_ANALOG_INPUTS    (6u)
 
+#define digitalPinToPort(P)        ( g_APinDescription[P].pPort )
+#define digitalPinToBitMask(P)     ( g_APinDescription[P].ulPin )
+//#define analogInPinToBit(P)        ( )
+#define portOutputRegister(port)   ( &(port->ODR) )
+#define portInputRegister(port)    ( &(port->IDR) )
+#define digitalPinHasPWM(P)        ( g_APinDescription[P].ulTimerChannel != NULL )
+#define analogInputToDigitalPin(p)  ((p < 6) ? (p) + 14 : -1)
 // LEDs
 #define PIN_LED_13           (13u)
 #define PIN_LED_RXL          -1//(72u)

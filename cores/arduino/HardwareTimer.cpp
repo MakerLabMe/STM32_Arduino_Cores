@@ -125,7 +125,9 @@ void HardwareTimer::begin(void)
 
         NVIC_Init(&NVIC_InitStructure);
         RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
-    }else if(timerNum == 5)
+    }
+#if defined(STM32F10X_HD)
+    else if(timerNum == 5)
     {
         NVIC_InitStructure.NVIC_IRQChannel = TIM5_IRQn;
         NVIC_InitStructure.NVIC_IRQChannelSubPriority = 5;
@@ -154,6 +156,7 @@ void HardwareTimer::begin(void)
         NVIC_Init(&NVIC_InitStructure);
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM8, ENABLE);
     } 
+  #endif // STM32F10X_HD
 
 
       /* Time Base configuration */
@@ -444,6 +447,35 @@ void __attribute__((weak)) TIM4_IRQHandler(void)
   } 
 }
 
+void __attribute__((weak)) TIM1_CC_IRQHandler(void)
+{
+    if (TIM_GetITStatus(TIM1, TIM_IT_CC1) != RESET)
+  {
+    TIM_ClearITPendingBit(TIM1, TIM_IT_CC1);    
+    if(HardwareTimer::callbacks[0*4 + 0] != NULL)
+        HardwareTimer::callbacks[0*4 + 0]();
+  }
+  if (TIM_GetITStatus(TIM1, TIM_IT_CC2) != RESET)
+  {
+    TIM_ClearITPendingBit(TIM1, TIM_IT_CC2);
+    if( HardwareTimer::callbacks[0*4 + 1])
+        HardwareTimer::callbacks[0*4 + 1]();
+  }
+  if (TIM_GetITStatus(TIM1, TIM_IT_CC3) != RESET)
+  {
+    TIM_ClearITPendingBit(TIM1, TIM_IT_CC3);
+    if(HardwareTimer::callbacks[0*4 + 2] != NULL)
+        HardwareTimer::callbacks[0*4 + 2]();
+  }
+  if (TIM_GetITStatus(TIM1, TIM_IT_CC4) != RESET)
+  {
+    TIM_ClearITPendingBit(TIM1, TIM_IT_CC4);
+    if(HardwareTimer::callbacks[0*4 + 3] != NULL)
+        HardwareTimer::callbacks[0*4 + 3]();
+  } 
+}
+
+#if defined(STM32F10X_HD)
 void __attribute__((weak)) TIM5_IRQHandler(void)
 {
   if (TIM_GetITStatus(TIM5, TIM_IT_CC1) != RESET)
@@ -472,33 +504,6 @@ void __attribute__((weak)) TIM5_IRQHandler(void)
   } 
 }
 
-void __attribute__((weak)) TIM1_CC_IRQHandler(void)
-{
-    if (TIM_GetITStatus(TIM1, TIM_IT_CC1) != RESET)
-  {
-    TIM_ClearITPendingBit(TIM1, TIM_IT_CC1);    
-    if(HardwareTimer::callbacks[0*4 + 0] != NULL)
-        HardwareTimer::callbacks[0*4 + 0]();
-  }
-  if (TIM_GetITStatus(TIM1, TIM_IT_CC2) != RESET)
-  {
-    TIM_ClearITPendingBit(TIM1, TIM_IT_CC2);
-    if( HardwareTimer::callbacks[0*4 + 1])
-        HardwareTimer::callbacks[0*4 + 1]();
-  }
-  if (TIM_GetITStatus(TIM1, TIM_IT_CC3) != RESET)
-  {
-    TIM_ClearITPendingBit(TIM1, TIM_IT_CC3);
-    if(HardwareTimer::callbacks[0*4 + 2] != NULL)
-        HardwareTimer::callbacks[0*4 + 2]();
-  }
-  if (TIM_GetITStatus(TIM1, TIM_IT_CC4) != RESET)
-  {
-    TIM_ClearITPendingBit(TIM1, TIM_IT_CC4);
-    if(HardwareTimer::callbacks[0*4 + 3] != NULL)
-        HardwareTimer::callbacks[0*4 + 3]();
-  } 
-}
 
 void __attribute__((weak)) TIM8_CC_IRQHandler(void)
 { 
@@ -528,3 +533,4 @@ void __attribute__((weak)) TIM8_CC_IRQHandler(void)
   } 
 
 }
+#endif
