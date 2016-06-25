@@ -55,6 +55,9 @@ extern "C"{
 #define clockCyclesToMicroseconds(a) ( ((a) * 1000L) / (SystemCoreClock / 1000L) )
 #define microsecondsToClockCycles(a) ( (a) * (SystemCoreClock / 1000000L) )
 
+//! DACC resolution in number of data bits
+# define DACC_RESOLUTION     12
+
 void yield(void);
 
 /* sketch */
