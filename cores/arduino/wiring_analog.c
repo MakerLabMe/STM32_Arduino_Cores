@@ -121,6 +121,58 @@ void analogWrite(uint32_t ulPin, uint32_t ulValue) {
 		return;
 	}
 
+  //DAC1
+  if ( g_APinDescription[ulPin].ulADCChannelNumber == ADC_Channel_4 )
+  {
+    // Defaults to digital write
+    pinMode(ulPin, AN_INPUT);
+    DAC_InitTypeDef            DAC_InitStructure;
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_DAC, ENABLE);
+    /* DAC channel1 Configuration */
+    DAC_InitStructure.DAC_Trigger = DAC_Trigger_Software;
+    DAC_InitStructure.DAC_WaveGeneration = DAC_WaveGeneration_None;
+    DAC_InitStructure.DAC_OutputBuffer = DAC_OutputBuffer_Disable;
+    DAC_Init(DAC_Channel_1, &DAC_InitStructure);
+
+    /* Enable DAC Channel1: Once the DAC channel1 is enabled, PA.04 is 
+       automatically connected to the DAC converter. */
+    DAC_Cmd(DAC_Channel_1, ENABLE);
+
+    // Write user value
+    // ulValue = mapResolution(ulValue, _writeResolution, DACC_RESOLUTION);
+
+    /* Set DAC Channel1 DHR12R register */
+    DAC_SetChannel1Data(DAC_Align_12b_R, ulValue);
+
+    DAC_SoftwareTriggerCmd(DAC_Channel_1, ENABLE);
+
+    return;
+  } if (g_APinDescription[ulPin].ulADCChannelNumber == ADC_Channel_5)//DAC2
+  {
+    // Defaults to digital write
+    pinMode(ulPin, AN_INPUT);
+    DAC_InitTypeDef            DAC_InitStructure;
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_DAC, ENABLE);
+    /* DAC channel1 Configuration */
+    DAC_InitStructure.DAC_Trigger = DAC_Trigger_Software;
+    DAC_InitStructure.DAC_WaveGeneration = DAC_WaveGeneration_None;
+    DAC_InitStructure.DAC_OutputBuffer = DAC_OutputBuffer_Disable;
+    DAC_Init(DAC_Channel_2, &DAC_InitStructure);
+
+    /* Enable DAC Channel1: Once the DAC channel1 is enabled, PA.04 is 
+       automatically connected to the DAC converter. */
+    DAC_Cmd(DAC_Channel_2, ENABLE);
+
+    // Write user value
+    // ulValue = mapResolution(ulValue, _writeResolution, DACC_RESOLUTION);
+
+    /* Set DAC Channel1 DHR12R register */
+    DAC_SetChannel2Data(DAC_Align_12b_R, ulValue);
+
+    DAC_SoftwareTriggerCmd(DAC_Channel_2, ENABLE);
+
+    return;
+  }
 	if ( g_APinDescription[ulPin].ulTimerPeripheral == NULL)
 	{
     // Defaults to digital write
